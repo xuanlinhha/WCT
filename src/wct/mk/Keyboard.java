@@ -2,16 +2,15 @@ package wct.mk;
 
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import org.apache.commons.lang3.SystemUtils;
+import wct.configuration.ConfigurationHandler;
 
 /**
  *
  * @author xuanlinhha
  */
 public class Keyboard {
-
-    private static final long prWatingTime = 20;
-    private static final long finishWatingTime = 1000;
 
     private static Keyboard instance;
 
@@ -25,7 +24,8 @@ public class Keyboard {
         return instance;
     }
 
-    public void paste(Robot r) throws InterruptedException {
+    public void paste(Robot r) throws IOException, InterruptedException {
+        Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
         if (SystemUtils.IS_OS_MAC) { //mac
             r.keyPress(KeyEvent.VK_META);
             Thread.sleep(prWatingTime);
@@ -51,7 +51,9 @@ public class Keyboard {
         }
     }
 
-    public void down(Robot r, int no) throws InterruptedException {
+    public void down(Robot r, int no) throws IOException, InterruptedException {
+        Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
+        Long finishWatingTime = ConfigurationHandler.getConfig().getKbFinishWaiting();
         for (int i = 0; i < no; i++) {
             r.keyPress(KeyEvent.VK_DOWN);
             Thread.sleep(prWatingTime);
