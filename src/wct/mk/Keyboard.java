@@ -10,6 +10,9 @@ import org.apache.commons.lang3.SystemUtils;
  */
 public class Keyboard {
 
+    private static final long prWatingTime = 20;
+    private static final long finishWatingTime = 1000;
+
     private static Keyboard instance;
 
     private Keyboard() {
@@ -22,49 +25,38 @@ public class Keyboard {
         return instance;
     }
 
-    public void copy(Robot r) {
-        if (SystemUtils.IS_OS_MAC) {
-            r.keyPress(KeyEvent.VK_META);
-            r.keyPress(KeyEvent.VK_C);
-            r.keyRelease(KeyEvent.VK_C);
-            r.keyRelease(KeyEvent.VK_META);
-        } else if (SystemUtils.IS_OS_WINDOWS) {
-            r.keyPress(KeyEvent.VK_CONTROL);
-            r.keyPress(KeyEvent.VK_C);
-            r.keyRelease(KeyEvent.VK_C);
-            r.keyRelease(KeyEvent.VK_CONTROL);
-        }
-    }
-
-    public void paste(Robot r) {
+    public void paste(Robot r) throws InterruptedException {
         if (SystemUtils.IS_OS_MAC) { //mac
             r.keyPress(KeyEvent.VK_META);
+            Thread.sleep(prWatingTime);
             r.keyPress(KeyEvent.VK_V);
+            Thread.sleep(prWatingTime);
             r.keyRelease(KeyEvent.VK_V);
+            Thread.sleep(prWatingTime);
             r.keyRelease(KeyEvent.VK_META);
+            Thread.sleep(prWatingTime);
         } else if (SystemUtils.IS_OS_WINDOWS) { //win
             r.keyPress(KeyEvent.VK_CONTROL);
+            Thread.sleep(prWatingTime);
             r.keyPress(KeyEvent.VK_V);
+            Thread.sleep(prWatingTime);
             r.keyRelease(KeyEvent.VK_V);
+            Thread.sleep(prWatingTime);
             r.keyRelease(KeyEvent.VK_CONTROL);
+            Thread.sleep(prWatingTime);
             r.keyPress(KeyEvent.VK_ENTER);
+            Thread.sleep(prWatingTime);
             r.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(prWatingTime);
         }
     }
 
-    public void down(Robot r, int no) {
+    public void down(Robot r, int no) throws InterruptedException {
         for (int i = 0; i < no; i++) {
             r.keyPress(KeyEvent.VK_DOWN);
+            Thread.sleep(prWatingTime);
             r.keyRelease(KeyEvent.VK_DOWN);
+            Thread.sleep(finishWatingTime);
         }
-    }
-
-    public void select(Robot r, int no) {
-        r.keyPress(KeyEvent.VK_SHIFT);
-        for (int i = 0; i < no - 1; i++) {
-            r.keyPress(KeyEvent.VK_DOWN);
-            r.keyRelease(KeyEvent.VK_DOWN);
-        }
-        r.keyRelease(KeyEvent.VK_SHIFT);
     }
 }

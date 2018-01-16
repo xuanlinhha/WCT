@@ -1,5 +1,8 @@
 package wct.main;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -87,6 +90,7 @@ public class WCT extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 500));
 
         jPanel1.setLayout(new java.awt.CardLayout());
 
@@ -475,7 +479,7 @@ public class WCT extends javax.swing.JFrame {
         }
         InvCopier invCopier = new InvCopier();
         int noOfFiles = Integer.parseInt(jTextField3.getText());
-        
+
         String outputFolder = jTextField7.getText();
         File folder = new File(outputFolder);
         File[] files = folder.listFiles();
@@ -685,6 +689,7 @@ public class WCT extends javax.swing.JFrame {
     private FileSender fileSender;
 
     private void initMyComponents() {
+        centerWindow(this);
         // send file
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
@@ -704,6 +709,13 @@ public class WCT extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+    }
+
+    private void centerWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 
     private void setPanel(int panelId) {

@@ -40,12 +40,8 @@ public class FileSender extends SwingWorker<Void, Void> {
                 // copy file
                 invCopier.copy();
                 // down
-                for (int j = 0; j < i; j++) {
-                    Keyboard.getInstance().down(r, j);
-                    if (isCancelled()) {
-                        break;
-                    }
-                }
+                Keyboard.getInstance().down(r, i);
+                //paste
                 Keyboard.getInstance().paste(r);
                 Thread.sleep(waitingTime);
             }
