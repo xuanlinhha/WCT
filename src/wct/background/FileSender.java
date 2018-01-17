@@ -35,12 +35,12 @@ public class FileSender extends SwingWorker<Void, Void> {
         // click to WeChat app
         Mouse.getInstance().click(r, wcPosition);
         // run
-        for (int i = 0; i < noOfGroups; i++) {
+        for (int i = 1; i <= noOfGroups; i++) {
             if (!filteredGroups.contains(i)) {
                 // copy file
                 invCopier.copy();
                 // down
-                Keyboard.getInstance().down(r, i);
+                Keyboard.getInstance().down(r, i - 1);
                 //paste
                 Keyboard.getInstance().paste(r);
                 Thread.sleep(waitingTime);

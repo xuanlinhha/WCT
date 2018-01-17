@@ -588,7 +588,12 @@ public class WCT extends javax.swing.JFrame {
         // filtered groups
         List<Integer> filteredGroups = new ArrayList<Integer>();
         if (!StringUtils.isBlank(jTextField4.getText())) {
-            if (StringUtils.isBlank(jTextField4.getText())) {
+            if (jTextField4.getText().contains("..")) {
+                String[] filtered = jTextField4.getText().split("\\.\\.");
+                for (int i = Integer.parseInt(filtered[0]); i <= Integer.parseInt(filtered[1]); i++) {
+                    filteredGroups.add(i);
+                }
+            } else {
                 String[] filered = jTextField4.getText().split(" ");
                 for (String s : filered) {
                     filteredGroups.add(Integer.parseInt(s));
@@ -796,6 +801,7 @@ public class WCT extends javax.swing.JFrame {
         // send file
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
+        jTextField9.setText("2000");
 
         // detect mouse
         jButton4.setEnabled(true);
@@ -808,10 +814,10 @@ public class WCT extends javax.swing.JFrame {
             jTextField6.setText(config.getInputFolder());
             jTextField7.setText(config.getOutputFolder());
             jTextField8.setText(config.getWcPosition());
-            jTextField10.setText(config.getKbPRWaiting() == null ? "20" : config.getKbPRWaiting().toString());
-            jTextField11.setText(config.getKbFinishWaiting() == null ? "20" : config.getKbFinishWaiting().toString());
-            jTextField12.setText(config.getMousePRWaiting() == null ? "20" : config.getMousePRWaiting().toString());
-            jTextField13.setText(config.getMouseMoveWaiting() == null ? "20" : config.getMousePRWaiting().toString());
+            jTextField10.setText(config.getKbPRWaiting() == null ? "50" : config.getKbPRWaiting().toString());
+            jTextField11.setText(config.getKbFinishWaiting() == null ? "50" : config.getKbFinishWaiting().toString());
+            jTextField12.setText(config.getMousePRWaiting() == null ? "50" : config.getMousePRWaiting().toString());
+            jTextField13.setText(config.getMouseMoveWaiting() == null ? "50" : config.getMousePRWaiting().toString());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
