@@ -5,9 +5,7 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
@@ -57,10 +55,10 @@ public class WCT extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jTextField14 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -207,32 +205,33 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.5;
         jPanel2.add(jButton3, gridBagConstraints);
 
-        jLabel6.setText("Filtered groups");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel6, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jTextField4, gridBagConstraints);
-
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Sending time");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel11, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jTextField9, gridBagConstraints);
+
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel18.setText("Skip");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jLabel18, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jTextField9, gridBagConstraints);
+        jPanel2.add(jTextField14, gridBagConstraints);
 
         jPanel1.add(jPanel2, "card2");
 
@@ -561,6 +560,13 @@ public class WCT extends javax.swing.JFrame {
         }
         fileSender.setNoOfGroups(Integer.parseInt(jTextField2.getText()));
 
+        // Skip
+        if (!StringUtils.isBlank(jTextField14.getText())) {
+            fileSender.setSkip(Integer.parseInt(jTextField14.getText()));
+        } else {
+            fileSender.setSkip(0);
+        }
+
         // load files in output folder
         if (StringUtils.isBlank(jTextField3.getText())) {
             JOptionPane.showMessageDialog(this, "Please input the no. of files!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -575,7 +581,6 @@ public class WCT extends javax.swing.JFrame {
         Arrays.sort(files, new WEFileComparator());
         invCopier.setFiles(files);
         invCopier.setNo(noOfFiles);
-        invCopier.setNext(0);
         fileSender.setInvCopier(invCopier);
 
         // sending time
@@ -584,23 +589,6 @@ public class WCT extends javax.swing.JFrame {
             return;
         }
         fileSender.setWaitingTime(Long.parseLong(jTextField9.getText()));
-
-        // filtered groups
-        List<Integer> filteredGroups = new ArrayList<Integer>();
-        if (!StringUtils.isBlank(jTextField4.getText())) {
-            if (jTextField4.getText().contains("..")) {
-                String[] filtered = jTextField4.getText().split("\\.\\.");
-                for (int i = Integer.parseInt(filtered[0]); i <= Integer.parseInt(filtered[1]); i++) {
-                    filteredGroups.add(i);
-                }
-            } else {
-                String[] filered = jTextField4.getText().split(" ");
-                for (String s : filered) {
-                    filteredGroups.add(Integer.parseInt(s));
-                }
-            }
-        }
-        fileSender.setFilteredGroups(filteredGroups);
 
         // take WeChat position from config panel
         String[] wcCoordinate = jTextField8.getText().split(" ");
@@ -755,11 +743,11 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -783,9 +771,9 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
@@ -801,6 +789,7 @@ public class WCT extends javax.swing.JFrame {
         // send file
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
+        jTextField14.setText("0");
         jTextField9.setText("2000");
 
         // detect mouse
@@ -808,8 +797,13 @@ public class WCT extends javax.swing.JFrame {
         jButton5.setEnabled(false);
 
         // configuration
+        Configuration config = null;
         try {
-            Configuration config = ConfigurationHandler.getConfig();
+            config = ConfigurationHandler.getConfig();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        if (config != null) {
             jTextField5.setText(config.getKid3Path());
             jTextField6.setText(config.getInputFolder());
             jTextField7.setText(config.getOutputFolder());
@@ -818,10 +812,12 @@ public class WCT extends javax.swing.JFrame {
             jTextField11.setText(config.getKbFinishWaiting() == null ? "50" : config.getKbFinishWaiting().toString());
             jTextField12.setText(config.getMousePRWaiting() == null ? "50" : config.getMousePRWaiting().toString());
             jTextField13.setText(config.getMouseMoveWaiting() == null ? "50" : config.getMousePRWaiting().toString());
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } else {
+            jTextField10.setText("50");
+            jTextField11.setText("50");
+            jTextField12.setText("50");
+            jTextField13.setText("50");
         }
-
     }
 
     private void centerWindow(Window frame) {

@@ -1,7 +1,6 @@
 package wct.background;
 
 import java.awt.Robot;
-import java.util.List;
 import javax.swing.JButton;
 import javax.swing.SwingWorker;
 import wct.invcopy.InvCopier;
@@ -23,7 +22,7 @@ public class FileSender extends SwingWorker<Void, Void> {
     private int noOfGroups;
     private InvCopier invCopier;
     private long waitingTime;
-    private List<Integer> filteredGroups;
+    private int skip;
     private Position wcPosition;
 
     @Override
@@ -34,17 +33,19 @@ public class FileSender extends SwingWorker<Void, Void> {
         r = new Robot();
         // click to WeChat app
         Mouse.getInstance().click(r, wcPosition);
+
+        // set starting point to copy
+        invCopier.setNext(skip);
+
         // run
-        for (int i = 1; i <= noOfGroups; i++) {
-            if (!filteredGroups.contains(i)) {
-                // copy file
-                invCopier.copy();
-                // down
-                Keyboard.getInstance().down(r, i - 1);
-                //paste
-                Keyboard.getInstance().paste(r);
-                Thread.sleep(waitingTime);
-            }
+        for (int i = 0; i < noOfGroups; i++) {
+            // copy file
+            invCopier.copy();
+            // down
+            Keyboard.getInstance().down(r, skip + i);
+            //paste
+            Keyboard.getInstance().paste(r);
+            Thread.sleep(waitingTime);
             if (isCancelled()) {
                 break;
             }
@@ -94,12 +95,12 @@ public class FileSender extends SwingWorker<Void, Void> {
         this.waitingTime = waitingTime;
     }
 
-    public List<Integer> getFilteredGroups() {
-        return filteredGroups;
+    public int getSkip() {
+        return skip;
     }
 
-    public void setFilteredGroups(List<Integer> filteredGroups) {
-        this.filteredGroups = filteredGroups;
+    public void setSkip(int skip) {
+        this.skip = skip;
     }
 
     public Position getWcPosition() {

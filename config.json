@@ -2,9 +2,9 @@
   "kid3Path": "C:\\Users\\workshop\\Documents\\WCT\\kid3-3.5.1-win32\\kid3-cli.exe",
   "inputFolder": "C:\\Users\\workshop\\Documents\\WCT\\input",
   "outputFolder": "C:\\Users\\workshop\\Documents\\WCT\\output",
-  "wcPosition": "461 1056",
-  "kbPRWaiting": 20,
-  "kbFinishWaiting": 20,
-  "mousePRWaiting": 20,
-  "mouseMoveWaiting": 20
+  "wcPosition": "469 1057",
+  "kbPRWaiting": 50,
+  "kbFinishWaiting": 50,
+  "mousePRWaiting": 50,
+  "mouseMoveWaiting": 50
 }
