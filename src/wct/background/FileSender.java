@@ -2,6 +2,7 @@ package wct.background;
 
 import java.awt.Robot;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import wct.invcopy.InvCopier;
 import wct.mk.Keyboard;
@@ -17,6 +18,7 @@ public class FileSender extends SwingWorker<Void, Void> {
     // gui
     private JButton startJButton;
     private JButton stopJButton;
+    private JTextField skipTextField;
 
     // data
     private int noOfGroups;
@@ -35,7 +37,7 @@ public class FileSender extends SwingWorker<Void, Void> {
         Mouse.getInstance().click(r, wcPosition);
 
         // set starting point to copy
-        invCopier.setNext(skip);
+        invCopier.setNextGroup(skip);
 
         // run
         for (int i = 0; i < noOfGroups; i++) {
@@ -52,6 +54,8 @@ public class FileSender extends SwingWorker<Void, Void> {
         }
         startJButton.setEnabled(true);
         stopJButton.setEnabled(false);
+        skipTextField.setText(Integer.toString(noOfGroups + skip));
+
         return null;
     }
 
@@ -109,6 +113,14 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setWcPosition(Position wcPosition) {
         this.wcPosition = wcPosition;
+    }
+
+    public JTextField getSkipTextField() {
+        return skipTextField;
+    }
+
+    public void setSkipTextField(JTextField skipTextField) {
+        this.skipTextField = skipTextField;
     }
 
 }

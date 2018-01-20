@@ -580,7 +580,7 @@ public class WCT extends javax.swing.JFrame {
         File[] files = folder.listFiles();
         Arrays.sort(files, new WEFileComparator());
         invCopier.setFiles(files);
-        invCopier.setNo(noOfFiles);
+        invCopier.setNoOfFiles(noOfFiles);
         fileSender.setInvCopier(invCopier);
 
         // sending time
@@ -600,6 +600,7 @@ public class WCT extends javax.swing.JFrame {
         // gui
         fileSender.setStartJButton(jButton2);
         fileSender.setStopJButton(jButton3);
+        fileSender.setSkipTextField(jTextField14);
 
         // run
         fileSender.execute();

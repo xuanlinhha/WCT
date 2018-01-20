@@ -12,17 +12,19 @@ import java.util.List;
 public class InvCopier {
 
     private File[] files;
-    private int next;
-    private int no;
+    private int nextGroup;
+    private int noOfFiles;
 
     public void copy() {
         List<File> selectedFiles = new ArrayList<File>();
-        for (int i = 0; i < no; i++) {
-            if (i < files.length) {
-                selectedFiles.add(files[next]);
-                next++;
+        int selectedFile = nextGroup * noOfFiles;
+        for (int i = 0; i < noOfFiles; i++) {
+            if (selectedFile < files.length) {
+                selectedFiles.add(files[selectedFile]);
+                selectedFile++;
             }
         }
+        nextGroup++;
         FileSelection fs = new FileSelection();
         fs.setFiles(selectedFiles);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(fs, fs);
@@ -36,20 +38,20 @@ public class InvCopier {
         this.files = files;
     }
 
-    public int getNext() {
-        return next;
+    public int getNextGroup() {
+        return nextGroup;
     }
 
-    public void setNext(int next) {
-        this.next = next;
+    public void setNextGroup(int nextGroup) {
+        this.nextGroup = nextGroup;
     }
 
-    public int getNo() {
-        return no;
+    public int getNoOfFiles() {
+        return noOfFiles;
     }
 
-    public void setNo(int no) {
-        this.no = no;
+    public void setNoOfFiles(int noOfFiles) {
+        this.noOfFiles = noOfFiles;
     }
-    
+
 }
