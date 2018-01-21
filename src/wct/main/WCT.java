@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import wct.background.CopiesGenerator;
 import wct.background.FileSender;
 import wct.background.MouseDetector;
+import wct.background.TextSender;
 import wct.configuration.Configuration;
 import wct.configuration.ConfigurationHandler;
 import wct.invcopy.InvCopier;
@@ -87,9 +88,22 @@ public class WCT extends javax.swing.JFrame {
         jTextField13 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField15 = new javax.swing.JTextField();
+        jTextField16 = new javax.swing.JTextField();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -463,7 +477,101 @@ public class WCT extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, "card4");
 
+        jPanel5.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Text");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jLabel6, gridBagConstraints);
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 0.8;
+        jPanel5.add(jScrollPane2, gridBagConstraints);
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel19.setText("No. of groups");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jLabel19, gridBagConstraints);
+
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel20.setText("Skip");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jLabel20, gridBagConstraints);
+
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText("Sending time");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jLabel21, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jTextField4, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jTextField15, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jTextField16, gridBagConstraints);
+
+        jButton10.setText("Start");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.4;
+        jPanel5.add(jButton10, gridBagConstraints);
+
+        jButton11.setText("Stop");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.4;
+        jPanel5.add(jButton11, gridBagConstraints);
+
+        jPanel1.add(jPanel5, "card5");
+
         jMenu1.setText("Menu");
+        jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem1.setText("Generate & Send files");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -472,6 +580,14 @@ public class WCT extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem4.setText("Send text");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuItem2.setText("Detect mouse");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -493,6 +609,7 @@ public class WCT extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Help");
+        jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jMenuItem5.setText("Help contents");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -712,6 +829,65 @@ public class WCT extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "This application is used to send files to WeChat groups.", "About", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        setPanel(3);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        textSender = new TextSender();
+
+        // text
+        textSender.setText(jTextArea2.getText().trim());
+
+        // no. of groups
+        if (StringUtils.isBlank(jTextField4.getText())) {
+            JOptionPane.showMessageDialog(this, "Please input the no. of groups!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        textSender.setNoOfGroups(Integer.parseInt(jTextField4.getText()));
+
+        // Skip
+        if (!StringUtils.isBlank(jTextField15.getText())) {
+            textSender.setSkip(Integer.parseInt(jTextField15.getText()));
+        } else {
+            textSender.setSkip(0);
+        }
+
+        // sending time
+        if (StringUtils.isBlank(jTextField16.getText())) {
+            JOptionPane.showMessageDialog(this, "Please input waiting time!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        textSender.setWaitingTime(Long.parseLong(jTextField16.getText()));
+
+        // take WeChat position from config panel
+        String[] wcCoordinate = jTextField8.getText().split(" ");
+        Position wcPos = new Position();
+        wcPos.setX(Integer.parseInt(wcCoordinate[0]));
+        wcPos.setY(Integer.parseInt(wcCoordinate[1]));
+        textSender.setWcPosition(wcPos);
+
+        // gui
+        textSender.setStartJButton(jButton10);
+        textSender.setStopJButton(jButton11);
+        textSender.setSkipTextField(jTextField15);
+
+        // run
+        int input = JOptionPane.showConfirmDialog(null, "Do you open VPN and select the first group in WeChat?", "Checking before continue",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (input == 0) { // YES
+            textSender.execute();
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if (textSender.cancel(true)) {
+            jButton10.setEnabled(true);
+            jButton11.setEnabled(false);
+            textSender = null;
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -749,6 +925,8 @@ public class WCT extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -767,10 +945,14 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -780,23 +962,30 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
@@ -806,14 +995,23 @@ public class WCT extends javax.swing.JFrame {
     private CopiesGenerator copiesGenerator;
     private MouseDetector mouseDetector;
     private FileSender fileSender;
+    private TextSender textSender;
 
     private void initMyComponents() {
         centerWindow(this);
+        this.setTitle("Generate copies - Send files");
         // send file
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
         jTextField14.setText("0");
         jTextField9.setText("2000");
+
+        // send text
+        jTextArea2.setText("");
+        jButton10.setEnabled(true);
+        jButton11.setEnabled(false);
+        jTextField15.setText("0");
+        jTextField16.setText("1000");
 
         // detect mouse
         jButton4.setEnabled(true);
@@ -866,14 +1064,21 @@ public class WCT extends javax.swing.JFrame {
                 jPanel1.add(jPanel3);
                 jPanel1.repaint();
                 jPanel1.revalidate();
-                this.setTitle("Detect mouse position");
+                this.setTitle("Detect mouse");
                 break;
             }
             case 2: {
                 jPanel1.add(jPanel4);
                 jPanel1.repaint();
                 jPanel1.revalidate();
-                this.setTitle("All config");
+                this.setTitle("Configuration");
+                break;
+            }
+            case 3: {
+                jPanel1.add(jPanel5);
+                jPanel1.repaint();
+                jPanel1.revalidate();
+                this.setTitle("Send text");
                 break;
             }
             default:
