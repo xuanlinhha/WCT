@@ -730,7 +730,7 @@ public class WCT extends javax.swing.JFrame {
         fileSender.setSkipTextField(jTextField14);
 
         // run
-        int input = JOptionPane.showConfirmDialog(null, "Do you open VPN and select the first group in WeChat?", "Checking before continue",
+        int input = JOptionPane.showConfirmDialog(null, "Do you want to start?", "Checking before continue",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (input == 0) { // YES
             fileSender.execute();
@@ -1004,7 +1004,7 @@ public class WCT extends javax.swing.JFrame {
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
         jTextField14.setText("0");
-        jTextField9.setText("2000");
+        jTextField9.setText("5000");
 
         // send text
         jTextArea2.setText("");
