@@ -40,6 +40,7 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
             }
         }
 
+        boolean isError = false;
         for (int i = 1; i <= noOfCopies; i++) {
             String comment = RandomStringUtils.random(10) + i;
             for (File f : files) {
@@ -59,20 +60,22 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(parent, "Cannot generate copies", "Error", JOptionPane.ERROR_MESSAGE);
                         ex.printStackTrace();
+                        isError = true;
                     }
                 }
-                if (isCancelled()) {
+                if (isCancelled() || isError) {
                     break;
                 }
             }
-            if (isCancelled()) {
+            if (isCancelled() || isError) {
                 break;
             }
         }
-        long runningTime = System.currentTimeMillis() - startTime;
-        JOptionPane.showMessageDialog(parent, "Time: " + runningTime, "Success", JOptionPane.INFORMATION_MESSAGE);
-
-        noOfFilesTextField.setText(noOfFiles.toString());
+        if (!isCancelled() && !isError) {
+            long runningTime = System.currentTimeMillis() - startTime;
+            JOptionPane.showMessageDialog(parent, "Time: " + runningTime, "Success", JOptionPane.INFORMATION_MESSAGE);
+            noOfFilesTextField.setText(noOfFiles.toString());
+        }
         generateButton.setEnabled(true);
         return null;
     }
