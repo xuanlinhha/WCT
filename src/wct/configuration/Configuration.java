@@ -9,7 +9,12 @@ public class Configuration {
     private String kid3Path;
     private String inputFolder;
     private String outputFolder;
-    private String wcPosition;
+
+    private String onTaskbar;
+    private String lastHistory;
+    private String scroll;
+    private Long scrollTime;
+
     private Long kbPRWaiting;
     private Long kbFinishWaiting;
     private Long mousePRWaiting;
@@ -39,12 +44,36 @@ public class Configuration {
         this.outputFolder = outputFolder;
     }
 
-    public String getWcPosition() {
-        return wcPosition;
+    public String getOnTaskbar() {
+        return onTaskbar;
     }
 
-    public void setWcPosition(String wcPosition) {
-        this.wcPosition = wcPosition;
+    public void setOnTaskbar(String onTaskbar) {
+        this.onTaskbar = onTaskbar;
+    }
+
+    public String getLastHistory() {
+        return lastHistory;
+    }
+
+    public void setLastHistory(String lastHistory) {
+        this.lastHistory = lastHistory;
+    }
+
+    public String getScroll() {
+        return scroll;
+    }
+
+    public void setScroll(String scroll) {
+        this.scroll = scroll;
+    }
+
+    public Long getScrollTime() {
+        return scrollTime;
+    }
+
+    public void setScrollTime(Long scrollTime) {
+        this.scrollTime = scrollTime;
     }
 
     public Long getKbPRWaiting() {

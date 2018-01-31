@@ -14,18 +14,21 @@ import wct.mk.Position;
  * @author xuanlinhha
  */
 public class FileSender extends SwingWorker<Void, Void> {
-
+    private static final Long SWITCH_TIME = 2000L;
+    
     // gui
     private JButton startJButton;
     private JButton stopJButton;
-    private JTextField skipTextField;
 
     // data
     private int noOfGroups;
+    private Position taskbarPosition;
+    private Position scrollPosition;
+    private long scrollTime;
+    private Position lastHistoryPosition;
     private InvCopier invCopier;
-    private long waitingTime;
-    private int skip;
-    private Position wcPosition;
+    private long sendingTime;
+    
 
     @Override
     protected Void doInBackground() throws Exception {
@@ -34,27 +37,30 @@ public class FileSender extends SwingWorker<Void, Void> {
         Robot r;
         r = new Robot();
         // click to WeChat app
-        Mouse.getInstance().click(r, wcPosition);
+        Mouse.getInstance().click(r, taskbarPosition);
+        Thread.sleep(SWITCH_TIME);
 
         // set starting point to copy
-        invCopier.setNextGroup(skip);
+        invCopier.setNextGroup(0);
 
         // run
         for (int i = 0; i < noOfGroups; i++) {
+            // scroll down to the last history
+            Mouse.getInstance().press(r, taskbarPosition, scrollTime);
+            
             // copy file
             invCopier.copy();
-            // down
-            Keyboard.getInstance().down(r, skip + i);
+            
             //paste
             Keyboard.getInstance().paste(r);
-            Thread.sleep(waitingTime);
+            
+            Thread.sleep(sendingTime);
             if (isCancelled()) {
                 break;
             }
         }
         startJButton.setEnabled(true);
         stopJButton.setEnabled(false);
-        skipTextField.setText(Integer.toString(noOfGroups + skip));
 
         return null;
     }
@@ -83,6 +89,38 @@ public class FileSender extends SwingWorker<Void, Void> {
         this.noOfGroups = noOfGroups;
     }
 
+    public Position getTaskbarPosition() {
+        return taskbarPosition;
+    }
+
+    public void setTaskbarPosition(Position taskbarPosition) {
+        this.taskbarPosition = taskbarPosition;
+    }
+
+    public Position getScrollPosition() {
+        return scrollPosition;
+    }
+
+    public void setScrollPosition(Position scrollPosition) {
+        this.scrollPosition = scrollPosition;
+    }
+
+    public long getScrollTime() {
+        return scrollTime;
+    }
+
+    public void setScrollTime(long scrollTime) {
+        this.scrollTime = scrollTime;
+    }
+
+    public Position getLastHistoryPosition() {
+        return lastHistoryPosition;
+    }
+
+    public void setLastHistoryPosition(Position lastHistoryPosition) {
+        this.lastHistoryPosition = lastHistoryPosition;
+    }
+
     public InvCopier getInvCopier() {
         return invCopier;
     }
@@ -91,36 +129,12 @@ public class FileSender extends SwingWorker<Void, Void> {
         this.invCopier = invCopier;
     }
 
-    public long getWaitingTime() {
-        return waitingTime;
+    public long getSendingTime() {
+        return sendingTime;
     }
 
-    public void setWaitingTime(long waitingTime) {
-        this.waitingTime = waitingTime;
-    }
-
-    public int getSkip() {
-        return skip;
-    }
-
-    public void setSkip(int skip) {
-        this.skip = skip;
-    }
-
-    public Position getWcPosition() {
-        return wcPosition;
-    }
-
-    public void setWcPosition(Position wcPosition) {
-        this.wcPosition = wcPosition;
-    }
-
-    public JTextField getSkipTextField() {
-        return skipTextField;
-    }
-
-    public void setSkipTextField(JTextField skipTextField) {
-        this.skipTextField = skipTextField;
+    public void setSendingTime(long sendingTime) {
+        this.sendingTime = sendingTime;
     }
 
 }

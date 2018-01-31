@@ -4,7 +4,6 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import wct.mk.Keyboard;
 import wct.mk.Mouse;
@@ -19,14 +18,15 @@ public class TextSender extends SwingWorker<Void, Void> {
     // gui
     private JButton startJButton;
     private JButton stopJButton;
-    private JTextField skipTextField;
 
     // data
     private String text;
     private int noOfGroups;
-    private long waitingTime;
-    private int skip;
-    private Position wcPosition;
+    private Position taskbarPosition;
+    private Position scrollPosition;
+    private long scrollTime;
+    private Position lastHistoryPosition;
+    private long sendingTime;
 
     @Override
     protected Void doInBackground() throws Exception {
@@ -35,7 +35,7 @@ public class TextSender extends SwingWorker<Void, Void> {
         Robot r;
         r = new Robot();
         // click to WeChat app
-        Mouse.getInstance().click(r, wcPosition);
+        Mouse.getInstance().click(r, taskbarPosition);
 
         // copy text
         copyText();
@@ -43,17 +43,19 @@ public class TextSender extends SwingWorker<Void, Void> {
         // select group and paste
         for (int i = 0; i < noOfGroups; i++) {
             // down
-            Keyboard.getInstance().down(r, skip + i);
+            Mouse.getInstance().press(r, taskbarPosition, scrollTime);
+
             //paste
             Keyboard.getInstance().paste(r);
-            Thread.sleep(waitingTime);
+
+            // wait
+            Thread.sleep(sendingTime);
             if (isCancelled()) {
                 break;
             }
         }
         startJButton.setEnabled(true);
         stopJButton.setEnabled(false);
-        skipTextField.setText(Integer.toString(noOfGroups + skip));
 
         return null;
     }
@@ -79,14 +81,6 @@ public class TextSender extends SwingWorker<Void, Void> {
         this.stopJButton = stopJButton;
     }
 
-    public JTextField getSkipTextField() {
-        return skipTextField;
-    }
-
-    public void setSkipTextField(JTextField skipTextField) {
-        this.skipTextField = skipTextField;
-    }
-
     public String getText() {
         return text;
     }
@@ -103,28 +97,44 @@ public class TextSender extends SwingWorker<Void, Void> {
         this.noOfGroups = noOfGroups;
     }
 
-    public long getWaitingTime() {
-        return waitingTime;
+    public Position getTaskbarPosition() {
+        return taskbarPosition;
     }
 
-    public void setWaitingTime(long waitingTime) {
-        this.waitingTime = waitingTime;
+    public void setTaskbarPosition(Position taskbarPosition) {
+        this.taskbarPosition = taskbarPosition;
     }
 
-    public int getSkip() {
-        return skip;
+    public Position getScrollPosition() {
+        return scrollPosition;
     }
 
-    public void setSkip(int skip) {
-        this.skip = skip;
+    public void setScrollPosition(Position scrollPosition) {
+        this.scrollPosition = scrollPosition;
     }
 
-    public Position getWcPosition() {
-        return wcPosition;
+    public long getScrollTime() {
+        return scrollTime;
     }
 
-    public void setWcPosition(Position wcPosition) {
-        this.wcPosition = wcPosition;
+    public void setScrollTime(long scrollTime) {
+        this.scrollTime = scrollTime;
+    }
+
+    public Position getLastHistoryPosition() {
+        return lastHistoryPosition;
+    }
+
+    public void setLastHistoryPosition(Position lastHistoryPosition) {
+        this.lastHistoryPosition = lastHistoryPosition;
+    }
+
+    public long getSendingTime() {
+        return sendingTime;
+    }
+
+    public void setSendingTime(long sendingTime) {
+        this.sendingTime = sendingTime;
     }
 
 }
