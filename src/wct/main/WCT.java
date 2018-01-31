@@ -68,10 +68,8 @@ public class WCT extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
         jTextField16 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
@@ -313,19 +311,11 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jLabel19, gridBagConstraints);
 
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel20.setText("Skip");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jLabel20, gridBagConstraints);
-
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel21.setText("Sending time");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jLabel21, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -339,12 +329,6 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jTextField15, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jTextField16, gridBagConstraints);
 
         jButton10.setText("Start");
@@ -355,7 +339,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.4;
         jPanel5.add(jButton10, gridBagConstraints);
@@ -368,7 +352,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.4;
         jPanel5.add(jButton11, gridBagConstraints);
@@ -768,7 +752,7 @@ public class WCT extends javax.swing.JFrame {
         scrollPosition.setX(Integer.parseInt(scrollCoordinate[0]));
         scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
         fileSender.setScrollPosition(scrollPosition);
-        Long scrollTime = Long.parseLong(jTextField19.getText());
+        Long scrollTime = Long.parseLong(jTextField20.getText());
         fileSender.setScrollTime(scrollTime);
 
         // gui
@@ -909,19 +893,19 @@ public class WCT extends javax.swing.JFrame {
         Position taskbarPosition = new Position();
         taskbarPosition.setX(Integer.parseInt(taskbarCoordinate[0]));
         taskbarPosition.setY(Integer.parseInt(taskbarCoordinate[1]));
-        fileSender.setTaskbarPosition(taskbarPosition);
+        textSender.setTaskbarPosition(taskbarPosition);
         String[] lastHistCoordinate = jTextField18.getText().split(" ");
         Position lastHistPosition = new Position();
         lastHistPosition.setX(Integer.parseInt(lastHistCoordinate[0]));
         lastHistPosition.setY(Integer.parseInt(lastHistCoordinate[1]));
-        fileSender.setLastHistoryPosition(lastHistPosition);
+        textSender.setLastHistoryPosition(lastHistPosition);
         String[] scrollCoordinate = jTextField19.getText().split(" ");
         Position scrollPosition = new Position();
         scrollPosition.setX(Integer.parseInt(scrollCoordinate[0]));
         scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
-        fileSender.setScrollPosition(scrollPosition);
-        Long scrollTime = Long.parseLong(jTextField19.getText());
-        fileSender.setScrollTime(scrollTime);
+        textSender.setScrollPosition(scrollPosition);
+        Long scrollTime = Long.parseLong(jTextField20.getText());
+        textSender.setScrollTime(scrollTime);
 
         // gui
         textSender.setStartJButton(jButton10);
@@ -1001,7 +985,6 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -1038,7 +1021,6 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
@@ -1069,7 +1051,6 @@ public class WCT extends javax.swing.JFrame {
         jTextArea2.setText("");
         jButton10.setEnabled(true);
         jButton11.setEnabled(false);
-        jTextField15.setText("0");
         jTextField16.setText("1000");
 
         // detect mouse
@@ -1091,7 +1072,7 @@ public class WCT extends javax.swing.JFrame {
             jTextField17.setText(config.getOnTaskbar());
             jTextField18.setText(config.getLastHistory());
             jTextField19.setText(config.getScroll());
-            jTextField20.setText(config.getScrollTime() == null ? "3000" : config.getScrollTime().toString());
+            jTextField20.setText(config.getScrollTime() == null ? "2000" : config.getScrollTime().toString());
 
             jTextField10.setText(config.getKbPRWaiting() == null ? "50" : config.getKbPRWaiting().toString());
             jTextField11.setText(config.getKbFinishWaiting() == null ? "50" : config.getKbFinishWaiting().toString());

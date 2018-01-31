@@ -43,7 +43,10 @@ public class TextSender extends SwingWorker<Void, Void> {
         // select group and paste
         for (int i = 0; i < noOfGroups; i++) {
             // down
-            Mouse.getInstance().press(r, taskbarPosition, scrollTime);
+            Mouse.getInstance().press(r, scrollPosition, scrollTime);
+
+            // click last group
+            Mouse.getInstance().click(r, lastHistoryPosition);
 
             //paste
             Keyboard.getInstance().paste(r);

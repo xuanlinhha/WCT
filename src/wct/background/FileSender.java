@@ -2,7 +2,6 @@ package wct.background;
 
 import java.awt.Robot;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 import javax.swing.SwingWorker;
 import wct.invcopy.InvCopier;
 import wct.mk.Keyboard;
@@ -14,8 +13,9 @@ import wct.mk.Position;
  * @author xuanlinhha
  */
 public class FileSender extends SwingWorker<Void, Void> {
+
     private static final Long SWITCH_TIME = 2000L;
-    
+
     // gui
     private JButton startJButton;
     private JButton stopJButton;
@@ -28,7 +28,6 @@ public class FileSender extends SwingWorker<Void, Void> {
     private Position lastHistoryPosition;
     private InvCopier invCopier;
     private long sendingTime;
-    
 
     @Override
     protected Void doInBackground() throws Exception {
@@ -46,14 +45,17 @@ public class FileSender extends SwingWorker<Void, Void> {
         // run
         for (int i = 0; i < noOfGroups; i++) {
             // scroll down to the last history
-            Mouse.getInstance().press(r, taskbarPosition, scrollTime);
-            
+            Mouse.getInstance().press(r, scrollPosition, scrollTime);
+
+            // click last group
+            Mouse.getInstance().click(r, lastHistoryPosition);
+
             // copy file
             invCopier.copy();
-            
+
             //paste
             Keyboard.getInstance().paste(r);
-            
+
             Thread.sleep(sendingTime);
             if (isCancelled()) {
                 break;
