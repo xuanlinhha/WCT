@@ -1,4 +1,4 @@
-package wct.invcopy;
+package wct.fileprocessing;
 
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;

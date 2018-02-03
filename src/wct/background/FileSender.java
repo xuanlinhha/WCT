@@ -3,7 +3,8 @@ package wct.background;
 import java.awt.Robot;
 import javax.swing.JButton;
 import javax.swing.SwingWorker;
-import wct.invcopy.InvCopier;
+import org.apache.commons.lang3.RandomStringUtils;
+import wct.fileprocessing.FileProcessor;
 import wct.mk.Keyboard;
 import wct.mk.Mouse;
 import wct.mk.Position;
@@ -14,44 +15,52 @@ import wct.mk.Position;
  */
 public class FileSender extends SwingWorker<Void, Void> {
 
-    private static final Long SWITCH_TIME = 2000L;
+    private static final Long SWITCH_TIME = 1000L;
+    private static final int RAMDOM_LENGTH = 20;
 
     // gui
     private JButton startJButton;
     private JButton stopJButton;
 
     // data
+    private String inputFolder;
     private int noOfGroups;
+    private long sendingTime;
+    private int howToSend;
+
     private Position taskbarPosition;
     private Position scrollPosition;
     private long scrollTime;
     private Position lastHistoryPosition;
-    private InvCopier invCopier;
-    private long sendingTime;
 
     @Override
     protected Void doInBackground() throws Exception {
         startJButton.setEnabled(false);
         stopJButton.setEnabled(true);
+        bottomUpSend();
+        startJButton.setEnabled(true);
+        stopJButton.setEnabled(false);
+        return null;
+    }
+
+    private void bottomUpSend() throws Exception {
         Robot r;
         r = new Robot();
         // click to WeChat app
         Mouse.getInstance().click(r, taskbarPosition);
         Thread.sleep(SWITCH_TIME);
 
-        // set starting point to copy
-        invCopier.setNextGroup(0);
-
         // run
         for (int i = 0; i < noOfGroups; i++) {
             // scroll down to the last history
             Mouse.getInstance().press(r, scrollPosition, scrollTime);
 
+            // change hash code and copy to clipboard
+            String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
+            FileProcessor.changeHashcodeAndCopy(inputFolder, randString);
+
             // click last group
             Mouse.getInstance().click(r, lastHistoryPosition);
-
-            // copy file
-            invCopier.copy();
 
             //paste
             Keyboard.getInstance().paste(r);
@@ -61,10 +70,6 @@ public class FileSender extends SwingWorker<Void, Void> {
                 break;
             }
         }
-        startJButton.setEnabled(true);
-        stopJButton.setEnabled(false);
-
-        return null;
     }
 
     public JButton getStartJButton() {
@@ -83,12 +88,36 @@ public class FileSender extends SwingWorker<Void, Void> {
         this.stopJButton = stopJButton;
     }
 
+    public String getInputFolder() {
+        return inputFolder;
+    }
+
+    public void setInputFolder(String inputFolder) {
+        this.inputFolder = inputFolder;
+    }
+
     public int getNoOfGroups() {
         return noOfGroups;
     }
 
     public void setNoOfGroups(int noOfGroups) {
         this.noOfGroups = noOfGroups;
+    }
+
+    public long getSendingTime() {
+        return sendingTime;
+    }
+
+    public void setSendingTime(long sendingTime) {
+        this.sendingTime = sendingTime;
+    }
+
+    public int getHowToSend() {
+        return howToSend;
+    }
+
+    public void setHowToSend(int howToSend) {
+        this.howToSend = howToSend;
     }
 
     public Position getTaskbarPosition() {
@@ -121,22 +150,6 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setLastHistoryPosition(Position lastHistoryPosition) {
         this.lastHistoryPosition = lastHistoryPosition;
-    }
-
-    public InvCopier getInvCopier() {
-        return invCopier;
-    }
-
-    public void setInvCopier(InvCopier invCopier) {
-        this.invCopier = invCopier;
-    }
-
-    public long getSendingTime() {
-        return sendingTime;
-    }
-
-    public void setSendingTime(long sendingTime) {
-        this.sendingTime = sendingTime;
     }
 
 }

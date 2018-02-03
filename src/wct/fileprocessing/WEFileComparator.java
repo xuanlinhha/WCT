@@ -1,4 +1,4 @@
-package wct.invcopy;
+package wct.fileprocessing;
 
 import java.io.File;
 import java.util.Comparator;

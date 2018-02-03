@@ -31,7 +31,7 @@ public class Mouse {
         r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         Thread.sleep(mPRWating);
     }
-    
+
     public void press(Robot r, Position p, Long pressTime) throws InterruptedException {
         r.mouseMove(p.getX(), p.getY());
         Thread.sleep(mouseMoveWating);

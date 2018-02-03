@@ -15,8 +15,8 @@ import wct.background.MouseDetector;
 import wct.background.TextSender;
 import wct.configuration.Configuration;
 import wct.configuration.ConfigurationHandler;
-import wct.invcopy.InvCopier;
-import wct.invcopy.WEFileComparator;
+import wct.fileprocessing.FileProcessor;
+import wct.fileprocessing.WEFileComparator;
 import wct.mk.Position;
 
 /**
@@ -45,19 +45,17 @@ public class WCT extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -74,10 +72,7 @@ public class WCT extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -121,80 +116,29 @@ public class WCT extends javax.swing.JFrame {
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel1.setText("Generate files");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel1, gridBagConstraints);
-
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("No. of copies");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel2, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jTextField1, gridBagConstraints);
-
-        jButton1.setText("Generate");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.25;
-        jPanel2.add(jButton1, gridBagConstraints);
-
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Send files");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel2.add(jLabel3, gridBagConstraints);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("No. of groups");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel4, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jTextField2, gridBagConstraints);
-
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("No. of files");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel5, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jTextField3, gridBagConstraints);
 
         jButton2.setText("Start");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +148,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
         jPanel2.add(jButton2, gridBagConstraints);
@@ -217,7 +161,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
         jPanel2.add(jButton3, gridBagConstraints);
@@ -226,15 +170,51 @@ public class WCT extends javax.swing.JFrame {
         jLabel11.setText("Sending time");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel11, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jTextField9, gridBagConstraints);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Generate copies");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jLabel1, gridBagConstraints);
+
+        jLabel2.setText("No. of copies");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jLabel2, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jTextField1, gridBagConstraints);
+
+        jButton1.setText("Generate");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jTextField9, gridBagConstraints);
+        jPanel2.add(jButton1, gridBagConstraints);
 
         jPanel1.add(jPanel2, "card2");
 
@@ -361,43 +341,16 @@ public class WCT extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Kid3 path");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel7, gridBagConstraints);
-
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Input folder");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel8, gridBagConstraints);
-
-        jButton6.setText("Browse");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jButton6, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.8;
-        jPanel4.add(jTextField5, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.8;
@@ -411,7 +364,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton7, gridBagConstraints);
 
@@ -419,12 +372,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel9.setText("Output folder");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel9, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.8;
@@ -438,7 +391,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton8, gridBagConstraints);
 
@@ -446,7 +399,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel10.setText("WeChat's Parameters");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel10, gridBagConstraints);
@@ -459,7 +412,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton9, gridBagConstraints);
@@ -468,12 +421,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel12.setText("Keyboard PR");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel12, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
         jPanel4.add(jTextField10, gridBagConstraints);
@@ -482,12 +435,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel13.setText("Keyboard Finish");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel13, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
         jPanel4.add(jTextField11, gridBagConstraints);
@@ -496,12 +449,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel14.setText("Mouse PR");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel14, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
         jPanel4.add(jTextField12, gridBagConstraints);
@@ -510,12 +463,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel15.setText("Mouse Move");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel15, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
         jPanel4.add(jTextField13, gridBagConstraints);
@@ -524,7 +477,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel16.setText("System Waiting Time");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel16, gridBagConstraints);
@@ -542,12 +495,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel22.setText("On Taskbar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel22, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField17, gridBagConstraints);
@@ -556,12 +509,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel23.setText("Last History");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel23, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField18, gridBagConstraints);
@@ -570,12 +523,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel24.setText("Scroll");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel24, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField19, gridBagConstraints);
@@ -584,12 +537,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel25.setText("Scroll Time");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel25, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField20, gridBagConstraints);
@@ -671,38 +624,6 @@ public class WCT extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTextField1.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please input No. of copies", "Missing input", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        int noOfCopies = Integer.parseInt(jTextField1.getText());
-        if (noOfCopies < 1) {
-            JOptionPane.showMessageDialog(this, "No. of copies is not correct", "Wrong input", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String kid3Path = jTextField5.getText();
-        String inputFolder = jTextField6.getText();
-        String outputFolder = jTextField7.getText();
-        if (inputFolder.equals(outputFolder)) {
-            JOptionPane.showMessageDialog(this, "Input and output folder must be different", "Wrong input", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        copiesGenerator = new CopiesGenerator();
-
-        // gui
-        copiesGenerator.setParent(this);
-        copiesGenerator.setGenerateButton(jButton1);
-        copiesGenerator.setNoOfFilesTextField(jTextField3);
-
-        // data
-        copiesGenerator.setKid3Path(kid3Path);
-        copiesGenerator.setInputFolder(inputFolder);
-        copiesGenerator.setOutputFolder(outputFolder);
-        copiesGenerator.setNoOfCopies(Integer.parseInt(jTextField1.getText()));
-        copiesGenerator.execute();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         fileSender = new FileSender();
 
@@ -713,25 +634,9 @@ public class WCT extends javax.swing.JFrame {
         }
         fileSender.setNoOfGroups(Integer.parseInt(jTextField2.getText()));
 
-        // load files in output folder
-        if (StringUtils.isBlank(jTextField3.getText())) {
-            JOptionPane.showMessageDialog(this, "Please input the no. of files!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        InvCopier invCopier = new InvCopier();
-        int noOfFiles = Integer.parseInt(jTextField3.getText());
-
-        String outputFolder = jTextField7.getText();
-        File folder = new File(outputFolder);
-        File[] files = folder.listFiles();
-        Arrays.sort(files, new WEFileComparator());
-        invCopier.setFiles(files);
-        invCopier.setNoOfFiles(noOfFiles);
-        fileSender.setInvCopier(invCopier);
-
         // sending time
         if (StringUtils.isBlank(jTextField9.getText())) {
-            JOptionPane.showMessageDialog(this, "Please input waiting time!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please input sending time!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         fileSender.setSendingTime(Long.parseLong(jTextField9.getText()));
@@ -779,16 +684,6 @@ public class WCT extends javax.swing.JFrame {
         setPanel(2);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Choose kid3-cli path");
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fc.setAcceptAllFileFilterUsed(false);
-        if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            jTextField5.setText(fc.getSelectedFile().getAbsolutePath());
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         JFileChooser fc = new JFileChooser();
         fc.setDialogTitle("Choose input folder");
@@ -811,7 +706,6 @@ public class WCT extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         Configuration config = new Configuration();
-        config.setKid3Path(jTextField5.getText());
         config.setInputFolder(jTextField6.getText());
         config.setOutputFolder(jTextField7.getText());
 
@@ -912,7 +806,7 @@ public class WCT extends javax.swing.JFrame {
         textSender.setStopJButton(jButton11);
 
         // run
-        int input = JOptionPane.showConfirmDialog(null, "Do you open VPN and select the first group in WeChat?", "Checking before continue",
+        int input = JOptionPane.showConfirmDialog(null, "Do you want to start?", "Checking before continue",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (input == 0) { // YES
             textSender.execute();
@@ -926,6 +820,35 @@ public class WCT extends javax.swing.JFrame {
             textSender = null;
         }
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jTextField1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please input No. of copies", "Missing input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int noOfCopies = Integer.parseInt(jTextField1.getText());
+        if (noOfCopies < 1) {
+            JOptionPane.showMessageDialog(this, "No. of copies is not correct", "Wrong input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String inputFolder = jTextField6.getText();
+        String outputFolder = jTextField7.getText();
+        if (inputFolder.equals(outputFolder)) {
+            JOptionPane.showMessageDialog(this, "Input and output folder must be different", "Wrong input", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        copiesGenerator = new CopiesGenerator();
+
+        // gui
+        copiesGenerator.setParent(this);
+        copiesGenerator.setGenerateButton(jButton1);
+
+        // data
+        copiesGenerator.setInputFolder(inputFolder);
+        copiesGenerator.setOutputFolder(outputFolder);
+        copiesGenerator.setNoOfCopies(Integer.parseInt(jTextField1.getText()));
+        copiesGenerator.execute();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -970,7 +893,6 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -992,9 +914,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -1027,9 +947,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField9;
@@ -1065,7 +983,6 @@ public class WCT extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         if (config != null) {
-            jTextField5.setText(config.getKid3Path());
             jTextField6.setText(config.getInputFolder());
             jTextField7.setText(config.getOutputFolder());
 
