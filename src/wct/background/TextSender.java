@@ -29,37 +29,40 @@ public class TextSender extends SwingWorker<Void, Void> {
     private long sendingTime;
 
     @Override
-    protected Void doInBackground() throws Exception {
+    protected Void doInBackground() {
         startJButton.setEnabled(false);
         stopJButton.setEnabled(true);
-        Robot r;
-        r = new Robot();
-        // click to WeChat app
-        Mouse.getInstance().click(r, taskbarPosition);
+        try {
+            Robot r;
+            r = new Robot();
+            // click to WeChat app
+            Mouse.getInstance().click(r, taskbarPosition);
 
-        // copy text
-        copyText();
+            // copy text
+            copyText();
 
-        // select group and paste
-        for (int i = 0; i < noOfGroups; i++) {
-            // down
-            Mouse.getInstance().press(r, scrollPosition, scrollTime);
+            // select group and paste
+            for (int i = 0; i < noOfGroups; i++) {
+                // down
+                Mouse.getInstance().press(r, scrollPosition, scrollTime);
 
-            // click last group
-            Mouse.getInstance().click(r, lastHistoryPosition);
+                // click last group
+                Mouse.getInstance().click(r, lastHistoryPosition);
 
-            //paste
-            Keyboard.getInstance().paste(r);
+                //paste
+                Keyboard.getInstance().paste(r);
 
-            // wait
-            Thread.sleep(sendingTime);
-            if (isCancelled()) {
-                break;
+                // wait
+                Thread.sleep(sendingTime);
+                if (isCancelled()) {
+                    break;
+                }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         startJButton.setEnabled(true);
         stopJButton.setEnabled(false);
-
         return null;
     }
 

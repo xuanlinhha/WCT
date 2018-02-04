@@ -23,10 +23,10 @@ public class FileSender extends SwingWorker<Void, Void> {
     private JButton stopJButton;
 
     // data
+    private String kid3Path;
     private String inputFolder;
     private int noOfGroups;
     private long sendingTime;
-    private int howToSend;
 
     private Position taskbarPosition;
     private Position scrollPosition;
@@ -34,7 +34,7 @@ public class FileSender extends SwingWorker<Void, Void> {
     private Position lastHistoryPosition;
 
     @Override
-    protected Void doInBackground() throws Exception {
+    protected Void doInBackground() {
         startJButton.setEnabled(false);
         stopJButton.setEnabled(true);
         bottomUpSend();
@@ -43,32 +43,37 @@ public class FileSender extends SwingWorker<Void, Void> {
         return null;
     }
 
-    private void bottomUpSend() throws Exception {
-        Robot r;
-        r = new Robot();
-        // click to WeChat app
-        Mouse.getInstance().click(r, taskbarPosition);
-        Thread.sleep(SWITCH_TIME);
+    private void bottomUpSend() {
+        try {
+            Robot r;
+            r = new Robot();
+            // click to WeChat app
+            Mouse.getInstance().click(r, taskbarPosition);
+            Thread.sleep(SWITCH_TIME);
 
-        // run
-        for (int i = 0; i < noOfGroups; i++) {
-            // scroll down to the last history
-            Mouse.getInstance().press(r, scrollPosition, scrollTime);
+            // run
+            for (int i = 0; i < noOfGroups; i++) {
+                // change hash code and copy to clipboard
+                String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
+                FileProcessor.changeHashcode(kid3Path, inputFolder, randString);
+                FileProcessor.copy(inputFolder);
+                
+                // scroll down to the last history
+                Mouse.getInstance().press(r, scrollPosition, scrollTime);
+                
+                // click last group
+                Mouse.getInstance().click(r, lastHistoryPosition);
 
-            // change hash code and copy to clipboard
-            String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
-            FileProcessor.changeHashcodeAndCopy(inputFolder, randString);
+                //paste
+                Keyboard.getInstance().paste(r);
 
-            // click last group
-            Mouse.getInstance().click(r, lastHistoryPosition);
-
-            //paste
-            Keyboard.getInstance().paste(r);
-
-            Thread.sleep(sendingTime);
-            if (isCancelled()) {
-                break;
+                Thread.sleep(sendingTime);
+                if (isCancelled()) {
+                    break;
+                }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -86,6 +91,14 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setStopJButton(JButton stopJButton) {
         this.stopJButton = stopJButton;
+    }
+
+    public String getKid3Path() {
+        return kid3Path;
+    }
+
+    public void setKid3Path(String kid3Path) {
+        this.kid3Path = kid3Path;
     }
 
     public String getInputFolder() {
@@ -110,14 +123,6 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setSendingTime(long sendingTime) {
         this.sendingTime = sendingTime;
-    }
-
-    public int getHowToSend() {
-        return howToSend;
-    }
-
-    public void setHowToSend(int howToSend) {
-        this.howToSend = howToSend;
     }
 
     public Position getTaskbarPosition() {

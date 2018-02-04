@@ -24,14 +24,19 @@ public class MouseDetector extends SwingWorker<Void, String> {
     }
 
     @Override
-    protected Void doInBackground() throws Exception {
-        System.out.println("Background task is running ...");
-        while (!isCancelled()) {
-            PointerInfo pi = MouseInfo.getPointerInfo();
-            Point p = pi.getLocation();
-            String s = p.x + " " + p.y + "\n";
-            publish(s);
-            Thread.sleep(1000);
+    protected Void doInBackground() {
+        try {
+
+            System.out.println("Background task is running ...");
+            while (!isCancelled()) {
+                PointerInfo pi = MouseInfo.getPointerInfo();
+                Point p = pi.getLocation();
+                String s = p.x + " " + p.y + "\n";
+                publish(s);
+                Thread.sleep(1000);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return null;
     }
