@@ -1,7 +1,6 @@
 {
-  "kid3Path": "C:\\Users\\workshop\\Documents\\WCT\\kid3-3.5.1-win32\\kid3-cli.exe",
-  "inputFolder": "C:\\Users\\workshop\\Documents\\WCT\\input",
-  "outputFolder": "C:\\Users\\workshop\\Documents\\WCT\\output",
+  "inputFolder": "/Users/xuanlinhha/Documents/WCT/input",
+  "outputFolder": "/Users/xuanlinhha/Documents/WCT/output",
   "onTaskbar": "460 1055",
   "lastHistory": "130 1004",
   "scroll": "306 1004",
