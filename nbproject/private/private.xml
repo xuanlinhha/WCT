@@ -3,11 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/background/FileSender.java</file>
-            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/fileprocessing/FileProcessor.java</file>
-            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/main/FileProcessor.java</file>
-            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/main/WCT.java</file>
-            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/background/CopiesGenerator.java</file>
+            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/background/CopiesGenerator.java</file>
+            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/main/WCT.java</file>
+            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/fileprocessing/Mp4Meta.java</file>
+            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/fileprocessing/FileProcessor.java</file>
         </group>
     </open-files>
 </project-private>
