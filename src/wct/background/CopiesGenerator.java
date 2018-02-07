@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.apache.commons.lang3.RandomStringUtils;
+import wct.fileprocessing.FileProcessor;
 
 /**
  *
@@ -24,7 +25,6 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
 
     // task
     private int noOfCopies;
-    private String kid3Path;
     private String inputFolder;
     private String outputFolder;
 
@@ -38,12 +38,8 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
 
             for (int i = 1; i <= noOfCopies; i++) {
                 String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
-                for (File f : files) {
-                    Process p = Runtime.getRuntime().exec(new String[]{kid3Path, "-c", "set comment " + randString, f.getAbsolutePath()});
-                    p.waitFor();
-                    // copy
-                    Files.copy(Paths.get(f.toURI()), Paths.get(outputFolder + File.separator + i + "_" + f.getName()), REPLACE_EXISTING);
-                }
+                FileProcessor.changeHashcode(inputFolder, randString);
+                FileProcessor.copyToOutput(i, inputFolder, outputFolder);
                 if (isCancelled()) {
                     break;
                 }
@@ -82,14 +78,6 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
 
     public void setNoOfCopies(int noOfCopies) {
         this.noOfCopies = noOfCopies;
-    }
-
-    public String getKid3Path() {
-        return kid3Path;
-    }
-
-    public void setKid3Path(String kid3Path) {
-        this.kid3Path = kid3Path;
     }
 
     public String getInputFolder() {

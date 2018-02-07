@@ -23,7 +23,6 @@ public class FileSender extends SwingWorker<Void, Void> {
     private JButton stopJButton;
 
     // data
-    private String kid3Path;
     private String inputFolder;
     private int noOfGroups;
     private long sendingTime;
@@ -55,12 +54,12 @@ public class FileSender extends SwingWorker<Void, Void> {
             for (int i = 0; i < noOfGroups; i++) {
                 // change hash code and copy to clipboard
                 String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
-                FileProcessor.changeHashcode(kid3Path, inputFolder, randString);
-                FileProcessor.copy(inputFolder);
-                
+                FileProcessor.changeHashcode(inputFolder, randString);
+                FileProcessor.copyToClipboard(inputFolder);
+
                 // scroll down to the last history
                 Mouse.getInstance().press(r, scrollPosition, scrollTime);
-                
+
                 // click last group
                 Mouse.getInstance().click(r, lastHistoryPosition);
 
@@ -91,14 +90,6 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setStopJButton(JButton stopJButton) {
         this.stopJButton = stopJButton;
-    }
-
-    public String getKid3Path() {
-        return kid3Path;
-    }
-
-    public void setKid3Path(String kid3Path) {
-        this.kid3Path = kid3Path;
     }
 
     public String getInputFolder() {
