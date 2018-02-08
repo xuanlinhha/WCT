@@ -61,4 +61,14 @@ public class Keyboard {
             Thread.sleep(finishWatingTime);
         }
     }
+    public void up(Robot r, int no) throws IOException, InterruptedException {
+        Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
+        Long finishWatingTime = ConfigurationHandler.getConfig().getKbFinishWaiting();
+        for (int i = 0; i < no; i++) {
+            r.keyPress(KeyEvent.VK_UP);
+            Thread.sleep(prWatingTime);
+            r.keyRelease(KeyEvent.VK_UP);
+            Thread.sleep(finishWatingTime);
+        }
+    }
 }

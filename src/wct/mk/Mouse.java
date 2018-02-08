@@ -40,4 +40,21 @@ public class Mouse {
         r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         Thread.sleep(mPRWating);
     }
+   
+    public void press(Robot r, Position p) throws InterruptedException {
+        r.mouseMove(p.getX(), p.getY());
+        Thread.sleep(mouseMoveWating);
+        r.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        Thread.sleep(mPRWating);
+    }
+    
+    public void move(Robot r, Position p) throws InterruptedException {
+        r.mouseMove(p.getX(), p.getY());
+        Thread.sleep(mouseMoveWating);
+    }
+    
+    public void release(Robot r) throws InterruptedException {
+        r.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        Thread.sleep(mPRWating);
+    }
 }

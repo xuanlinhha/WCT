@@ -696,10 +696,14 @@ public class WCT extends javax.swing.JFrame {
         lastHistPosition.setY(Integer.parseInt(lastHistCoordinate[1]));
         fileSender.setLastHistoryPosition(lastHistPosition);
         String[] scrollCoordinate = jTextField19.getText().split(" ");
-        Position scrollPosition = new Position();
-        scrollPosition.setX(Integer.parseInt(scrollCoordinate[0]));
-        scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
-        fileSender.setScrollPosition(scrollPosition);
+        Position scrollPositionFrom = new Position();
+        Position scrollPositionTo = new Position();
+        scrollPositionFrom.setX(Integer.parseInt(scrollCoordinate[0]));
+        scrollPositionFrom.setY(Integer.parseInt(scrollCoordinate[1]));
+        scrollPositionTo.setX(Integer.parseInt(scrollCoordinate[3]));
+        scrollPositionTo.setY(Integer.parseInt(scrollCoordinate[4]));
+        fileSender.setScrollPositionFrom(scrollPositionFrom);
+        fileSender.setScrollPositionTo(scrollPositionTo);
         Long scrollTime = Long.parseLong(jTextField20.getText());
         fileSender.setScrollTime(scrollTime);
 
