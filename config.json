@@ -1,12 +1,12 @@
 {
-  "inputFolder": "/Users/xuanlinhha/Documents/WCT/input",
-  "outputFolder": "/Users/xuanlinhha/Documents/WCT/output",
-  "onTaskbar": "460 1055",
-  "lastHistory": "130 1004",
-  "scroll": "306 1004",
-  "scrollTime": 3000,
+  "inputFolder": "C:\\Users\\workshop\\Documents\\WCT\\input",
+  "outputFolder": "C:\\Users\\workshop\\Documents\\WCT\\output",
+  "onTaskbar": "462 1058",
+  "lastHistory": "142 1005",
+  "scroll": "305 76 305 984",
+  "scrollTime": 1000,
   "kbPRWaiting": 50,
-  "kbFinishWaiting": 50,
+  "kbFinishWaiting": 100,
   "mousePRWaiting": 50,
   "mouseMoveWaiting": 50
 }
