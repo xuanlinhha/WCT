@@ -1,5 +1,7 @@
 package wct.configuration;
 
+import java.util.List;
+
 /**
  *
  * @author xuanlinhha
@@ -14,6 +16,7 @@ public class Configuration {
     private String lastHistory;
     private String scroll;
     private Long scrollTime;
+    private List<String> imagePoints;
 
     private Long kbPRWaiting;
     private Long kbFinishWaiting;
@@ -74,6 +77,14 @@ public class Configuration {
 
     public void setScrollTime(Long scrollTime) {
         this.scrollTime = scrollTime;
+    }
+
+    public List<String> getImagePoints() {
+        return imagePoints;
+    }
+
+    public void setImagePoints(List<String> imagePoints) {
+        this.imagePoints = imagePoints;
     }
 
     public Long getKbPRWaiting() {

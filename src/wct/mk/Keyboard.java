@@ -35,6 +35,11 @@ public class Keyboard {
             Thread.sleep(prWatingTime);
             r.keyRelease(KeyEvent.VK_META);
             Thread.sleep(prWatingTime);
+            
+            r.keyPress(KeyEvent.VK_ENTER);
+            Thread.sleep(prWatingTime);
+            r.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(prWatingTime);
         } else if (SystemUtils.IS_OS_WINDOWS) { //win
             r.keyPress(KeyEvent.VK_CONTROL);
             Thread.sleep(prWatingTime);

@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
@@ -98,6 +100,11 @@ public class WCT extends javax.swing.JFrame {
         jTextField19 = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jTextField20 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -541,21 +548,19 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField17, gridBagConstraints);
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel23.setText("Last History");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel23, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField18, gridBagConstraints);
 
@@ -569,23 +574,55 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField19, gridBagConstraints);
 
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel25.setText("Scroll Time");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel25, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField20, gridBagConstraints);
+
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel20.setText("Image Positions");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jLabel20, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jTextField3, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jTextField5, gridBagConstraints);
+
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel26.setText("Position 1");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jLabel26, gridBagConstraints);
+
+        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel27.setText("Position 2");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jLabel27, gridBagConstraints);
 
         jPanel1.add(jPanel4, "card4");
 
@@ -702,6 +739,11 @@ public class WCT extends javax.swing.JFrame {
         fileSender.setScrollPosition(scrollPosition);
         Long scrollTime = Long.parseLong(jTextField20.getText());
         fileSender.setScrollTime(scrollTime);
+        List<Position> imagePositions = new ArrayList<Position>();
+        String[] imgPos1 = jTextField3.getText().split(" ");
+        String[] imgPos2 = jTextField5.getText().split(" ");
+        imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
+        imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
 
         // gui
         fileSender.setStartJButton(jButton2);
@@ -756,6 +798,10 @@ public class WCT extends javax.swing.JFrame {
         config.setLastHistory(jTextField18.getText());
         config.setScroll(jTextField19.getText());
         config.setScrollTime(Long.parseLong(jTextField20.getText()));
+        List<String> imagePoints = new ArrayList<String>();
+        imagePoints.add(jTextField3.getText());
+        imagePoints.add(jTextField5.getText());
+        config.setImagePoints(imagePoints);
 
         config.setKbPRWaiting(Long.parseLong(jTextField10.getText()));
         config.setKbFinishWaiting(Long.parseLong(jTextField11.getText()));
@@ -960,11 +1006,14 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1002,7 +1051,9 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
+    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField9;
@@ -1045,6 +1096,12 @@ public class WCT extends javax.swing.JFrame {
             jTextField18.setText(config.getLastHistory());
             jTextField19.setText(config.getScroll());
             jTextField20.setText(config.getScrollTime() == null ? "2000" : config.getScrollTime().toString());
+            if (config.getImagePoints() != null) {
+                jTextField3.setText(config.getImagePoints().get(0));
+                if (config.getImagePoints().size() > 1) {
+                    jTextField5.setText(config.getImagePoints().get(1));
+                }
+            }
 
             jTextField10.setText(config.getKbPRWaiting() == null ? "50" : config.getKbPRWaiting().toString());
             jTextField11.setText(config.getKbFinishWaiting() == null ? "50" : config.getKbFinishWaiting().toString());
