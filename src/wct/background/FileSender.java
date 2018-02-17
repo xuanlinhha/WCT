@@ -1,6 +1,11 @@
 package wct.background;
 
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.SwingWorker;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -8,6 +13,7 @@ import wct.fileprocessing.FileProcessor;
 import wct.mk.Keyboard;
 import wct.mk.Mouse;
 import wct.mk.Position;
+import wct.mk.Screen;
 
 /**
  *
@@ -26,11 +32,20 @@ public class FileSender extends SwingWorker<Void, Void> {
     private String inputFolder;
     private int noOfGroups;
     private long sendingTime;
+    private String option;
 
     private Position taskbarPosition;
     private Position scrollPosition;
     private long scrollTime;
     private Position lastHistoryPosition;
+    private String alternativeMsg;
+    private List<Position> imagePositions;
+
+    Set<String> sentGroups;
+
+    public FileSender() {
+        sentGroups = new HashSet<String>();
+    }
 
     @Override
     protected Void doInBackground() {
@@ -44,24 +59,46 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     private void bottomUpSend() {
         try {
+            if (!option.equals("Continue")) {
+                sentGroups.clear();
+            }
             Robot r;
             r = new Robot();
+            Screen sc = new Screen();
+            sc.initPositions(imagePositions.get(0), imagePositions.get(1));
+
             // click to WeChat app
             Mouse.getInstance().click(r, taskbarPosition);
             Thread.sleep(SWITCH_TIME);
 
             // run
             for (int i = 0; i < noOfGroups; i++) {
-                // change hash code and copy to clipboard
-                String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
-                FileProcessor.changeHashcode(inputFolder, randString);
-                FileProcessor.copyToClipboard(inputFolder);
+                FileProcessor.clearClipboard();
 
                 // scroll down to the last history
                 Mouse.getInstance().press(r, scrollPosition, scrollTime);
 
+                // get color to check
+                String color = sc.getColorData(r);
+
+                // if new group
+                if (!sentGroups.contains(color)) {
+                    // change hash code and copy to clipboard
+                    String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
+                    FileProcessor.changeHashcode(inputFolder, randString);
+                    FileProcessor.copyToClipboard(inputFolder);
+                    sentGroups.add(color);
+
+                } else {
+                    StringSelection stringSelection = new StringSelection(alternativeMsg);
+                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
+                            stringSelection, null);
+                }
+
                 // click last group
                 Mouse.getInstance().click(r, lastHistoryPosition);
+
+                Thread.sleep(1000);
 
                 //paste
                 Keyboard.getInstance().paste(r);
@@ -146,6 +183,38 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setLastHistoryPosition(Position lastHistoryPosition) {
         this.lastHistoryPosition = lastHistoryPosition;
+    }
+
+    public String getOption() {
+        return option;
+    }
+
+    public void setOption(String option) {
+        this.option = option;
+    }
+
+    public String getAlternativeMsg() {
+        return alternativeMsg;
+    }
+
+    public void setAlternativeMsg(String alternativeMsg) {
+        this.alternativeMsg = alternativeMsg;
+    }
+
+    public Set<String> getSentGroups() {
+        return sentGroups;
+    }
+
+    public void setSentGroups(Set<String> sentGroups) {
+        this.sentGroups = sentGroups;
+    }
+
+    public List<Position> getImagePositions() {
+        return imagePositions;
+    }
+
+    public void setImagePositions(List<Position> imagePositions) {
+        this.imagePositions = imagePositions;
     }
 
 }

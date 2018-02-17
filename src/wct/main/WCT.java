@@ -41,6 +41,7 @@ public class WCT extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -58,6 +59,8 @@ public class WCT extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -105,6 +108,7 @@ public class WCT extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -128,7 +132,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel3.setText("Send files");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
@@ -138,12 +142,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel4.setText("No. of groups");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel4, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jTextField2, gridBagConstraints);
@@ -178,12 +182,12 @@ public class WCT extends javax.swing.JFrame {
         jLabel11.setText("Sending time");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel11, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jTextField9, gridBagConstraints);
@@ -261,6 +265,22 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
         jPanel2.add(jLabel18, gridBagConstraints);
+
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel28.setText("Option");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jLabel28, gridBagConstraints);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "From beginning", "Continue" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jComboBox1, gridBagConstraints);
 
         jPanel1.add(jPanel2, "card2");
 
@@ -591,7 +611,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField20, gridBagConstraints);
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel20.setText("Image Positions");
+        jLabel20.setText("Alternative Msg");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -609,7 +629,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField5, gridBagConstraints);
 
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel26.setText("Position 1");
+        jLabel26.setText("Img Position 1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
@@ -617,12 +637,18 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jLabel26, gridBagConstraints);
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel27.setText("Position 2");
+        jLabel27.setText("Img Position 2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel27, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jTextField8, gridBagConstraints);
 
         jPanel1.add(jPanel4, "card4");
 
@@ -744,6 +770,13 @@ public class WCT extends javax.swing.JFrame {
         String[] imgPos2 = jTextField5.getText().split(" ");
         imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
         imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
+        fileSender.setImagePositions(imagePositions);
+        if (StringUtils.isBlank(jTextField6.getText())) {
+            fileSender.setAlternativeMsg("[Smile]");
+        } else {
+            fileSender.setAlternativeMsg(jTextField6.getText());
+        }
+        fileSender.setOption(jComboBox1.getSelectedItem().toString());
 
         // gui
         fileSender.setStartJButton(jButton2);
@@ -793,7 +826,7 @@ public class WCT extends javax.swing.JFrame {
         Configuration config = new Configuration();
         config.setInputFolder(jTextField6.getText());
         config.setOutputFolder(jTextField7.getText());
-
+        
         config.setOnTaskbar(jTextField17.getText());
         config.setLastHistory(jTextField18.getText());
         config.setScroll(jTextField19.getText());
@@ -802,7 +835,7 @@ public class WCT extends javax.swing.JFrame {
         imagePoints.add(jTextField3.getText());
         imagePoints.add(jTextField5.getText());
         config.setImagePoints(imagePoints);
-
+        
         config.setKbPRWaiting(Long.parseLong(jTextField10.getText()));
         config.setKbFinishWaiting(Long.parseLong(jTextField11.getText()));
         config.setMousePRWaiting((Long.parseLong(jTextField12.getText())));
@@ -983,6 +1016,7 @@ public class WCT extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -994,6 +1028,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1014,6 +1049,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1056,13 +1092,14 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
     private CopiesGenerator copiesGenerator;
     private MouseDetector mouseDetector;
     private FileSender fileSender;
     private TextSender textSender;
-
+    
     private void initMyComponents() {
         centerWindow(this);
         this.setTitle("Generate copies - Send files");
@@ -1091,7 +1128,7 @@ public class WCT extends javax.swing.JFrame {
         if (config != null) {
             jTextField6.setText(config.getInputFolder());
             jTextField7.setText(config.getOutputFolder());
-
+            
             jTextField17.setText(config.getOnTaskbar());
             jTextField18.setText(config.getLastHistory());
             jTextField19.setText(config.getScroll());
@@ -1102,7 +1139,7 @@ public class WCT extends javax.swing.JFrame {
                     jTextField5.setText(config.getImagePoints().get(1));
                 }
             }
-
+            
             jTextField10.setText(config.getKbPRWaiting() == null ? "50" : config.getKbPRWaiting().toString());
             jTextField11.setText(config.getKbFinishWaiting() == null ? "50" : config.getKbFinishWaiting().toString());
             jTextField12.setText(config.getMousePRWaiting() == null ? "50" : config.getMousePRWaiting().toString());
@@ -1115,14 +1152,14 @@ public class WCT extends javax.swing.JFrame {
             jTextField13.setText("50");
         }
     }
-
+    
     private void centerWindow(Window frame) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
         int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
         frame.setLocation(x, y);
     }
-
+    
     private void setPanel(int panelId) {
         jPanel1.removeAll();
         jPanel1.repaint();
@@ -1158,7 +1195,7 @@ public class WCT extends javax.swing.JFrame {
             }
             default:
                 break;
-
+            
         }
     }
 }

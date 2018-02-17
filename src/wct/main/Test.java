@@ -34,13 +34,16 @@ public class Test {
     public static void main(String[] args) throws Exception {
         Robot r = new Robot();
 
-        Mouse.getInstance().click(r, new Position(467, 616));
+        Mouse.getInstance().click(r, new Position(576, 728));
+//        Mouse.getInstance().click(r, new Position(467, 616));
         Thread.sleep(1000);
 
         Screen sc = new Screen();
-        sc.initPositions(new Position(75, 553), new Position(110, 588));
+        sc.initPositions(new Position(84, 643), new Position(126, 684));
+//        sc.initPositions(new Position(75, 553), new Position(110, 588));
+
         for (Position p : sc.getPositions()) {
-            Mouse.getInstance().click(r,p);
+            Mouse.getInstance().click(r, p);
             Thread.sleep(2000);
         }
 

@@ -1,6 +1,7 @@
 package wct.fileprocessing;
 
 import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -64,5 +65,11 @@ public class FileProcessor {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static void clearClipboard() {
+        StringSelection stringSelection = new StringSelection("");
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
+                stringSelection, null);
     }
 }
