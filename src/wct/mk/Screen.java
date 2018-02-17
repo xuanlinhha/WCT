@@ -27,6 +27,7 @@ public class Screen {
                 positions.add(new Position(x, y));
             }
         }
+        positions.remove(6);
         this.positions = positions;
     }
 
