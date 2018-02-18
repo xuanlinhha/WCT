@@ -32,19 +32,13 @@ public class FileSender extends SwingWorker<Void, Void> {
     private String inputFolder;
     private int noOfGroups;
     private long sendingTime;
-    private String option;
+    private Set<String> sentGroups;
 
     private Position taskbarPosition;
     private Position scrollPosition;
     private long scrollTime;
     private String alternativeMsg;
     private List<Position> imagePositions;
-
-    Set<String> sentGroups;
-
-    public FileSender() {
-        sentGroups = new HashSet<String>();
-    }
 
     @Override
     protected Void doInBackground() {
@@ -58,9 +52,6 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     private void bottomUpSend() {
         try {
-            if (!option.equals("Continue")) {
-                sentGroups.clear();
-            }
             Robot r;
             r = new Robot();
             Screen sc = new Screen();
@@ -71,9 +62,10 @@ public class FileSender extends SwingWorker<Void, Void> {
             Thread.sleep(SWITCH_TIME);
 
             // run
-            for (int i = 0; i < noOfGroups; i++) {
-//                FileProcessor.clearClipboard();
+            int counter = 0;
+            while (counter < noOfGroups) {
 
+//                FileProcessor.clearClipboard();
                 // scroll down to the last history
                 Mouse.getInstance().press(r, scrollPosition, scrollTime);
 
@@ -83,10 +75,11 @@ public class FileSender extends SwingWorker<Void, Void> {
                 // if new group
                 if (!sentGroups.contains(color)) {
                     // change hash code and copy to clipboard
-                    String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
+                    String randString = RandomStringUtils.random(RAMDOM_LENGTH) + counter;
                     FileProcessor.changeHashcode(inputFolder, randString);
                     FileProcessor.copyToClipboard(inputFolder);
                     sentGroups.add(color);
+                    counter++;
 
                 } else {
                     StringSelection stringSelection = new StringSelection(alternativeMsg);
@@ -95,9 +88,9 @@ public class FileSender extends SwingWorker<Void, Void> {
                 }
 
                 // click last group
-                Mouse.getInstance().click(r, imagePositions.get(1));
+                Mouse.getInstance().click(r, imagePositions.get(0));
 
-                Thread.sleep(1000);
+                Thread.sleep(500);
 
                 //paste
                 Keyboard.getInstance().paste(r);
@@ -174,14 +167,6 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setScrollTime(long scrollTime) {
         this.scrollTime = scrollTime;
-    }
-
-    public String getOption() {
-        return option;
-    }
-
-    public void setOption(String option) {
-        this.option = option;
     }
 
     public String getAlternativeMsg() {

@@ -5,7 +5,9 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
@@ -746,7 +748,7 @@ public class WCT extends javax.swing.JFrame {
         }
         fileSender.setSendingTime(Long.parseLong(jTextField9.getText()));
 
-        // kid3 & input folder from config panel
+        // input folder from config panel
         fileSender.setInputFolder(jTextField6.getText());
 
         // take WeChat's parameters from config panel
@@ -773,7 +775,10 @@ public class WCT extends javax.swing.JFrame {
         } else {
             fileSender.setAlternativeMsg(jTextField6.getText());
         }
-        fileSender.setOption(jComboBox1.getSelectedItem().toString());
+        if (!jComboBox1.getSelectedItem().toString().equals("Continue")) {
+            sentGroupsFile.clear();
+        }
+        fileSender.setSentGroups(sentGroupsFile);
 
         // gui
         fileSender.setStartJButton(jButton2);
@@ -918,13 +923,16 @@ public class WCT extends javax.swing.JFrame {
         String[] imgPos2 = jTextField5.getText().split(" ");
         imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
         imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
-        fileSender.setImagePositions(imagePositions);
+        textSender.setImagePositions(imagePositions);
         if (StringUtils.isBlank(jTextField8.getText())) {
-            fileSender.setAlternativeMsg("[Smile]");
+            textSender.setAlternativeMsg("[Smile]");
         } else {
-            fileSender.setAlternativeMsg(jTextField6.getText());
+            textSender.setAlternativeMsg(jTextField6.getText());
         }
-        fileSender.setOption(jComboBox2.getSelectedItem().toString());
+        if (!jComboBox2.getSelectedItem().toString().equals("Continue")) {
+            sentGroupsText.clear();
+        }
+        textSender.setSentGroups(sentGroupsText);
 
         // gui
         textSender.setStartJButton(jButton10);
@@ -1102,6 +1110,8 @@ public class WCT extends javax.swing.JFrame {
     private MouseDetector mouseDetector;
     private FileSender fileSender;
     private TextSender textSender;
+    private Set<String> sentGroupsFile;
+    private Set<String> sentGroupsText;
 
     private void initMyComponents() {
         centerWindow(this);
@@ -1110,12 +1120,14 @@ public class WCT extends javax.swing.JFrame {
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
         jTextField9.setText("5000");
+        sentGroupsFile = new HashSet<String>();
 
         // send text
         jTextArea2.setText("");
         jButton10.setEnabled(true);
         jButton11.setEnabled(false);
         jTextField16.setText("1000");
+        sentGroupsText = new HashSet<String>();
 
         // detect mouse
         jButton4.setEnabled(true);
@@ -1134,7 +1146,7 @@ public class WCT extends javax.swing.JFrame {
 
             jTextField17.setText(config.getOnTaskbar());
             jTextField19.setText(config.getScroll());
-            jTextField20.setText(config.getScrollTime() == null ? "2000" : config.getScrollTime().toString());
+            jTextField20.setText(config.getScrollTime() == null ? "3000" : config.getScrollTime().toString());
             if (config.getImagePositions() != null) {
                 jTextField3.setText(config.getImagePositions().get(0));
                 if (config.getImagePositions().size() > 1) {
@@ -1147,7 +1159,7 @@ public class WCT extends javax.swing.JFrame {
             jTextField12.setText(config.getMousePRWaiting() == null ? "50" : config.getMousePRWaiting().toString());
             jTextField13.setText(config.getMouseMoveWaiting() == null ? "50" : config.getMousePRWaiting().toString());
         } else {
-            jTextField20.setText("2000");
+            jTextField20.setText("3000");
             jTextField10.setText("50");
             jTextField11.setText("50");
             jTextField12.setText("50");

@@ -10,6 +10,7 @@ import javax.swing.SwingWorker;
 import wct.mk.Keyboard;
 import wct.mk.Mouse;
 import wct.mk.Position;
+import wct.mk.Screen;
 
 /**
  *
@@ -31,7 +32,7 @@ public class TextSender extends SwingWorker<Void, Void> {
     private String alternativeMsg;
     private List<Position> imagePositions;
 
-    Set<String> sentGroups;
+    private Set<String> sentGroups;
 
     @Override
     protected Void doInBackground() {
@@ -40,19 +41,37 @@ public class TextSender extends SwingWorker<Void, Void> {
         try {
             Robot r;
             r = new Robot();
+            Screen sc = new Screen();
+            sc.initPositions(imagePositions.get(0), imagePositions.get(1));
+
             // click to WeChat app
             Mouse.getInstance().click(r, taskbarPosition);
 
-            // copy text
-            copyText();
+            int counter = 0;
+            while (counter < noOfGroups) {
+                // clear
+//                FileProcessor.clearClipboard();
 
-            // select group and paste
-            for (int i = 0; i < noOfGroups; i++) {
                 // down
                 Mouse.getInstance().press(r, scrollPosition, scrollTime);
 
+                // get color to check
+                String color = sc.getColorData(r);
+
+                // if group has been sent
+                if (sentGroups.contains(color)) {
+                    StringSelection stringSelection = new StringSelection(alternativeMsg);
+                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
+                            stringSelection, null);
+                } else {
+                    // copy text
+                    copyText();
+                    sentGroups.add(color);
+                    counter++;
+                }
+
                 // click last group
-                Mouse.getInstance().click(r, imagePositions.get(1));
+                Mouse.getInstance().click(r, imagePositions.get(0));
 
                 //paste
                 Keyboard.getInstance().paste(r);
@@ -138,6 +157,30 @@ public class TextSender extends SwingWorker<Void, Void> {
 
     public void setSendingTime(long sendingTime) {
         this.sendingTime = sendingTime;
+    }
+
+    public String getAlternativeMsg() {
+        return alternativeMsg;
+    }
+
+    public void setAlternativeMsg(String alternativeMsg) {
+        this.alternativeMsg = alternativeMsg;
+    }
+
+    public List<Position> getImagePositions() {
+        return imagePositions;
+    }
+
+    public void setImagePositions(List<Position> imagePositions) {
+        this.imagePositions = imagePositions;
+    }
+
+    public Set<String> getSentGroups() {
+        return sentGroups;
+    }
+
+    public void setSentGroups(Set<String> sentGroups) {
+        this.sentGroups = sentGroups;
     }
 
 }
