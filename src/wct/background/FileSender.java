@@ -37,7 +37,6 @@ public class FileSender extends SwingWorker<Void, Void> {
     private Position taskbarPosition;
     private Position scrollPosition;
     private long scrollTime;
-    private Position lastHistoryPosition;
     private String alternativeMsg;
     private List<Position> imagePositions;
 
@@ -96,7 +95,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 }
 
                 // click last group
-                Mouse.getInstance().click(r, lastHistoryPosition);
+                Mouse.getInstance().click(r, imagePositions.get(1));
 
                 Thread.sleep(1000);
 
@@ -175,14 +174,6 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setScrollTime(long scrollTime) {
         this.scrollTime = scrollTime;
-    }
-
-    public Position getLastHistoryPosition() {
-        return lastHistoryPosition;
-    }
-
-    public void setLastHistoryPosition(Position lastHistoryPosition) {
-        this.lastHistoryPosition = lastHistoryPosition;
     }
 
     public String getOption() {

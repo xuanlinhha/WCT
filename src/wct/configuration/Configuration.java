@@ -13,10 +13,9 @@ public class Configuration {
     private String outputFolder;
 
     private String onTaskbar;
-    private String lastHistory;
     private String scroll;
     private Long scrollTime;
-    private List<String> imagePoints;
+    private List<String> imagePositions;
 
     private Long kbPRWaiting;
     private Long kbFinishWaiting;
@@ -55,12 +54,12 @@ public class Configuration {
         this.onTaskbar = onTaskbar;
     }
 
-    public String getLastHistory() {
-        return lastHistory;
+    public List<String> getImagePositions() {
+        return imagePositions;
     }
 
-    public void setLastHistory(String lastHistory) {
-        this.lastHistory = lastHistory;
+    public void setImagePositions(List<String> imagePositions) {
+        this.imagePositions = imagePositions;
     }
 
     public String getScroll() {
@@ -77,14 +76,6 @@ public class Configuration {
 
     public void setScrollTime(Long scrollTime) {
         this.scrollTime = scrollTime;
-    }
-
-    public List<String> getImagePoints() {
-        return imagePoints;
-    }
-
-    public void setImagePoints(List<String> imagePoints) {
-        this.imagePoints = imagePoints;
     }
 
     public Long getKbPRWaiting() {

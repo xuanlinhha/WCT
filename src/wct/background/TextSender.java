@@ -3,6 +3,8 @@ package wct.background;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
+import java.util.List;
+import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.SwingWorker;
 import wct.mk.Keyboard;
@@ -25,8 +27,11 @@ public class TextSender extends SwingWorker<Void, Void> {
     private Position taskbarPosition;
     private Position scrollPosition;
     private long scrollTime;
-    private Position lastHistoryPosition;
     private long sendingTime;
+    private String alternativeMsg;
+    private List<Position> imagePositions;
+
+    Set<String> sentGroups;
 
     @Override
     protected Void doInBackground() {
@@ -47,7 +52,7 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Mouse.getInstance().press(r, scrollPosition, scrollTime);
 
                 // click last group
-                Mouse.getInstance().click(r, lastHistoryPosition);
+                Mouse.getInstance().click(r, imagePositions.get(1));
 
                 //paste
                 Keyboard.getInstance().paste(r);
@@ -125,14 +130,6 @@ public class TextSender extends SwingWorker<Void, Void> {
 
     public void setScrollTime(long scrollTime) {
         this.scrollTime = scrollTime;
-    }
-
-    public Position getLastHistoryPosition() {
-        return lastHistoryPosition;
-    }
-
-    public void setLastHistoryPosition(Position lastHistoryPosition) {
-        this.lastHistoryPosition = lastHistoryPosition;
     }
 
     public long getSendingTime() {
