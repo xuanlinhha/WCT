@@ -73,7 +73,7 @@ public class FileSender extends SwingWorker<Void, Void> {
 
             // run
             for (int i = 0; i < noOfGroups; i++) {
-                FileProcessor.clearClipboard();
+//                FileProcessor.clearClipboard();
 
                 // scroll down to the last history
                 Mouse.getInstance().press(r, scrollPosition, scrollTime);
