@@ -73,6 +73,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 String color = sc.getColorData(r);
 
                 // if new group
+                boolean isNew = false;
                 if (!sentGroups.contains(color)) {
                     // change hash code and copy to clipboard
                     String randString = RandomStringUtils.random(RAMDOM_LENGTH) + counter;
@@ -80,7 +81,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     FileProcessor.copyToClipboard(inputFolder);
                     sentGroups.add(color);
                     counter++;
-
+                    isNew = true;
                 } else {
                     StringSelection stringSelection = new StringSelection(alternativeMsg);
                     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
@@ -94,8 +95,9 @@ public class FileSender extends SwingWorker<Void, Void> {
 
                 //paste
                 Keyboard.getInstance().paste(r);
-
-                Thread.sleep(sendingTime);
+                if (isNew) {
+                    Thread.sleep(sendingTime);
+                }
                 if (isCancelled()) {
                     break;
                 }

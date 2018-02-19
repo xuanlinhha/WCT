@@ -59,6 +59,7 @@ public class TextSender extends SwingWorker<Void, Void> {
                 String color = sc.getColorData(r);
 
                 // if group has been sent
+                boolean isNew = false;
                 if (sentGroups.contains(color)) {
                     StringSelection stringSelection = new StringSelection(alternativeMsg);
                     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
@@ -68,6 +69,7 @@ public class TextSender extends SwingWorker<Void, Void> {
                     copyText();
                     sentGroups.add(color);
                     counter++;
+                    isNew = true;
                 }
 
                 // click last group
@@ -77,7 +79,9 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Keyboard.getInstance().paste(r);
 
                 // wait
-                Thread.sleep(sendingTime);
+                if (isNew) {
+                    Thread.sleep(sendingTime);
+                }
                 if (isCancelled()) {
                     break;
                 }
