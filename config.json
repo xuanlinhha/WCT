@@ -2,9 +2,8 @@
   "inputFolder": "C:\\Documents and Settings\\Administrator\\My Documents\\WCT\\input",
   "outputFolder": "C:\\Documents and Settings\\Administrator\\My Documents\\WCT\\output",
   "onTaskbar": "170 750",
-  "lastHistory": "111 725",
   "scroll": "307 734",
-  "scrollTime": 2000,
+  "scrollTime": 3000,
   "imagePositions": [
     "74 689",
     "111 725"

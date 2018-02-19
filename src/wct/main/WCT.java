@@ -790,6 +790,7 @@ public class WCT extends javax.swing.JFrame {
         if (input == 0) { // YES
             fileSender.execute();
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

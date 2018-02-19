@@ -3,10 +3,10 @@ package wct.background;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.apache.commons.lang3.RandomStringUtils;
 import wct.fileprocessing.FileProcessor;
@@ -102,6 +102,9 @@ public class FileSender extends SwingWorker<Void, Void> {
                     break;
                 }
             }
+//            JOptionPane.showConfirmDialog(null, "Sent Groups", sentGroups.size() + " groups sent!",
+//                    JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -6,6 +6,7 @@ import java.awt.datatransfer.StringSelection;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import wct.mk.Keyboard;
 import wct.mk.Mouse;
@@ -86,6 +87,9 @@ public class TextSender extends SwingWorker<Void, Void> {
                     break;
                 }
             }
+//            JOptionPane.showConfirmDialog(null, "Sent Groups", sentGroups.size() + " groups sent!",
+//                    JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
