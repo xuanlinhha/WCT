@@ -870,6 +870,7 @@ public class WCT extends javax.swing.JFrame {
         if (fileSender.cancel(true)) {
             jButton2.setEnabled(true);
             jButton3.setEnabled(false);
+            JOptionPane.showMessageDialog(null, sentGroupsFile.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
             fileSender = null;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -951,6 +952,7 @@ public class WCT extends javax.swing.JFrame {
         if (textSender.cancel(true)) {
             jButton10.setEnabled(true);
             jButton11.setEnabled(false);
+            JOptionPane.showMessageDialog(null, sentGroupsText.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
             textSender = null;
         }
     }//GEN-LAST:event_jButton11ActionPerformed
