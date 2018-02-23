@@ -1,25 +1,11 @@
 package wct.main;
 
-import java.awt.AWTException;
-import java.awt.Color;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.lang3.RandomStringUtils;
-import wct.mk.Keyboard;
 import wct.mk.Mouse;
 import wct.mk.Position;
 import wct.mk.Screen;
-import wct.recognition.GroupRecognizer;
 
 /**
  *
@@ -34,16 +20,16 @@ public class Test {
     public static void main(String[] args) throws Exception {
         Robot r = new Robot();
 
-        Mouse.getInstance().click(r, new Position(576, 728));
+        Mouse.getInstance().click(new Position(576, 728));
 //        Mouse.getInstance().click(r, new Position(467, 616));
         Thread.sleep(1000);
 
-        Screen sc = new Screen();
+        Screen sc = Screen.getInstance();
         sc.initPositions(new Position(84, 643), new Position(126, 684));
 //        sc.initPositions(new Position(75, 553), new Position(110, 588));
 
         for (Position p : sc.getPositions()) {
-            Mouse.getInstance().click(r, p);
+            Mouse.getInstance().click(p);
             Thread.sleep(2000);
         }
 

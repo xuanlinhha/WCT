@@ -8,7 +8,6 @@ import java.util.List;
  */
 public class Configuration {
 
-    private String kid3Path;
     private String inputFolder;
     private String outputFolder;
 
@@ -21,14 +20,6 @@ public class Configuration {
     private Long kbFinishWaiting;
     private Long mousePRWaiting;
     private Long mouseMoveWaiting;
-
-    public String getKid3Path() {
-        return kid3Path;
-    }
-
-    public void setKid3Path(String kid3Path) {
-        this.kid3Path = kid3Path;
-    }
 
     public String getInputFolder() {
         return inputFolder;

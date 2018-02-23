@@ -976,7 +976,6 @@ public class WCT extends javax.swing.JFrame {
         copiesGenerator = new CopiesGenerator();
 
         // gui
-        copiesGenerator.setParent(this);
         copiesGenerator.setGenerateButton(jButton1);
 
         // data

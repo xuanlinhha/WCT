@@ -1,8 +1,5 @@
 package wct.background;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
@@ -12,6 +9,7 @@ import wct.mk.Keyboard;
 import wct.mk.Mouse;
 import wct.mk.Position;
 import wct.mk.Screen;
+import wct.mk.SystemClipboard;
 
 /**
  *
@@ -40,55 +38,35 @@ public class TextSender extends SwingWorker<Void, Void> {
         startJButton.setEnabled(false);
         stopJButton.setEnabled(true);
         try {
-            Robot r;
-            r = new Robot();
-            Screen sc = new Screen();
+            Screen sc = Screen.getInstance();
             sc.initPositions(imagePositions.get(0), imagePositions.get(1));
 
             // click to WeChat app
-            Mouse.getInstance().click(r, taskbarPosition);
+            Mouse.getInstance().click(taskbarPosition);
 
             int counter = 0;
             while (counter < noOfGroups) {
-                // clear
-//                FileProcessor.clearClipboard();
+                Mouse.getInstance().press(scrollPosition, scrollTime);
 
-                // down
-                Mouse.getInstance().press(r, scrollPosition, scrollTime);
+                String color = sc.getColorData();
 
-                // get color to check
-                String color = sc.getColorData(r);
-
-                // if group has been sent
-                boolean isNew = false;
                 if (sentGroups.contains(color)) {
-                    StringSelection stringSelection = new StringSelection(alternativeMsg);
-                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
-                            stringSelection, null);
+                    SystemClipboard.getInstance().copyString(alternativeMsg);
+
                 } else {
-                    // copy text
-                    copyText();
+                    SystemClipboard.getInstance().copyString(text);
                     sentGroups.add(color);
                     counter++;
-                    isNew = true;
                 }
 
-                // click last group
-                Mouse.getInstance().click(r, imagePositions.get(0));
+                Mouse.getInstance().click(imagePositions.get(0));
 
-                //paste
-                Keyboard.getInstance().paste(r);
+                Keyboard.getInstance().paste();
 
-                // wait
-                if (isNew) {
-                    Thread.sleep(sendingTime);
-                }
                 if (isCancelled()) {
                     break;
                 }
             }
-//            JOptionPane.showConfirmDialog(null, "Sent Groups", sentGroups.size() + " groups sent!",
-//                    JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -96,11 +74,6 @@ public class TextSender extends SwingWorker<Void, Void> {
         startJButton.setEnabled(true);
         stopJButton.setEnabled(false);
         return null;
-    }
-
-    private void copyText() {
-        StringSelection ss = new StringSelection(text);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, ss);
     }
 
     public JButton getStartJButton() {

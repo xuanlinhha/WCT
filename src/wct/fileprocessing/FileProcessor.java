@@ -1,5 +1,6 @@
 package wct.fileprocessing;
 
+import wct.mk.FileSelection;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;
@@ -31,6 +32,19 @@ public class FileProcessor {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static List<File> getFiles(String inputFolder) {
+        File folder = new File(inputFolder);
+        File[] files = folder.listFiles();
+        List<File> selectedFiles = new ArrayList<File>();
+        Arrays.sort(files, new WEFileComparator());
+        for (File f : files) {
+            if (f.isFile() && (f.getName().endsWith(".mp3") || f.getName().endsWith(".mp4"))) {
+                selectedFiles.add(f);
+            }
+        }
+        return selectedFiles;
     }
 
     public static void copyToClipboard(String inputFolder) {

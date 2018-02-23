@@ -1,5 +1,6 @@
 package wct.mk;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Robot;
 import java.util.ArrayList;
@@ -12,6 +13,19 @@ import java.util.List;
 public class Screen {
 
     private List<Position> positions;
+    private Robot r;
+    private static Screen instance;
+
+    private Screen() {
+    }
+
+    public static Screen getInstance() throws AWTException {
+        if (instance == null) {
+            instance = new Screen();
+            instance.r = new Robot();
+        }
+        return instance;
+    }
 
     public void initPositions(Position p1, Position p2) {
         int width = Math.abs(p2.getX() - p1.getX()) / 3;
@@ -31,7 +45,7 @@ public class Screen {
         this.positions = positions;
     }
 
-    public String getColorData(Robot r) {
+    public String getColorData() {
         StringBuilder sb = new StringBuilder();
         for (Position p : positions) {
             Color c = r.getPixelColor(p.getX(), p.getY());

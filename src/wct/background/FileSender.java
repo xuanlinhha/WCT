@@ -1,8 +1,5 @@
 package wct.background;
 
-import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
@@ -14,6 +11,7 @@ import wct.mk.Keyboard;
 import wct.mk.Mouse;
 import wct.mk.Position;
 import wct.mk.Screen;
+import wct.mk.SystemClipboard;
 
 /**
  *
@@ -52,49 +50,39 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     private void bottomUpSend() {
         try {
-            Robot r;
-            r = new Robot();
-            Screen sc = new Screen();
+            Screen sc = Screen.getInstance();
             sc.initPositions(imagePositions.get(0), imagePositions.get(1));
 
             // click to WeChat app
-            Mouse.getInstance().click(r, taskbarPosition);
+            Mouse.getInstance().click(taskbarPosition);
             Thread.sleep(SWITCH_TIME);
 
             // run
+            String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             int counter = 0;
             while (counter < noOfGroups) {
 
-//                FileProcessor.clearClipboard();
-                // scroll down to the last history
-                Mouse.getInstance().press(r, scrollPosition, scrollTime);
+                Mouse.getInstance().press(scrollPosition, scrollTime);
 
-                // get color to check
-                String color = sc.getColorData(r);
+                String color = sc.getColorData();
 
-                // if new group
                 boolean isNew = false;
                 if (!sentGroups.contains(color)) {
-                    // change hash code and copy to clipboard
-                    String randString = RandomStringUtils.random(RAMDOM_LENGTH) + counter;
-                    FileProcessor.changeHashcode(inputFolder, randString);
-                    FileProcessor.copyToClipboard(inputFolder);
+
+                    FileProcessor.changeHashcode(inputFolder, randString + counter);
+                    SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(inputFolder));
+
                     sentGroups.add(color);
                     counter++;
                     isNew = true;
                 } else {
-                    StringSelection stringSelection = new StringSelection(alternativeMsg);
-                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(
-                            stringSelection, null);
+                    SystemClipboard.getInstance().copyString(alternativeMsg);
                 }
 
-                // click last group
-                Mouse.getInstance().click(r, imagePositions.get(0));
+                Mouse.getInstance().click(imagePositions.get(0));
 
-                Thread.sleep(500);
-
-                //paste
-                Keyboard.getInstance().paste(r);
+                Keyboard.getInstance().paste();
+                
                 if (isNew) {
                     Thread.sleep(sendingTime);
                 }
@@ -102,8 +90,6 @@ public class FileSender extends SwingWorker<Void, Void> {
                     break;
                 }
             }
-//            JOptionPane.showConfirmDialog(null, "Sent Groups", sentGroups.size() + " groups sent!",
-//                    JOptionPane.YES_OPTION, JOptionPane.INFORMATION_MESSAGE);
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();

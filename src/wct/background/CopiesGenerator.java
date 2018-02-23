@@ -1,11 +1,7 @@
 package wct.background;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,7 +16,6 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
     private static final int RAMDOM_LENGTH = 20;
 
     // gui
-    private JFrame parent;
     private JButton generateButton;
 
     // task
@@ -46,7 +41,7 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
             }
             if (!isCancelled()) {
                 long runningTime = System.currentTimeMillis() - startTime;
-                JOptionPane.showMessageDialog(parent, "Time: " + runningTime, "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Time: " + runningTime, "Success", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -54,14 +49,6 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
         generateButton.setEnabled(true);
         return null;
 
-    }
-
-    public JFrame getParent() {
-        return parent;
-    }
-
-    public void setParent(JFrame parent) {
-        this.parent = parent;
     }
 
     public JButton getGenerateButton() {

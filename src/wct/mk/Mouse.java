@@ -1,5 +1,6 @@
 package wct.mk;
 
+import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
 import java.io.IOException;
@@ -11,19 +12,21 @@ import wct.configuration.ConfigurationHandler;
  */
 public class Mouse {
 
+    private Robot r;
     private static Mouse instance;
 
     private Mouse() {
     }
 
-    public static Mouse getInstance() {
+    public static Mouse getInstance() throws AWTException {
         if (instance == null) {
             instance = new Mouse();
+            instance.r = new Robot();
         }
         return instance;
     }
 
-    public void click(Robot r, Position p) throws InterruptedException, IOException {
+    public void click(Position p) throws InterruptedException, IOException {
         Long mouseMoveWating = ConfigurationHandler.getConfig().getMouseMoveWaiting();
         Long mPRWating = ConfigurationHandler.getConfig().getMousePRWaiting();
         r.mouseMove(p.getX(), p.getY());
@@ -34,7 +37,7 @@ public class Mouse {
         Thread.sleep(mPRWating);
     }
 
-    public void press(Robot r, Position p, Long pressTime) throws InterruptedException, IOException {
+    public void press(Position p, Long pressTime) throws InterruptedException, IOException {
         Long mouseMoveWating = ConfigurationHandler.getConfig().getMouseMoveWaiting();
         Long mPRWating = ConfigurationHandler.getConfig().getMousePRWaiting();
         r.mouseMove(p.getX(), p.getY());
