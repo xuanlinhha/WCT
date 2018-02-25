@@ -1,4 +1,4 @@
-package wct.mk;
+package wct.resourses;
 
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;

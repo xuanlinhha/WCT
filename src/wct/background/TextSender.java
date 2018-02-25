@@ -5,11 +5,11 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-import wct.mk.Keyboard;
-import wct.mk.Mouse;
-import wct.mk.Position;
-import wct.mk.Screen;
-import wct.mk.SystemClipboard;
+import wct.resourses.Keyboard;
+import wct.resourses.Mouse;
+import wct.resourses.Position;
+import wct.resourses.Screen;
+import wct.resourses.SystemClipboard;
 
 /**
  *

@@ -1,6 +1,6 @@
 package wct.fileprocessing;
 
-import wct.mk.FileSelection;
+import wct.resourses.FileSelection;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;

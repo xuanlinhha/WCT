@@ -1,4 +1,4 @@
-package wct.mk;
+package wct.resourses;
 
 import java.awt.AWTException;
 import java.awt.Color;

@@ -3,9 +3,9 @@ package wct.main;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
-import wct.mk.Mouse;
-import wct.mk.Position;
-import wct.mk.Screen;
+import wct.resourses.Mouse;
+import wct.resourses.Position;
+import wct.resourses.Screen;
 
 /**
  *

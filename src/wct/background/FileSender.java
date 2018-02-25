@@ -7,11 +7,11 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.apache.commons.lang3.RandomStringUtils;
 import wct.fileprocessing.FileProcessor;
-import wct.mk.Keyboard;
-import wct.mk.Mouse;
-import wct.mk.Position;
-import wct.mk.Screen;
-import wct.mk.SystemClipboard;
+import wct.resourses.Keyboard;
+import wct.resourses.Mouse;
+import wct.resourses.Position;
+import wct.resourses.Screen;
+import wct.resourses.SystemClipboard;
 
 /**
  *
@@ -21,6 +21,7 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     private static final Long SWITCH_TIME = 1000L;
     private static final int RAMDOM_LENGTH = 20;
+    private static final Long WAIT_FOR_PASTING = 500L;
 
     // gui
     private JButton startJButton;
@@ -30,25 +31,61 @@ public class FileSender extends SwingWorker<Void, Void> {
     private String inputFolder;
     private int noOfGroups;
     private long sendingTime;
-    private Set<String> sentGroups;
-
     private Position taskbarPosition;
     private Position scrollPosition;
     private long scrollTime;
-    private String alternativeMsg;
+
+    // image recognition
+    private boolean groupRecognition;
     private List<Position> imagePositions;
+    private Set<String> sentGroups;
+    private String alternativeMsg;
 
     @Override
     protected Void doInBackground() {
         startJButton.setEnabled(false);
         stopJButton.setEnabled(true);
-        bottomUpSend();
+        if (groupRecognition) {
+            bottomUpSendWithImageRecognition();
+        } else {
+            bottomUpSend();
+        }
         startJButton.setEnabled(true);
         stopJButton.setEnabled(false);
         return null;
     }
 
     private void bottomUpSend() {
+        try {
+            // click to WeChat app
+            Mouse.getInstance().click(taskbarPosition);
+            Thread.sleep(SWITCH_TIME);
+
+            // run
+            String randString = RandomStringUtils.random(RAMDOM_LENGTH);
+            int counter = 0;
+            while (counter < noOfGroups) {
+                Mouse.getInstance().press(scrollPosition, scrollTime);
+                FileProcessor.changeHashcode(inputFolder, randString + counter);
+                SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(inputFolder));
+                Mouse.getInstance().click(imagePositions.get(0));
+                Thread.sleep(WAIT_FOR_PASTING);
+                Keyboard.getInstance().paste();
+                if (counter < noOfGroups - 1) {
+                    Thread.sleep(sendingTime);
+                }
+                counter++;
+                if (isCancelled()) {
+                    break;
+                }
+            }
+            JOptionPane.showMessageDialog(null, noOfGroups + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void bottomUpSendWithImageRecognition() {
         try {
             Screen sc = Screen.getInstance();
             sc.initPositions(imagePositions.get(0), imagePositions.get(1));
@@ -61,14 +98,10 @@ public class FileSender extends SwingWorker<Void, Void> {
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             int counter = 0;
             while (counter < noOfGroups) {
-
                 Mouse.getInstance().press(scrollPosition, scrollTime);
-
                 String color = sc.getColorData();
-
                 boolean isNew = false;
                 if (!sentGroups.contains(color)) {
-
                     FileProcessor.changeHashcode(inputFolder, randString + counter);
                     SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(inputFolder));
 
@@ -78,11 +111,9 @@ public class FileSender extends SwingWorker<Void, Void> {
                 } else {
                     SystemClipboard.getInstance().copyString(alternativeMsg);
                 }
-
                 Mouse.getInstance().click(imagePositions.get(0));
-
+                Thread.sleep(WAIT_FOR_PASTING);
                 Keyboard.getInstance().paste();
-                
                 if (isNew) {
                     Thread.sleep(sendingTime);
                 }
@@ -182,6 +213,14 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setImagePositions(List<Position> imagePositions) {
         this.imagePositions = imagePositions;
+    }
+
+    public boolean isGroupRecognition() {
+        return groupRecognition;
+    }
+
+    public void setGroupRecognition(boolean groupRecognition) {
+        this.groupRecognition = groupRecognition;
     }
 
 }

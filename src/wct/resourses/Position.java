@@ -1,4 +1,4 @@
-package wct.mk;
+package wct.resourses;
 
 /**
  *

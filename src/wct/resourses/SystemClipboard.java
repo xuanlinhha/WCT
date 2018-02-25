@@ -1,4 +1,4 @@
-package wct.mk;
+package wct.resourses;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;

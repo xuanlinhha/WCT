@@ -3,6 +3,7 @@ package wct.main;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ import wct.background.MouseDetector;
 import wct.background.TextSender;
 import wct.configuration.Configuration;
 import wct.configuration.ConfigurationHandler;
-import wct.mk.Position;
+import wct.resourses.Position;
 
 /**
  *
@@ -62,7 +63,8 @@ public class WCT extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -269,20 +271,30 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jLabel18, gridBagConstraints);
 
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel28.setText("Option");
+        jLabel28.setText("Group recognition");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel28, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Continue", "From beginning" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Continue", "From beginning" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jComboBox1, gridBagConstraints);
+
+        jCheckBox1.setText("Enable");
+        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox1ItemStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 3;
+        jPanel2.add(jCheckBox1, gridBagConstraints);
 
         jPanel1.add(jPanel2, "card2");
 
@@ -752,28 +764,57 @@ public class WCT extends javax.swing.JFrame {
         fileSender.setInputFolder(jTextField6.getText());
 
         // take WeChat's parameters from config panel
+        if (StringUtils.isBlank(jTextField17.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing Wechat position on taskbar!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String[] taskbarCoordinate = jTextField17.getText().split(" ");
         Position taskbarPosition = new Position();
         taskbarPosition.setX(Integer.parseInt(taskbarCoordinate[0]));
         taskbarPosition.setY(Integer.parseInt(taskbarCoordinate[1]));
         fileSender.setTaskbarPosition(taskbarPosition);
+
+        if (StringUtils.isBlank(jTextField19.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing position to scroll!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String[] scrollCoordinate = jTextField19.getText().split(" ");
         Position scrollPosition = new Position();
         scrollPosition.setX(Integer.parseInt(scrollCoordinate[0]));
         scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
         fileSender.setScrollPosition(scrollPosition);
+
+        if (StringUtils.isBlank(jTextField20.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing scrolling time!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Long scrollTime = Long.parseLong(jTextField20.getText());
         fileSender.setScrollTime(scrollTime);
+
+        fileSender.setGroupRecognition(jCheckBox1.isSelected());
+
         List<Position> imagePositions = new ArrayList<Position>();
+        if (StringUtils.isBlank(jTextField3.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing image position 1!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String[] imgPos1 = jTextField3.getText().split(" ");
-        String[] imgPos2 = jTextField5.getText().split(" ");
         imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
-        imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
+
+        if (jCheckBox1.isSelected()) {
+            if (StringUtils.isBlank(jTextField5.getText())) {
+                JOptionPane.showMessageDialog(this, "Missing image position 2!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String[] imgPos2 = jTextField5.getText().split(" ");
+            imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
+        }
         fileSender.setImagePositions(imagePositions);
+
         if (StringUtils.isBlank(jTextField8.getText())) {
-            fileSender.setAlternativeMsg("[Smile]");
+            fileSender.setAlternativeMsg("--");
         } else {
-            fileSender.setAlternativeMsg(jTextField6.getText());
+            fileSender.setAlternativeMsg(jTextField8.getText());
         }
         if (!jComboBox1.getSelectedItem().toString().equals("Continue")) {
             sentGroupsFile.clear();
@@ -993,6 +1034,14 @@ public class WCT extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            jComboBox1.setEnabled(true);
+        } else {
+            jComboBox1.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCheckBox1ItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -1041,6 +1090,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -1121,6 +1171,7 @@ public class WCT extends javax.swing.JFrame {
         // send file
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
+        jComboBox1.setEnabled(false);
         jTextField9.setText("5000");
         sentGroupsFile = new HashSet<String>();
 
