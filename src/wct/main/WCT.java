@@ -82,6 +82,7 @@ public class WCT extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -204,6 +205,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         jPanel2.add(jLabel1, gridBagConstraints);
 
         jLabel2.setText("No. of copies");
@@ -249,7 +251,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weighty = 0.2;
+        gridBagConstraints.weighty = 0.1;
         jPanel2.add(jLabel5, gridBagConstraints);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -418,7 +420,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel5.add(jButton11, gridBagConstraints);
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel23.setText("Option");
+        jLabel23.setText("Group recognition");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -429,9 +431,20 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jComboBox2, gridBagConstraints);
+
+        jCheckBox2.setText("Enable");
+        jCheckBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBox2ItemStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel5.add(jCheckBox2, gridBagConstraints);
 
         jPanel1.add(jPanel5, "card5");
 
@@ -874,6 +887,7 @@ public class WCT extends javax.swing.JFrame {
         config.setOnTaskbar(jTextField17.getText());
         config.setScroll(jTextField19.getText());
         config.setScrollTime(Long.parseLong(jTextField20.getText()));
+        config.setAlternativeMsg(jTextField8.getText());
         List<String> imagePositions = new ArrayList<String>();
         imagePositions.add(jTextField3.getText());
         imagePositions.add(jTextField5.getText());
@@ -941,37 +955,59 @@ public class WCT extends javax.swing.JFrame {
         }
         textSender.setNoOfGroups(Integer.parseInt(jTextField4.getText()));
 
-        // sending time
-        if (StringUtils.isBlank(jTextField16.getText())) {
-            JOptionPane.showMessageDialog(this, "Please input waiting time!", "Error", JOptionPane.ERROR_MESSAGE);
+        // take WeChat's parameters from config panel
+        if (StringUtils.isBlank(jTextField17.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing Wechat position on taskbar!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        textSender.setSendingTime(Long.parseLong(jTextField16.getText()));
-
-        // take WeChat's parameters from config panel
         String[] taskbarCoordinate = jTextField17.getText().split(" ");
         Position taskbarPosition = new Position();
         taskbarPosition.setX(Integer.parseInt(taskbarCoordinate[0]));
         taskbarPosition.setY(Integer.parseInt(taskbarCoordinate[1]));
         textSender.setTaskbarPosition(taskbarPosition);
+
+        if (StringUtils.isBlank(jTextField19.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing position to scroll!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String[] scrollCoordinate = jTextField19.getText().split(" ");
         Position scrollPosition = new Position();
         scrollPosition.setX(Integer.parseInt(scrollCoordinate[0]));
         scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
         textSender.setScrollPosition(scrollPosition);
+
+        if (StringUtils.isBlank(jTextField20.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing scrolling time!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Long scrollTime = Long.parseLong(jTextField20.getText());
         textSender.setScrollTime(scrollTime);
+
+        textSender.setGroupRecognition(jCheckBox2.isSelected());
+
         List<Position> imagePositions = new ArrayList<Position>();
-        String[] imgPos1 = jTextField3.getText().split(" ");
-        String[] imgPos2 = jTextField5.getText().split(" ");
-        imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
-        imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
-        textSender.setImagePositions(imagePositions);
-        if (StringUtils.isBlank(jTextField8.getText())) {
-            textSender.setAlternativeMsg("[Smile]");
-        } else {
-            textSender.setAlternativeMsg(jTextField6.getText());
+        if (StringUtils.isBlank(jTextField3.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing image position 1!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+        String[] imgPos1 = jTextField3.getText().split(" ");
+        imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
+        if (jCheckBox2.isSelected()) {
+            if (StringUtils.isBlank(jTextField5.getText())) {
+                JOptionPane.showMessageDialog(this, "Missing image position 2!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            String[] imgPos2 = jTextField5.getText().split(" ");
+            imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
+        }
+        textSender.setImagePositions(imagePositions);
+
+        if (StringUtils.isBlank(jTextField8.getText())) {
+            textSender.setAlternativeMsg("--");
+        } else {
+            textSender.setAlternativeMsg(jTextField8.getText());
+        }
+
         if (!jComboBox2.getSelectedItem().toString().equals("Continue")) {
             sentGroupsText.clear();
         }
@@ -1042,6 +1078,14 @@ public class WCT extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jCheckBox1ItemStateChanged
 
+    private void jCheckBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox2ItemStateChanged
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            jComboBox2.setEnabled(true);
+        } else {
+            jComboBox2.setEnabled(false);
+        }
+    }//GEN-LAST:event_jCheckBox2ItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -1091,6 +1135,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -1172,6 +1217,7 @@ public class WCT extends javax.swing.JFrame {
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
         jComboBox1.setEnabled(false);
+        jComboBox2.setEnabled(false);
         jTextField9.setText("5000");
         sentGroupsFile = new HashSet<String>();
 
@@ -1199,6 +1245,7 @@ public class WCT extends javax.swing.JFrame {
 
             jTextField17.setText(config.getOnTaskbar());
             jTextField19.setText(config.getScroll());
+            jTextField8.setText(config.getAlternativeMsg());
             jTextField20.setText(config.getScrollTime() == null ? "3000" : config.getScrollTime().toString());
             if (config.getImagePositions() != null) {
                 jTextField3.setText(config.getImagePositions().get(0));
@@ -1217,6 +1264,7 @@ public class WCT extends javax.swing.JFrame {
             jTextField11.setText("50");
             jTextField12.setText("50");
             jTextField13.setText("50");
+            jTextField8.setText("--");
         }
     }
 

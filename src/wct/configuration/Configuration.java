@@ -14,6 +14,7 @@ public class Configuration {
     private String onTaskbar;
     private String scroll;
     private Long scrollTime;
+    private String alternativeMsg;
     private List<String> imagePositions;
 
     private Long kbPRWaiting;
@@ -99,6 +100,14 @@ public class Configuration {
 
     public void setMouseMoveWaiting(Long mouseMoveWaiting) {
         this.mouseMoveWaiting = mouseMoveWaiting;
+    }
+
+    public String getAlternativeMsg() {
+        return alternativeMsg;
+    }
+
+    public void setAlternativeMsg(String alternativeMsg) {
+        this.alternativeMsg = alternativeMsg;
     }
 
 }

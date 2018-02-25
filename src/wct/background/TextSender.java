@@ -17,6 +17,9 @@ import wct.resourses.SystemClipboard;
  */
 public class TextSender extends SwingWorker<Void, Void> {
 
+    private static final Long SWITCH_TIME = 1000L;
+    private static final Long WAIT_FOR_PASTING = 500L;
+
     // gui
     private JButton startJButton;
     private JButton stopJButton;
@@ -27,16 +30,50 @@ public class TextSender extends SwingWorker<Void, Void> {
     private Position taskbarPosition;
     private Position scrollPosition;
     private long scrollTime;
-    private long sendingTime;
-    private String alternativeMsg;
-    private List<Position> imagePositions;
 
+    // image recognition
+    private boolean groupRecognition;
+    private List<Position> imagePositions;
     private Set<String> sentGroups;
+    private String alternativeMsg;
 
     @Override
     protected Void doInBackground() {
         startJButton.setEnabled(false);
         stopJButton.setEnabled(true);
+        if (groupRecognition) {
+            bottomUpSendWithImageRecognition();
+        } else {
+            bottomUpSend();
+        }
+        startJButton.setEnabled(true);
+        stopJButton.setEnabled(false);
+        return null;
+    }
+
+    private void bottomUpSend() {
+        try {
+            Mouse.getInstance().click(taskbarPosition);
+            SystemClipboard.getInstance().copyString(text);
+            Thread.sleep(SWITCH_TIME);
+            int counter = 0;
+            while (counter < noOfGroups) {
+                Mouse.getInstance().press(scrollPosition, scrollTime);
+                Mouse.getInstance().click(imagePositions.get(0));
+                Thread.sleep(WAIT_FOR_PASTING);
+                Keyboard.getInstance().paste();
+                counter++;
+                if (isCancelled()) {
+                    break;
+                }
+            }
+            JOptionPane.showMessageDialog(null, noOfGroups + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void bottomUpSendWithImageRecognition() {
         try {
             Screen sc = Screen.getInstance();
             sc.initPositions(imagePositions.get(0), imagePositions.get(1));
@@ -71,9 +108,6 @@ public class TextSender extends SwingWorker<Void, Void> {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        startJButton.setEnabled(true);
-        stopJButton.setEnabled(false);
-        return null;
     }
 
     public JButton getStartJButton() {
@@ -132,14 +166,6 @@ public class TextSender extends SwingWorker<Void, Void> {
         this.scrollTime = scrollTime;
     }
 
-    public long getSendingTime() {
-        return sendingTime;
-    }
-
-    public void setSendingTime(long sendingTime) {
-        this.sendingTime = sendingTime;
-    }
-
     public String getAlternativeMsg() {
         return alternativeMsg;
     }
@@ -162,6 +188,14 @@ public class TextSender extends SwingWorker<Void, Void> {
 
     public void setSentGroups(Set<String> sentGroups) {
         this.sentGroups = sentGroups;
+    }
+
+    public boolean isGroupRecognition() {
+        return groupRecognition;
+    }
+
+    public void setGroupRecognition(boolean groupRecognition) {
+        this.groupRecognition = groupRecognition;
     }
 
 }

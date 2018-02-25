@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/mk/Keyboard.java</file>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/configuration/ConfigurationHandler.java</file>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/configuration/Configuration.java</file>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/mk/Mouse.java</file>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/main/WCT.java</file>
+            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/background/FileSender.java</file>
+            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/background/TextSender.java</file>
+            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/resourses/Screen.java</file>
+            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/main/WCT.java</file>
+            <file>file:/C:/Users/workshop/Documents/NetBeansProjects/WCT/src/wct/configuration/Configuration.java</file>
         </group>
     </open-files>
 </project-private>
