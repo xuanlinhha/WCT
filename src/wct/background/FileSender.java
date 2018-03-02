@@ -1,5 +1,6 @@
 package wct.background;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
@@ -34,11 +35,13 @@ public class FileSender extends SwingWorker<Void, Void> {
     private Position taskbarPosition;
     private Position scrollPosition;
     private long scrollTime;
+    private int counter;
 
     // image recognition
     private boolean groupRecognition;
     private List<Position> imagePositions;
-    private Set<String> sentGroups;
+    private boolean isContinue;
+    private static Set<String> sentGroups = new HashSet<String>();
     private String alternativeMsg;
 
     @Override
@@ -63,7 +66,7 @@ public class FileSender extends SwingWorker<Void, Void> {
 
             // run
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
-            int counter = 0;
+            counter = 0;
             while (counter < noOfGroups) {
                 Mouse.getInstance().press(scrollPosition, scrollTime);
                 FileProcessor.changeHashcode(inputFolder, randString + counter);
@@ -71,10 +74,10 @@ public class FileSender extends SwingWorker<Void, Void> {
                 Mouse.getInstance().click(imagePositions.get(0));
                 Thread.sleep(WAIT_FOR_PASTING);
                 Keyboard.getInstance().paste();
+                counter++;
                 if (counter < noOfGroups - 1) {
                     Thread.sleep(sendingTime);
                 }
-                counter++;
                 if (isCancelled()) {
                     break;
                 }
@@ -90,15 +93,22 @@ public class FileSender extends SwingWorker<Void, Void> {
             Screen sc = Screen.getInstance();
             sc.initPositions(imagePositions.get(0), imagePositions.get(1));
 
+            // clear if start from beginning
+            if (!isContinue) {
+                sentGroups.clear();
+            }
+
             // click to WeChat app
             Mouse.getInstance().click(taskbarPosition);
             Thread.sleep(SWITCH_TIME);
 
             // run
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
-            int counter = 0;
+            counter = 0;
             while (counter < noOfGroups) {
                 Mouse.getInstance().press(scrollPosition, scrollTime);
+                Mouse.getInstance().click(imagePositions.get(0));
+                Thread.sleep(WAIT_FOR_PASTING);
                 String color = sc.getColorData();
                 boolean isNew = false;
                 if (!sentGroups.contains(color)) {
@@ -111,8 +121,6 @@ public class FileSender extends SwingWorker<Void, Void> {
                 } else {
                     SystemClipboard.getInstance().copyString(alternativeMsg);
                 }
-                Mouse.getInstance().click(imagePositions.get(0));
-                Thread.sleep(WAIT_FOR_PASTING);
                 Keyboard.getInstance().paste();
                 if (isNew) {
                     Thread.sleep(sendingTime);
@@ -221,6 +229,22 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setGroupRecognition(boolean groupRecognition) {
         this.groupRecognition = groupRecognition;
+    }
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+
+    public boolean isIsContinue() {
+        return isContinue;
+    }
+
+    public void setIsContinue(boolean isContinue) {
+        this.isContinue = isContinue;
     }
 
 }

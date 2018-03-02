@@ -6,9 +6,7 @@ import java.awt.Window;
 import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
@@ -63,7 +61,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jCheckBox1 = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         jButton4 = new javax.swing.JButton();
@@ -75,9 +73,7 @@ public class WCT extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jLabel19 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
@@ -280,7 +276,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel28, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Continue", "From beginning" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Continue", "From beginning" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -372,26 +368,12 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jLabel19, gridBagConstraints);
-
-        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel21.setText("Sending time");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jLabel21, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jTextField4, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jTextField16, gridBagConstraints);
 
         jButton10.setText("Start");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
@@ -401,7 +383,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.4;
         jPanel5.add(jButton10, gridBagConstraints);
@@ -414,7 +396,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.4;
         jPanel5.add(jButton11, gridBagConstraints);
@@ -423,14 +405,14 @@ public class WCT extends javax.swing.JFrame {
         jLabel23.setText("Group recognition");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jLabel23, gridBagConstraints);
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Continue", "From beginning" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jComboBox2, gridBagConstraints);
 
@@ -442,7 +424,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jCheckBox2, gridBagConstraints);
 
@@ -829,10 +811,12 @@ public class WCT extends javax.swing.JFrame {
         } else {
             fileSender.setAlternativeMsg(jTextField8.getText());
         }
+
         if (!jComboBox1.getSelectedItem().toString().equals("Continue")) {
-            sentGroupsFile.clear();
+            fileSender.setIsContinue(true);
+        } else {
+            fileSender.setIsContinue(false);
         }
-        fileSender.setSentGroups(sentGroupsFile);
 
         // gui
         fileSender.setStartJButton(jButton2);
@@ -925,7 +909,11 @@ public class WCT extends javax.swing.JFrame {
         if (fileSender.cancel(true)) {
             jButton2.setEnabled(true);
             jButton3.setEnabled(false);
-            JOptionPane.showMessageDialog(null, sentGroupsFile.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+            if (fileSender.isGroupRecognition()) {
+                JOptionPane.showMessageDialog(null, fileSender.getSentGroups().size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, fileSender.getCounter() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+            }
             fileSender = null;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -1009,9 +997,10 @@ public class WCT extends javax.swing.JFrame {
         }
 
         if (!jComboBox2.getSelectedItem().toString().equals("Continue")) {
-            sentGroupsText.clear();
+            textSender.setIsContinue(true);
+        } else {
+            textSender.setIsContinue(false);
         }
-        textSender.setSentGroups(sentGroupsText);
 
         // gui
         textSender.setStartJButton(jButton10);
@@ -1029,7 +1018,11 @@ public class WCT extends javax.swing.JFrame {
         if (textSender.cancel(true)) {
             jButton10.setEnabled(true);
             jButton11.setEnabled(false);
-            JOptionPane.showMessageDialog(null, sentGroupsText.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+            if (fileSender.isGroupRecognition()) {
+                JOptionPane.showMessageDialog(null, textSender.getSentGroups().size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, textSender.getCounter() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+            }
             textSender = null;
         }
     }//GEN-LAST:event_jButton11ActionPerformed
@@ -1151,7 +1144,6 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -1190,7 +1182,6 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
@@ -1207,8 +1198,6 @@ public class WCT extends javax.swing.JFrame {
     private MouseDetector mouseDetector;
     private FileSender fileSender;
     private TextSender textSender;
-    private Set<String> sentGroupsFile;
-    private Set<String> sentGroupsText;
 
     private void initMyComponents() {
         centerWindow(this);
@@ -1219,14 +1208,11 @@ public class WCT extends javax.swing.JFrame {
         jComboBox1.setEnabled(false);
         jComboBox2.setEnabled(false);
         jTextField9.setText("5000");
-        sentGroupsFile = new HashSet<String>();
 
         // send text
         jTextArea2.setText("");
         jButton10.setEnabled(true);
         jButton11.setEnabled(false);
-        jTextField16.setText("1000");
-        sentGroupsText = new HashSet<String>();
 
         // detect mouse
         jButton4.setEnabled(true);
