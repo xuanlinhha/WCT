@@ -1,10 +1,14 @@
 package wct.resourses;
 
 import java.awt.AWTException;
-import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.Robot;
-import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
+import javax.imageio.ImageIO;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -27,33 +31,17 @@ public class Screen {
         return instance;
     }
 
-    public void initPositions(Position p1, Position p2) {
-        int width = Math.abs(p2.getX() - p1.getX()) / 3;
-        int haft = width / 2;
-        int firstX = p1.getX() + haft;
-        int firstY = p1.getY() + haft;
-        List<Position> positions = new ArrayList<Position>();
-
-        for (int i = 0; i < 3; i++) {
-            int x = firstX + i * width;
-            for (int j = 0; j < 3; j++) {
-                int y = firstY + j * width;
-                positions.add(new Position(x, y));
-            }
-        }
-        positions.remove(6);
-        this.positions = positions;
-    }
-
     public String getColorData() {
-        StringBuilder sb = new StringBuilder();
-        for (Position p : positions) {
-            Color c = r.getPixelColor(p.getX(), p.getY());
-            sb.append(new Integer(c.getRed()));
-            sb.append(new Integer(c.getGreen()));
-            sb.append(new Integer(c.getBlue()));
+        try {
+            BufferedImage image = r.createScreenCapture(new Rectangle(positions.get(0).getX(), positions.get(1).getY(), Math.abs(positions.get(1).getX() - positions.get(0).getX()), Math.abs(positions.get(1).getY() - positions.get(0).getY())));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", baos);
+            byte[] bytes = baos.toByteArray();
+            return DigestUtils.sha256Hex(bytes);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        return sb.toString();
+        return "";
     }
 
     public List<Position> getPositions() {

@@ -91,7 +91,6 @@ public class FileSender extends SwingWorker<Void, Void> {
     private void bottomUpSendWithImageRecognition() {
         try {
             Screen sc = Screen.getInstance();
-            sc.initPositions(imagePositions.get(0), imagePositions.get(1));
 
             // clear if start from beginning
             if (!isContinue) {

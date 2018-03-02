@@ -1,11 +1,12 @@
 package wct.main;
 
+import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
-import wct.resourses.Mouse;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import javax.imageio.ImageIO;
+import org.apache.commons.codec.digest.DigestUtils;
 import wct.resourses.Position;
-import wct.resourses.Screen;
 
 /**
  *
@@ -13,45 +14,52 @@ import wct.resourses.Screen;
  */
 public class Test {
 
-    private static String inputFolder = "C:\\Users\\workshop\\Documents\\WCT\\input";
-    private static String outputFolder = "C:\\Users\\workshop\\Documents\\WCT\\output";
-    private static int RAMDOM_LENGTH = 50;
+    private static long WAIT_FOR_PASTING = 1000L;
 
     public static void main(String[] args) throws Exception {
         Robot r = new Robot();
-
-        Mouse.getInstance().click(new Position(576, 728));
-//        Mouse.getInstance().click(r, new Position(467, 616));
-        Thread.sleep(1000);
-
-        Screen sc = Screen.getInstance();
-        sc.initPositions(new Position(84, 643), new Position(126, 684));
-//        sc.initPositions(new Position(75, 553), new Position(110, 588));
-
-        for (Position p : sc.getPositions()) {
-            Mouse.getInstance().click(p);
-            Thread.sleep(2000);
-        }
-
-//
-//        Set<String> colors = new HashSet<String>();
-//        int limit = 15;
-//        for (int i = 0; i < limit; i++) {
-//            Mouse.getInstance().press(r, new Position(307, 602), 3000L);
-//            String colorData = sc.getColorData(r);
-//            if (!colors.contains(colorData)) {
-//                System.out.println(colorData);
-//                copyTextToClipboard(":)");
-//                Mouse.getInstance().click(r, new Position(143, 569));
-//                Keyboard.getInstance().paste(r);
-//                Thread.sleep(1000L);
-//                colors.add(colorData);
+        Position p1 = new Position(1, 1);
+        Position p2 = new Position(10, 10);
+        int counter = 0;
+        while (counter < 10) {
+//            Mouse.getInstance().press(new Position(1, 1), 2000L);
+//            Mouse.getInstance().click(new Position(1, 1));
+//            Thread.sleep(WAIT_FOR_PASTING);
+            BufferedImage image = r.createScreenCapture(new Rectangle(p1.getX(), p2.getY(), Math.abs(p2.getX() - p1.getX()), Math.abs(p2.getY() - p1.getY())));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", baos);
+            byte[] bytes = baos.toByteArray();
+            DigestUtils.sha256Hex(bytes);
+            System.out.println(DigestUtils.sha256Hex(bytes));
+//            SystemClipboard.getInstance().copyString("-");
+//            Keyboard.getInstance().paste();
+            p2.setX(p2.getX() + 1);
+            p2.setY(p2.getY() + 1);
+            counter++;
+//            if (counter < 10 - 1) {
+//                Thread.sleep(3000L);
 //            }
-//        }
+        }
+        counter = 0;
+        while (counter < 10) {
+//            Mouse.getInstance().press(new Position(1, 1), 2000L);
+//            Mouse.getInstance().click(new Position(1, 1));
+//            Thread.sleep(WAIT_FOR_PASTING);
+            BufferedImage image = r.createScreenCapture(new Rectangle(p1.getX(), p2.getY(), Math.abs(p2.getX() - p1.getX()), Math.abs(p2.getY() - p1.getY())));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", baos);
+            byte[] bytes = baos.toByteArray();
+            DigestUtils.sha256Hex(bytes);
+            System.out.println(DigestUtils.sha256Hex(bytes));
+//            SystemClipboard.getInstance().copyString("-");
+//            Keyboard.getInstance().paste();
+            p2.setX(p2.getX() - 1);
+            p2.setY(p2.getY() - 1);
+            counter++;
+//            if (counter < 10 - 1) {
+//                Thread.sleep(3000L);
+//            }
+        }
     }
 
-    private static void copyTextToClipboard(String s) {
-        StringSelection ss = new StringSelection(s);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, ss);
-    }
 }
