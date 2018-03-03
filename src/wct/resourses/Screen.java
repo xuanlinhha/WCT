@@ -33,7 +33,9 @@ public class Screen {
 
     public String getColorData() {
         try {
-            BufferedImage image = r.createScreenCapture(new Rectangle(positions.get(0).getX(), positions.get(1).getY(), Math.abs(positions.get(1).getX() - positions.get(0).getX()), Math.abs(positions.get(1).getY() - positions.get(0).getY())));
+            Position p1 = positions.get(0);
+            Position p2 = positions.get(1);
+            BufferedImage image = r.createScreenCapture(new Rectangle(p1.getX(), p1.getY(), Math.abs(p2.getX() - p1.getX()), Math.abs(p2.getY() - p1.getY())));
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(image, "jpg", baos);
             byte[] bytes = baos.toByteArray();

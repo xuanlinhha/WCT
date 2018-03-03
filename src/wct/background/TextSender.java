@@ -19,7 +19,7 @@ import wct.resourses.SystemClipboard;
 public class TextSender extends SwingWorker<Void, Void> {
 
     private static final Long SWITCH_TIME = 1000L;
-    private static final Long WAIT_FOR_PASTING = 500L;
+    private static final Long CLICK_WAITING = 1000L;
 
     // gui
     private JButton startJButton;
@@ -63,7 +63,7 @@ public class TextSender extends SwingWorker<Void, Void> {
             while (counter < noOfGroups) {
                 Mouse.getInstance().press(scrollPosition, scrollTime);
                 Mouse.getInstance().click(imagePositions.get(0));
-                Thread.sleep(WAIT_FOR_PASTING);
+                Thread.sleep(CLICK_WAITING);
                 Keyboard.getInstance().paste();
                 counter++;
                 if (isCancelled()) {
@@ -79,7 +79,7 @@ public class TextSender extends SwingWorker<Void, Void> {
     private void bottomUpSendWithImageRecognition() {
         try {
             Screen sc = Screen.getInstance();
-
+            sc.setPositions(imagePositions);
             // clear if start from beginning
             if (!isContinue) {
                 sentGroups.clear();
@@ -92,8 +92,9 @@ public class TextSender extends SwingWorker<Void, Void> {
             while (counter < noOfGroups) {
                 Mouse.getInstance().press(scrollPosition, scrollTime);
                 Mouse.getInstance().click(imagePositions.get(0));
-                Thread.sleep(WAIT_FOR_PASTING);
+                Thread.sleep(CLICK_WAITING);
                 String color = sc.getColorData();
+                System.out.println(color);
                 if (sentGroups.contains(color)) {
                     SystemClipboard.getInstance().copyString(alternativeMsg);
                 } else {

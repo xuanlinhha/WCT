@@ -812,7 +812,7 @@ public class WCT extends javax.swing.JFrame {
             fileSender.setAlternativeMsg(jTextField8.getText());
         }
 
-        if (!jComboBox1.getSelectedItem().toString().equals("Continue")) {
+        if (jComboBox1.getSelectedItem().toString().equals("Continue")) {
             fileSender.setIsContinue(true);
         } else {
             fileSender.setIsContinue(false);
@@ -996,7 +996,7 @@ public class WCT extends javax.swing.JFrame {
             textSender.setAlternativeMsg(jTextField8.getText());
         }
 
-        if (!jComboBox2.getSelectedItem().toString().equals("Continue")) {
+        if (jComboBox2.getSelectedItem().toString().equals("Continue")) {
             textSender.setIsContinue(true);
         } else {
             textSender.setIsContinue(false);
@@ -1018,7 +1018,7 @@ public class WCT extends javax.swing.JFrame {
         if (textSender.cancel(true)) {
             jButton10.setEnabled(true);
             jButton11.setEnabled(false);
-            if (fileSender.isGroupRecognition()) {
+            if (textSender.isGroupRecognition()) {
                 JOptionPane.showMessageDialog(null, textSender.getSentGroups().size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, textSender.getCounter() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
