@@ -121,7 +121,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     SystemClipboard.getInstance().copyString(alternativeMsg);
                 }
                 Keyboard.getInstance().paste();
-                if (isNew) {
+                if (isNew && counter < noOfGroups - 1) {
                     Thread.sleep(sendingTime);
                 }
                 if (isCancelled()) {
