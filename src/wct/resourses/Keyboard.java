@@ -25,8 +25,20 @@ public class Keyboard {
         }
         return instance;
     }
+    
+    public void pasteWithoutEnter() throws IOException, InterruptedException {
+        Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
+        r.keyPress(KeyEvent.VK_CONTROL);
+        Thread.sleep(prWatingTime);
+        r.keyPress(KeyEvent.VK_V);
+        Thread.sleep(prWatingTime);
+        r.keyRelease(KeyEvent.VK_V);
+        Thread.sleep(prWatingTime);
+        r.keyRelease(KeyEvent.VK_CONTROL);
+        Thread.sleep(prWatingTime);
+    }
 
-    public void paste() throws IOException, InterruptedException {
+    public void pasteWithEnter() throws IOException, InterruptedException {
         Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
         r.keyPress(KeyEvent.VK_CONTROL);
         Thread.sleep(prWatingTime);

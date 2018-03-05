@@ -584,7 +584,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jLabel17, gridBagConstraints);
 
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel22.setText("On Taskbar");
+        jLabel22.setText("On Taskbar Pos");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -597,7 +597,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField17, gridBagConstraints);
 
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel24.setText("Scroll");
+        jLabel24.setText("Scroll Pos");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
@@ -612,20 +612,20 @@ public class WCT extends javax.swing.JFrame {
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel25.setText("Scroll Time");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel25, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField20, gridBagConstraints);
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel20.setText("Alternative Msg");
+        jLabel20.setText("Second Last Pos");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel20, gridBagConstraints);
@@ -641,7 +641,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField5, gridBagConstraints);
 
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel26.setText("Img Position 1");
+        jLabel26.setText("Img Pos 1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -649,14 +649,14 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jLabel26, gridBagConstraints);
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel27.setText("Img Position 2");
+        jLabel27.setText("Img Pos 2");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel27, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField8, gridBagConstraints);
@@ -779,6 +779,16 @@ public class WCT extends javax.swing.JFrame {
         scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
         fileSender.setScrollPosition(scrollPosition);
 
+        if (StringUtils.isBlank(jTextField8.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing second last position!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String[] secondLastCoordinate = jTextField8.getText().split(" ");
+        Position secondLastPosition = new Position();
+        secondLastPosition.setX(Integer.parseInt(secondLastCoordinate[0]));
+        secondLastPosition.setY(Integer.parseInt(secondLastCoordinate[1]));
+        fileSender.setSecondLastPosition(secondLastPosition);
+
         if (StringUtils.isBlank(jTextField20.getText())) {
             JOptionPane.showMessageDialog(this, "Missing scrolling time!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -805,12 +815,6 @@ public class WCT extends javax.swing.JFrame {
             imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
         }
         fileSender.setImagePositions(imagePositions);
-
-        if (StringUtils.isBlank(jTextField8.getText())) {
-            fileSender.setAlternativeMsg("--");
-        } else {
-            fileSender.setAlternativeMsg(jTextField8.getText());
-        }
 
         if (jComboBox1.getSelectedItem().toString().equals("Continue")) {
             fileSender.setIsContinue(true);
@@ -964,6 +968,16 @@ public class WCT extends javax.swing.JFrame {
         scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
         textSender.setScrollPosition(scrollPosition);
 
+        if (StringUtils.isBlank(jTextField8.getText())) {
+            JOptionPane.showMessageDialog(this, "Missing second last position!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String[] secondLastCoordinate = jTextField8.getText().split(" ");
+        Position secondLastPosition = new Position();
+        secondLastPosition.setX(Integer.parseInt(secondLastCoordinate[0]));
+        secondLastPosition.setY(Integer.parseInt(secondLastCoordinate[1]));
+        textSender.setSecondLastPosition(secondLastPosition);
+
         if (StringUtils.isBlank(jTextField20.getText())) {
             JOptionPane.showMessageDialog(this, "Missing scrolling time!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -989,12 +1003,6 @@ public class WCT extends javax.swing.JFrame {
             imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
         }
         textSender.setImagePositions(imagePositions);
-
-        if (StringUtils.isBlank(jTextField8.getText())) {
-            textSender.setAlternativeMsg("--");
-        } else {
-            textSender.setAlternativeMsg(jTextField8.getText());
-        }
 
         if (jComboBox2.getSelectedItem().toString().equals("Continue")) {
             textSender.setIsContinue(true);

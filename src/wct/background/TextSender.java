@@ -20,6 +20,7 @@ public class TextSender extends SwingWorker<Void, Void> {
 
     private static final Long SWITCH_TIME = 1000L;
     private static final Long CLICK_WAITING = 1000L;
+    private static final Long GO_TOP_WAITING = 2000L;
 
     // gui
     private JButton startJButton;
@@ -38,7 +39,7 @@ public class TextSender extends SwingWorker<Void, Void> {
     private List<Position> imagePositions;
     private boolean isContinue;
     private static Set<String> sentGroups = new HashSet<String>();
-    private String alternativeMsg;
+    private Position secondLastPosition;
 
     @Override
     protected Void doInBackground() {
@@ -64,7 +65,7 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Mouse.getInstance().press(scrollPosition, scrollTime);
                 Mouse.getInstance().click(imagePositions.get(0));
                 Thread.sleep(CLICK_WAITING);
-                Keyboard.getInstance().paste();
+                Keyboard.getInstance().pasteWithEnter();
                 counter++;
                 if (isCancelled()) {
                     break;
@@ -93,16 +94,23 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Mouse.getInstance().press(scrollPosition, scrollTime);
                 Mouse.getInstance().click(imagePositions.get(0));
                 Thread.sleep(CLICK_WAITING);
-                String color = sc.getColorData();
-                System.out.println(color);
-                if (sentGroups.contains(color)) {
-                    SystemClipboard.getInstance().copyString(alternativeMsg);
-                } else {
-                    SystemClipboard.getInstance().copyString(text);
-                    sentGroups.add(color);
-                    counter++;
+
+                // identify group is sent or not
+                while (true) {
+                    String color = sc.getColorData();
+                    if (sentGroups.contains(color)) {
+                        SystemClipboard.getInstance().copyString("U");
+                        Keyboard.getInstance().pasteWithoutEnter();
+                        Mouse.getInstance().click(secondLastPosition);
+                        Thread.sleep(GO_TOP_WAITING);
+                    } else {
+                        sentGroups.add(color);
+                        break;
+                    }
                 }
-                Keyboard.getInstance().paste();
+                SystemClipboard.getInstance().copyString(text);
+                Keyboard.getInstance().pasteWithEnter();
+                counter++;
                 if (isCancelled()) {
                     break;
                 }
@@ -169,12 +177,12 @@ public class TextSender extends SwingWorker<Void, Void> {
         this.scrollTime = scrollTime;
     }
 
-    public String getAlternativeMsg() {
-        return alternativeMsg;
+    public Position getSecondLastPosition() {
+        return secondLastPosition;
     }
 
-    public void setAlternativeMsg(String alternativeMsg) {
-        this.alternativeMsg = alternativeMsg;
+    public void setSecondLastPosition(Position secondLastPosition) {
+        this.secondLastPosition = secondLastPosition;
     }
 
     public List<Position> getImagePositions() {
