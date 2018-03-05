@@ -1258,7 +1258,6 @@ public class WCT extends javax.swing.JFrame {
             jTextField11.setText("50");
             jTextField12.setText("50");
             jTextField13.setText("50");
-            jTextField8.setText("--");
         }
     }
 
