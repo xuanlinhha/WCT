@@ -14,7 +14,7 @@ public class Configuration {
     private String onTaskbar;
     private String scroll;
     private Long scrollTime;
-    private String alternativeMsg;
+    private String secondLast;
     private List<String> imagePositions;
 
     private Long kbPRWaiting;
@@ -102,12 +102,12 @@ public class Configuration {
         this.mouseMoveWaiting = mouseMoveWaiting;
     }
 
-    public String getAlternativeMsg() {
-        return alternativeMsg;
+    public String getSecondLast() {
+        return secondLast;
     }
 
-    public void setAlternativeMsg(String alternativeMsg) {
-        this.alternativeMsg = alternativeMsg;
+    public void setSecondLast(String secondLast) {
+        this.secondLast = secondLast;
     }
 
 }

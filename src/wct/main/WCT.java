@@ -875,7 +875,7 @@ public class WCT extends javax.swing.JFrame {
         config.setOnTaskbar(jTextField17.getText());
         config.setScroll(jTextField19.getText());
         config.setScrollTime(Long.parseLong(jTextField20.getText()));
-        config.setAlternativeMsg(jTextField8.getText());
+        config.setSecondLast(jTextField8.getText());
         List<String> imagePositions = new ArrayList<String>();
         imagePositions.add(jTextField3.getText());
         imagePositions.add(jTextField5.getText());
@@ -1239,7 +1239,7 @@ public class WCT extends javax.swing.JFrame {
 
             jTextField17.setText(config.getOnTaskbar());
             jTextField19.setText(config.getScroll());
-            jTextField8.setText(config.getAlternativeMsg());
+            jTextField8.setText(config.getSecondLast());
             jTextField20.setText(config.getScrollTime() == null ? "3000" : config.getScrollTime().toString());
             if (config.getImagePositions() != null) {
                 jTextField3.setText(config.getImagePositions().get(0));

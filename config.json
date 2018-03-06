@@ -1,13 +1,13 @@
 {
   "inputFolder": "C:\\Documents and Settings\\Administrator\\My Documents\\WCT\\input",
   "outputFolder": "C:\\Documents and Settings\\Administrator\\My Documents\\WCT\\output",
-  "onTaskbar": "170 750",
-  "scroll": "307 734",
-  "scrollTime": 2000,
-  "alternativeMsg": "153 648",
+  "onTaskbar": "156 963",
+  "scroll": "306 494",
+  "scrollTime": 1500,
+  "secondLast": "144 352",
   "imagePositions": [
-    "74 688",
-    "112 726"
+    "73 395",
+    "111 430"
   ],
   "kbPRWaiting": 50,
   "kbFinishWaiting": 50,
