@@ -43,4 +43,5 @@ target/*
 
 build/*
 dist/*
+nbproject/*
 

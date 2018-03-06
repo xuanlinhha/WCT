@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import wct.fileprocessing.TextReaderWriter;
 import wct.resourses.Keyboard;
 import wct.resourses.Mouse;
 import wct.resourses.Position;
@@ -21,6 +22,7 @@ public class TextSender extends SwingWorker<Void, Void> {
     private static final Long SWITCH_TIME = 1000L;
     private static final Long CLICK_WAITING = 1000L;
     private static final Long GO_TOP_WAITING = 2000L;
+    private static final String SENT_TEXT_GROUPS = "sent_groups_TEXT.txt";
 
     // gui
     private JButton startJButton;
@@ -84,6 +86,8 @@ public class TextSender extends SwingWorker<Void, Void> {
             // clear if start from beginning
             if (!isContinue) {
                 sentGroups.clear();
+            } else {
+                sentGroups = TextReaderWriter.loadSentFileGroups(SENT_TEXT_GROUPS);
             }
 
             // click to WeChat app
@@ -115,6 +119,7 @@ public class TextSender extends SwingWorker<Void, Void> {
                     break;
                 }
             }
+            TextReaderWriter.saveSentFileGroups(SENT_TEXT_GROUPS, sentGroups);
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();

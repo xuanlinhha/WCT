@@ -1,13 +1,19 @@
 package wct.background;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import wct.fileprocessing.FileProcessor;
+import wct.fileprocessing.TextReaderWriter;
 import wct.resourses.Keyboard;
 import wct.resourses.Mouse;
 import wct.resourses.Position;
@@ -24,6 +30,7 @@ public class FileSender extends SwingWorker<Void, Void> {
     private static final int RAMDOM_LENGTH = 20;
     private static final Long CLICK_WAITING = 1000L;
     private static final Long GO_TOP_WAITING = 2000L;
+    private static final String SENT_FILE_GROUPS = "sent_groups_FILE.txt";
 
     // gui
     private JButton startJButton;
@@ -97,6 +104,8 @@ public class FileSender extends SwingWorker<Void, Void> {
             // clear if start from beginning
             if (!isContinue) {
                 sentGroups.clear();
+            } else {
+                sentGroups = TextReaderWriter.loadSentFileGroups(SENT_FILE_GROUPS);
             }
 
             // click to WeChat app
@@ -137,6 +146,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     break;
                 }
             }
+            TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
