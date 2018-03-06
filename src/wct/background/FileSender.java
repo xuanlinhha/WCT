@@ -1,16 +1,11 @@
 package wct.background;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import wct.fileprocessing.FileProcessor;
 import wct.fileprocessing.TextReaderWriter;
@@ -121,8 +116,13 @@ public class FileSender extends SwingWorker<Void, Void> {
                 Thread.sleep(CLICK_WAITING);
 
                 // identify group is sent or not
+                boolean isAdded = false;
+                String color = "";
                 while (true) {
-                    String color = sc.getColorData();
+                    if (isCancelled()) {
+                        break;
+                    }
+                    color = sc.getColorData();
                     if (sentGroups.contains(color)) {
                         SystemClipboard.getInstance().copyString("U");
                         Keyboard.getInstance().pasteWithoutEnter();
@@ -130,10 +130,16 @@ public class FileSender extends SwingWorker<Void, Void> {
                         Thread.sleep(GO_TOP_WAITING);
                     } else {
                         sentGroups.add(color);
+                        isAdded = true;
                         break;
                     }
                 }
-
+                if (isCancelled()) {
+                    if (isAdded) {
+                        sentGroups.remove(color);
+                    }
+                    break;
+                }
                 // send video
                 FileProcessor.changeHashcode(inputFolder, randString + counter);
                 SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(inputFolder));
@@ -142,9 +148,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 if (counter < noOfGroups) {
                     Thread.sleep(sendingTime);
                 }
-                if (isCancelled()) {
-                    break;
-                }
+
             }
             TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);

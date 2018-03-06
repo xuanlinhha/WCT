@@ -98,10 +98,14 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Mouse.getInstance().press(scrollPosition, scrollTime);
                 Mouse.getInstance().click(imagePositions.get(0));
                 Thread.sleep(CLICK_WAITING);
-
                 // identify group is sent or not
+                boolean isAdded = false;
+                String color = "";
                 while (true) {
-                    String color = sc.getColorData();
+                    if (isCancelled()) {
+                        break;
+                    }
+                    color = sc.getColorData();
                     if (sentGroups.contains(color)) {
                         SystemClipboard.getInstance().copyString("U");
                         Keyboard.getInstance().pasteWithoutEnter();
@@ -109,15 +113,20 @@ public class TextSender extends SwingWorker<Void, Void> {
                         Thread.sleep(GO_TOP_WAITING);
                     } else {
                         sentGroups.add(color);
+                        isAdded = true;
                         break;
                     }
                 }
+                if (isCancelled()) {
+                    if (isAdded) {
+                        sentGroups.remove(color);
+                    }
+                    break;
+                }
+                // send text
                 SystemClipboard.getInstance().copyString(text);
                 Keyboard.getInstance().pasteWithEnter();
                 counter++;
-                if (isCancelled()) {
-                    break;
-                }
             }
             TextReaderWriter.saveSentFileGroups(SENT_TEXT_GROUPS, sentGroups);
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
