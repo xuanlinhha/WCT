@@ -76,7 +76,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 Thread.sleep(CLICK_WAITING);
                 Keyboard.getInstance().pasteWithEnter();
                 counter++;
-                if (counter < noOfGroups - 1) {
+                if (counter < noOfGroups) {
                     Thread.sleep(sendingTime);
                 }
                 if (isCancelled()) {
@@ -90,6 +90,7 @@ public class FileSender extends SwingWorker<Void, Void> {
     }
 
     private void bottomUpSendWithImageRecognition() {
+//        System.out.println("sendingTime: " + sendingTime);
         try {
             Screen sc = Screen.getInstance();
             sc.setPositions(imagePositions);
@@ -129,7 +130,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(inputFolder));
                 Keyboard.getInstance().pasteWithEnter();
                 counter++;
-                if (counter < noOfGroups - 1) {
+                if (counter < noOfGroups) {
                     Thread.sleep(sendingTime);
                 }
                 if (isCancelled()) {

@@ -1,16 +1,16 @@
 {
-  "inputFolder": "C:\\Users\\workshop\\Documents\\WCT\\input",
-  "outputFolder": "C:\\Users\\workshop\\Documents\\WCT\\output",
-  "onTaskbar": "467 1058",
-  "scroll": "306 1038",
+  "inputFolder": "C:\\Documents and Settings\\Administrator\\My Documents\\WCT\\input",
+  "outputFolder": "C:\\Documents and Settings\\Administrator\\My Documents\\WCT\\output",
+  "onTaskbar": "170 750",
+  "scroll": "307 734",
   "scrollTime": 2000,
-  "alternativeMsg": "--",
+  "alternativeMsg": "153 648",
   "imagePositions": [
-    "72 990",
-    "110 1025"
+    "74 688",
+    "112 726"
   ],
-  "kbPRWaiting": 100,
-  "kbFinishWaiting": 100,
-  "mousePRWaiting": 100,
-  "mouseMoveWaiting": 100
+  "kbPRWaiting": 50,
+  "kbFinishWaiting": 50,
+  "mousePRWaiting": 50,
+  "mouseMoveWaiting": 50
 }
