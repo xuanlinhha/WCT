@@ -23,7 +23,7 @@ public class FileProcessor {
                 if (f.isFile() && (f.getName().endsWith(".mp3"))) {
                     Mp3Meta.changeComment(f, randString);
                 } else if (f.isFile() && f.getName().endsWith(".mp4")) {
-                    Mp4Meta.writeRandomMetadata(f, randString);
+                    Mp4Meta.writeRandomMetadataWithJcodec(f, randString);
                 }
             }
         } catch (Exception ex) {
