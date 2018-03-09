@@ -306,8 +306,8 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
-                    <StringItem index="0" value="Continue"/>
-                    <StringItem index="1" value="From beginning"/>
+                    <StringItem index="0" value="From beginning"/>
+                    <StringItem index="1" value="Continue"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -322,6 +322,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBox1">
               <Properties>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Enable"/>
               </Properties>
               <Events>
@@ -491,8 +492,8 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
-                    <StringItem index="0" value="Continue"/>
-                    <StringItem index="1" value="From beginning"/>
+                    <StringItem index="0" value="From beginning"/>
+                    <StringItem index="1" value="Continue"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -504,6 +505,7 @@
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBox2">
               <Properties>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="Enable"/>
               </Properties>
               <Events>

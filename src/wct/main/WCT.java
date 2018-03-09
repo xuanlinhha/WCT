@@ -276,13 +276,14 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel28, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Continue", "From beginning" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "From beginning", "Continue" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jComboBox1, gridBagConstraints);
 
+        jCheckBox1.setSelected(true);
         jCheckBox1.setText("Enable");
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -409,13 +410,14 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jLabel23, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Continue", "From beginning" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "From beginning", "Continue" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jComboBox2, gridBagConstraints);
 
+        jCheckBox2.setSelected(true);
         jCheckBox2.setText("Enable");
         jCheckBox2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -825,6 +827,7 @@ public class WCT extends javax.swing.JFrame {
         // gui
         fileSender.setStartJButton(jButton2);
         fileSender.setStopJButton(jButton3);
+        fileSender.setOption(jComboBox1);
 
         // run
         int input = JOptionPane.showConfirmDialog(null, "Do you want to start?", "Checking before continue",
@@ -1013,6 +1016,7 @@ public class WCT extends javax.swing.JFrame {
         // gui
         textSender.setStartJButton(jButton10);
         textSender.setStopJButton(jButton11);
+        textSender.setOption(jComboBox2);
 
         // run
         int input = JOptionPane.showConfirmDialog(null, "Do you want to start?", "Checking before continue",
@@ -1213,8 +1217,8 @@ public class WCT extends javax.swing.JFrame {
         // send file
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
-        jComboBox1.setEnabled(false);
-        jComboBox2.setEnabled(false);
+//        jComboBox1.setEnabled(false);
+//        jComboBox2.setEnabled(false);
         jTextField9.setText("5000");
 
         // send text

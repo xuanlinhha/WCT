@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -30,6 +31,7 @@ public class FileSender extends SwingWorker<Void, Void> {
     // gui
     private JButton startJButton;
     private JButton stopJButton;
+    private JComboBox option;
 
     // data
     private String inputFolder;
@@ -92,7 +94,6 @@ public class FileSender extends SwingWorker<Void, Void> {
     }
 
     private void bottomUpSendWithImageRecognition() {
-        boolean isInterrupted = false;
         try {
             Screen sc = Screen.getInstance();
             sc.setPositions(imagePositions);
@@ -155,6 +156,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             ex.printStackTrace();
         } finally {
             TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
+            option.setSelectedIndex(1);
         }
     }
 
@@ -268,6 +270,14 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     public void setIsContinue(boolean isContinue) {
         this.isContinue = isContinue;
+    }
+
+    public JComboBox getOption() {
+        return option;
+    }
+
+    public void setOption(JComboBox option) {
+        this.option = option;
     }
 
 }

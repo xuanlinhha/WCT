@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import wct.fileprocessing.TextReaderWriter;
@@ -27,6 +28,7 @@ public class TextSender extends SwingWorker<Void, Void> {
     // gui
     private JButton startJButton;
     private JButton stopJButton;
+    private JComboBox option;
 
     // data
     private String text;
@@ -128,12 +130,12 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Keyboard.getInstance().pasteWithEnter();
                 counter++;
             }
-
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             TextReaderWriter.saveSentFileGroups(SENT_TEXT_GROUPS, sentGroups);
+            option.setSelectedIndex(1);
         }
     }
 
@@ -239,6 +241,14 @@ public class TextSender extends SwingWorker<Void, Void> {
 
     public void setIsContinue(boolean isContinue) {
         this.isContinue = isContinue;
+    }
+
+    public JComboBox getOption() {
+        return option;
+    }
+
+    public void setOption(JComboBox option) {
+        this.option = option;
     }
 
 }
