@@ -92,7 +92,7 @@ public class FileSender extends SwingWorker<Void, Void> {
     }
 
     private void bottomUpSendWithImageRecognition() {
-//        System.out.println("sendingTime: " + sendingTime);
+        boolean isInterrupted = false;
         try {
             Screen sc = Screen.getInstance();
             sc.setPositions(imagePositions);
@@ -150,10 +150,11 @@ public class FileSender extends SwingWorker<Void, Void> {
                 }
 
             }
-            TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
         }
     }
 

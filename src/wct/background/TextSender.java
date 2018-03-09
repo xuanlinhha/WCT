@@ -128,10 +128,12 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Keyboard.getInstance().pasteWithEnter();
                 counter++;
             }
-            TextReaderWriter.saveSentFileGroups(SENT_TEXT_GROUPS, sentGroups);
+
             JOptionPane.showMessageDialog(null, sentGroups.size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            TextReaderWriter.saveSentFileGroups(SENT_TEXT_GROUPS, sentGroups);
         }
     }
 
