@@ -11,9 +11,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import org.apache.commons.codec.digest.DigestUtils;
+import wct.multilanguage.LanguageHandler;
 import wct.resourses.Keyboard;
 import wct.resourses.Mouse;
 import wct.resourses.Position;
@@ -73,6 +76,9 @@ public class Test {
         for(String s:ss){
             System.out.println(s);
         }
+        
+        ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
+        System.out.println(bundle.getString("menu"));
     }
 
 }
