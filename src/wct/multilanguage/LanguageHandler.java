@@ -1,5 +1,6 @@
 package wct.multilanguage;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -17,7 +18,7 @@ public class LanguageHandler {
     public static LanguageHandler getInstance() {
         if (instance == null) {
             instance = new LanguageHandler();
-            instance.bundle = ResourceBundle.getBundle("wct/English");
+            instance.bundle = ResourceBundle.getBundle("wct/Message", Locale.getDefault());
         }
         return instance;
     }

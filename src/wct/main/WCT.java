@@ -7,6 +7,7 @@ import java.awt.event.ItemEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +17,7 @@ import wct.background.MouseDetector;
 import wct.background.TextSender;
 import wct.configuration.Configuration;
 import wct.configuration.ConfigurationHandler;
+import wct.multilanguage.LanguageHandler;
 import wct.resourses.Position;
 
 /**
@@ -28,6 +30,7 @@ public class WCT extends javax.swing.JFrame {
      * Creates new form WCT
      */
     public WCT() {
+        bundle = LanguageHandler.getInstance().getBundle();
         initComponents();
         initMyComponents();
     }
@@ -122,6 +125,8 @@ public class WCT extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("wct/main/Bundle"); // NOI18N
+        setTitle(bundle.getString("WCT.title")); // NOI18N
         setPreferredSize(new java.awt.Dimension(700, 500));
 
         jPanel1.setLayout(new java.awt.CardLayout());
@@ -130,7 +135,6 @@ public class WCT extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("wct/main/Bundle"); // NOI18N
         jLabel3.setText(bundle.getString("WCT.jLabel3.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -205,6 +209,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         jPanel2.add(jLabel1, gridBagConstraints);
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText(bundle.getString("WCT.jLabel2.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -746,14 +751,14 @@ public class WCT extends javax.swing.JFrame {
 
         // no. of groups
         if (StringUtils.isBlank(jTextField2.getText())) {
-            JOptionPane.showMessageDialog(this, "Please input the no. of groups!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("input_group_no"), bundle.getString("missing_input"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         fileSender.setNoOfGroups(Integer.parseInt(jTextField2.getText()));
 
         // sending time
         if (StringUtils.isBlank(jTextField9.getText())) {
-            JOptionPane.showMessageDialog(this, "Please input sending time!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("input_sending_time"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         fileSender.setSendingTime(Long.parseLong(jTextField9.getText()));
@@ -763,7 +768,7 @@ public class WCT extends javax.swing.JFrame {
 
         // take WeChat's parameters from config panel
         if (StringUtils.isBlank(jTextField17.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing Wechat position on taskbar!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("wechat_pos_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String[] taskbarCoordinate = jTextField17.getText().split(" ");
@@ -773,7 +778,7 @@ public class WCT extends javax.swing.JFrame {
         fileSender.setTaskbarPosition(taskbarPosition);
 
         if (StringUtils.isBlank(jTextField19.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing position to scroll!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("scroll_pos_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String[] scrollCoordinate = jTextField19.getText().split(" ");
@@ -783,7 +788,7 @@ public class WCT extends javax.swing.JFrame {
         fileSender.setScrollPosition(scrollPosition);
 
         if (StringUtils.isBlank(jTextField8.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing second last position!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("second_last_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String[] secondLastCoordinate = jTextField8.getText().split(" ");
@@ -793,7 +798,7 @@ public class WCT extends javax.swing.JFrame {
         fileSender.setSecondLastPosition(secondLastPosition);
 
         if (StringUtils.isBlank(jTextField20.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing scrolling time!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("scrolling_time_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         Long scrollTime = Long.parseLong(jTextField20.getText());
@@ -803,7 +808,7 @@ public class WCT extends javax.swing.JFrame {
 
         List<Position> imagePositions = new ArrayList<Position>();
         if (StringUtils.isBlank(jTextField3.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing image position 1!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("img1_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String[] imgPos1 = jTextField3.getText().split(" ");
@@ -811,7 +816,7 @@ public class WCT extends javax.swing.JFrame {
 
         if (jCheckBox1.isSelected()) {
             if (StringUtils.isBlank(jTextField5.getText())) {
-                JOptionPane.showMessageDialog(this, "Missing image position 2!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, bundle.getString("img2_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
             String[] imgPos2 = jTextField5.getText().split(" ");
@@ -819,7 +824,7 @@ public class WCT extends javax.swing.JFrame {
         }
         fileSender.setImagePositions(imagePositions);
 
-        if (jComboBox1.getSelectedItem().toString().equals("Continue")) {
+        if (jComboBox1.getSelectedItem().toString().equals(bundle.getString("continue"))) {
             fileSender.setIsContinue(true);
         } else {
             fileSender.setIsContinue(false);
@@ -831,7 +836,7 @@ public class WCT extends javax.swing.JFrame {
         fileSender.setOption(jComboBox1);
 
         // run
-        int input = JOptionPane.showConfirmDialog(null, "Do you want to start?", "Checking before continue",
+        int input = JOptionPane.showConfirmDialog(null, bundle.getString("start_question"), bundle.getString("confirm_title"),
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (input == 0) { // YES
             fileSender.execute();
@@ -853,7 +858,7 @@ public class WCT extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Choose input folder");
+        fc.setDialogTitle(bundle.getString("choose_input"));
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.setAcceptAllFileFilterUsed(false);
         if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -863,7 +868,7 @@ public class WCT extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         JFileChooser fc = new JFileChooser();
-        fc.setDialogTitle("Choose output folder");
+        fc.setDialogTitle(bundle.getString("choose_output"));
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.setAcceptAllFileFilterUsed(false);
         if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -891,9 +896,9 @@ public class WCT extends javax.swing.JFrame {
         config.setMouseMoveWaiting(Long.parseLong(jTextField13.getText()));
         try {
             ConfigurationHandler.save(config);
-            JOptionPane.showMessageDialog(this, "Saved config", "Success", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("save_config_msg"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Cannot save configuration!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("save_config_error"), bundle.getString("error"), JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -918,20 +923,20 @@ public class WCT extends javax.swing.JFrame {
             jButton2.setEnabled(true);
             jButton3.setEnabled(false);
             if (fileSender.isGroupRecognition()) {
-                JOptionPane.showMessageDialog(null, fileSender.getSentGroups().size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, fileSender.getSentGroups().size() + bundle.getString("groups_sent_txt"), bundle.getString("sent_groups_title"), JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, fileSender.getCounter() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, fileSender.getCounter() + bundle.getString("groups_sent_txt"), bundle.getString("sent_groups_title"), JOptionPane.INFORMATION_MESSAGE);
             }
             fileSender = null;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        JOptionPane.showMessageDialog(this, "Help contents are not available!", "Help contents", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, bundle.getString("help_contents_msg"), bundle.getString("help_contents"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        JOptionPane.showMessageDialog(this, "This application is used to send files to WeChat groups.", "About", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, bundle.getString("about_msg"), bundle.getString("about"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -946,14 +951,14 @@ public class WCT extends javax.swing.JFrame {
 
         // no. of groups
         if (StringUtils.isBlank(jTextField4.getText())) {
-            JOptionPane.showMessageDialog(this, "Please input the no. of groups!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("input_group_no"), bundle.getString("missing_input"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         textSender.setNoOfGroups(Integer.parseInt(jTextField4.getText()));
 
         // take WeChat's parameters from config panel
         if (StringUtils.isBlank(jTextField17.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing Wechat position on taskbar!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("wechat_pos_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String[] taskbarCoordinate = jTextField17.getText().split(" ");
@@ -963,7 +968,7 @@ public class WCT extends javax.swing.JFrame {
         textSender.setTaskbarPosition(taskbarPosition);
 
         if (StringUtils.isBlank(jTextField19.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing position to scroll!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("scroll_pos_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String[] scrollCoordinate = jTextField19.getText().split(" ");
@@ -973,7 +978,7 @@ public class WCT extends javax.swing.JFrame {
         textSender.setScrollPosition(scrollPosition);
 
         if (StringUtils.isBlank(jTextField8.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing second last position!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("second_last_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String[] secondLastCoordinate = jTextField8.getText().split(" ");
@@ -983,7 +988,7 @@ public class WCT extends javax.swing.JFrame {
         textSender.setSecondLastPosition(secondLastPosition);
 
         if (StringUtils.isBlank(jTextField20.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing scrolling time!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("scrolling_time_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         Long scrollTime = Long.parseLong(jTextField20.getText());
@@ -993,14 +998,14 @@ public class WCT extends javax.swing.JFrame {
 
         List<Position> imagePositions = new ArrayList<Position>();
         if (StringUtils.isBlank(jTextField3.getText())) {
-            JOptionPane.showMessageDialog(this, "Missing image position 1!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("img1_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String[] imgPos1 = jTextField3.getText().split(" ");
         imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
         if (jCheckBox2.isSelected()) {
             if (StringUtils.isBlank(jTextField5.getText())) {
-                JOptionPane.showMessageDialog(this, "Missing image position 2!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, bundle.getString("img2_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
             String[] imgPos2 = jTextField5.getText().split(" ");
@@ -1008,7 +1013,7 @@ public class WCT extends javax.swing.JFrame {
         }
         textSender.setImagePositions(imagePositions);
 
-        if (jComboBox2.getSelectedItem().toString().equals("Continue")) {
+        if (jComboBox2.getSelectedItem().toString().equals(bundle.getString("continue"))) {
             textSender.setIsContinue(true);
         } else {
             textSender.setIsContinue(false);
@@ -1020,7 +1025,7 @@ public class WCT extends javax.swing.JFrame {
         textSender.setOption(jComboBox2);
 
         // run
-        int input = JOptionPane.showConfirmDialog(null, "Do you want to start?", "Checking before continue",
+        int input = JOptionPane.showConfirmDialog(null, bundle.getString("start_question"), bundle.getString("confirm_title"),
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (input == 0) { // YES
             textSender.execute();
@@ -1032,9 +1037,9 @@ public class WCT extends javax.swing.JFrame {
             jButton10.setEnabled(true);
             jButton11.setEnabled(false);
             if (textSender.isGroupRecognition()) {
-                JOptionPane.showMessageDialog(null, textSender.getSentGroups().size() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, textSender.getSentGroups().size() + bundle.getString("groups_sent_txt"), bundle.getString("sent_groups_title"), JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, textSender.getCounter() + " groups sent!", "Sent Groups", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, textSender.getCounter() + bundle.getString("groups_sent_txt"), bundle.getString("sent_groups_title"), JOptionPane.INFORMATION_MESSAGE);
             }
             textSender = null;
         }
@@ -1042,18 +1047,18 @@ public class WCT extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jTextField1.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please input No. of copies", "Missing input", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("input_copies_no"), bundle.getString("missing_input"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         int noOfCopies = Integer.parseInt(jTextField1.getText());
         if (noOfCopies < 1) {
-            JOptionPane.showMessageDialog(this, "No. of copies is not correct", "Wrong input", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("incorrect_copies_no"), bundle.getString("incorrect_input"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         String inputFolder = jTextField6.getText();
         String outputFolder = jTextField7.getText();
         if (inputFolder.equals(outputFolder)) {
-            JOptionPane.showMessageDialog(this, "Input and output folder must be different", "Wrong input", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("input_output_folder_error"), bundle.getString("incorrect_input"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         copiesGenerator = new CopiesGenerator();
@@ -1211,10 +1216,10 @@ public class WCT extends javax.swing.JFrame {
     private MouseDetector mouseDetector;
     private FileSender fileSender;
     private TextSender textSender;
+    private ResourceBundle bundle;
 
     private void initMyComponents() {
         centerWindow(this);
-        this.setTitle("Generate copies - Send files");
         // send file
         jButton2.setEnabled(true);
         jButton3.setEnabled(false);
@@ -1277,33 +1282,30 @@ public class WCT extends javax.swing.JFrame {
         jPanel1.removeAll();
         jPanel1.repaint();
         jPanel1.revalidate();
+        ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
         switch (panelId) {
             case 0: {
                 jPanel1.add(jPanel2);
                 jPanel1.repaint();
                 jPanel1.revalidate();
-                this.setTitle("Generate copies - Send files");
                 break;
             }
             case 1: {
                 jPanel1.add(jPanel3);
                 jPanel1.repaint();
                 jPanel1.revalidate();
-                this.setTitle("Detect mouse");
                 break;
             }
             case 2: {
                 jPanel1.add(jPanel4);
                 jPanel1.repaint();
                 jPanel1.revalidate();
-                this.setTitle("Configuration");
                 break;
             }
             case 3: {
                 jPanel1.add(jPanel5);
                 jPanel1.repaint();
                 jPanel1.revalidate();
-                this.setTitle("Send text");
                 break;
             }
             default:

@@ -63,19 +63,6 @@ public class Test {
 //        BufferedImage image = new Robot().createScreenCapture(
 //           new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()) );
 //        ImageIO.write(image, "jpg", new File("image.jpg"));
-        List<String> sl = new ArrayList<String>();
-        sl.add("a");
-        sl.add("a");
-        sl.add("b");
-        sl.add("c");
-        Set<String> ss = new HashSet<String>(sl);
-        for(String s:sl){
-            System.out.println(s);
-        }
-        System.out.println("----");
-        for(String s:ss){
-            System.out.println(s);
-        }
         
         ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
         System.out.println(bundle.getString("menu"));
