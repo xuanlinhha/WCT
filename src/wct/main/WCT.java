@@ -130,7 +130,8 @@ public class WCT extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Send files");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("wct/main/Bundle"); // NOI18N
+        jLabel3.setText(bundle.getString("WCT.jLabel3.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -140,7 +141,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jLabel3, gridBagConstraints);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("No. of groups");
+        jLabel4.setText(bundle.getString("WCT.jLabel4.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -153,7 +154,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jTextField2, gridBagConstraints);
 
-        jButton2.setText("Start");
+        jButton2.setText(bundle.getString("WCT.jButton2.text")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -166,7 +167,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.5;
         jPanel2.add(jButton2, gridBagConstraints);
 
-        jButton3.setText("Stop");
+        jButton3.setText(bundle.getString("WCT.jButton3.text")); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -180,7 +181,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jButton3, gridBagConstraints);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel11.setText("Sending time");
+        jLabel11.setText(bundle.getString("WCT.jLabel11.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -195,7 +196,7 @@ public class WCT extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Generate copies");
+        jLabel1.setText(bundle.getString("WCT.jLabel1.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -204,7 +205,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         jPanel2.add(jLabel1, gridBagConstraints);
 
-        jLabel2.setText("No. of copies");
+        jLabel2.setText(bundle.getString("WCT.jLabel2.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -217,7 +218,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jTextField1, gridBagConstraints);
 
-        jButton1.setText("Generate");
+        jButton1.setText(bundle.getString("WCT.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -229,7 +230,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jButton1, gridBagConstraints);
 
-        jButton6.setText("Stop");
+        jButton6.setText(bundle.getString("WCT.jButton6.text")); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -269,7 +270,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jLabel18, gridBagConstraints);
 
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel28.setText("Group recognition");
+        jLabel28.setText(bundle.getString("WCT.jLabel28.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -284,7 +285,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jComboBox1, gridBagConstraints);
 
         jCheckBox1.setSelected(true);
-        jCheckBox1.setText("Enable");
+        jCheckBox1.setText(bundle.getString("WCT.jCheckBox1.text")); // NOI18N
         jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBox1ItemStateChanged(evt);
@@ -299,7 +300,7 @@ public class WCT extends javax.swing.JFrame {
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        jButton4.setText("Start");
+        jButton4.setText(bundle.getString("WCT.jButton4.text")); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -312,7 +313,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.5;
         jPanel3.add(jButton4, gridBagConstraints);
 
-        jButton5.setText("Stop");
+        jButton5.setText(bundle.getString("WCT.jButton5.text")); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -342,7 +343,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Text");
+        jLabel6.setText(bundle.getString("WCT.jLabel6.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -363,7 +364,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel5.add(jScrollPane2, gridBagConstraints);
 
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel19.setText("No. of groups");
+        jLabel19.setText(bundle.getString("WCT.jLabel19.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -376,7 +377,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jTextField4, gridBagConstraints);
 
-        jButton10.setText("Start");
+        jButton10.setText(bundle.getString("WCT.jButton10.text")); // NOI18N
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -389,7 +390,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.4;
         jPanel5.add(jButton10, gridBagConstraints);
 
-        jButton11.setText("Stop");
+        jButton11.setText(bundle.getString("WCT.jButton11.text")); // NOI18N
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -403,7 +404,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel5.add(jButton11, gridBagConstraints);
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel23.setText("Group recognition");
+        jLabel23.setText(bundle.getString("WCT.jLabel23.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -418,7 +419,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel5.add(jComboBox2, gridBagConstraints);
 
         jCheckBox2.setSelected(true);
-        jCheckBox2.setText("Enable");
+        jCheckBox2.setText(bundle.getString("WCT.jCheckBox2.text")); // NOI18N
         jCheckBox2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jCheckBox2ItemStateChanged(evt);
@@ -435,7 +436,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Input folder");
+        jLabel8.setText(bundle.getString("WCT.jLabel8.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -449,7 +450,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.8;
         jPanel4.add(jTextField6, gridBagConstraints);
 
-        jButton7.setText("Browse");
+        jButton7.setText(bundle.getString("WCT.jButton7.text")); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -462,7 +463,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jButton7, gridBagConstraints);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("Output folder");
+        jLabel9.setText(bundle.getString("WCT.jLabel9.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -476,7 +477,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.8;
         jPanel4.add(jTextField7, gridBagConstraints);
 
-        jButton8.setText("Browse");
+        jButton8.setText(bundle.getString("WCT.jButton8.text")); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -489,7 +490,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jButton8, gridBagConstraints);
 
         jLabel10.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel10.setText("WeChat's Parameters");
+        jLabel10.setText(bundle.getString("WCT.jLabel10.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -497,7 +498,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel10, gridBagConstraints);
 
-        jButton9.setText("Save");
+        jButton9.setText(bundle.getString("WCT.jButton9.text")); // NOI18N
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -511,7 +512,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jButton9, gridBagConstraints);
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("Keyboard PR");
+        jLabel12.setText(bundle.getString("WCT.jLabel12.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 11;
@@ -525,7 +526,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField10, gridBagConstraints);
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText("Keyboard Finish");
+        jLabel13.setText(bundle.getString("WCT.jLabel13.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 11;
@@ -539,7 +540,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField11, gridBagConstraints);
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel14.setText("Mouse PR");
+        jLabel14.setText(bundle.getString("WCT.jLabel14.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 12;
@@ -553,7 +554,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField12, gridBagConstraints);
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel15.setText("Mouse Move");
+        jLabel15.setText(bundle.getString("WCT.jLabel15.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 12;
@@ -567,7 +568,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField13, gridBagConstraints);
 
         jLabel16.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel16.setText("System Waiting Time");
+        jLabel16.setText(bundle.getString("WCT.jLabel16.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
@@ -576,7 +577,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jLabel16, gridBagConstraints);
 
         jLabel17.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel17.setText("File Processing");
+        jLabel17.setText(bundle.getString("WCT.jLabel17.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -586,7 +587,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jLabel17, gridBagConstraints);
 
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel22.setText("On Taskbar Pos");
+        jLabel22.setText(bundle.getString("WCT.jLabel22.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -599,7 +600,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField17, gridBagConstraints);
 
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel24.setText("Scroll Pos");
+        jLabel24.setText(bundle.getString("WCT.jLabel24.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
@@ -612,7 +613,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField19, gridBagConstraints);
 
         jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel25.setText("Scroll Time");
+        jLabel25.setText(bundle.getString("WCT.jLabel25.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
@@ -625,7 +626,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField20, gridBagConstraints);
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel20.setText("Second Last Pos");
+        jLabel20.setText(bundle.getString("WCT.jLabel20.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -643,7 +644,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jTextField5, gridBagConstraints);
 
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel26.setText("Img Pos 1");
+        jLabel26.setText(bundle.getString("WCT.jLabel26.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -651,7 +652,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel4.add(jLabel26, gridBagConstraints);
 
         jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel27.setText("Img Pos 2");
+        jLabel27.setText(bundle.getString("WCT.jLabel27.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 7;
@@ -665,10 +666,10 @@ public class WCT extends javax.swing.JFrame {
 
         jPanel1.add(jPanel4, "card4");
 
-        jMenu1.setText("Menu");
+        jMenu1.setText(bundle.getString("WCT.jMenu1.text")); // NOI18N
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jMenuItem1.setText("Generate & Send files");
+        jMenuItem1.setText(bundle.getString("WCT.jMenuItem1.text")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -676,7 +677,7 @@ public class WCT extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem4.setText("Send text");
+        jMenuItem4.setText(bundle.getString("WCT.jMenuItem4.text")); // NOI18N
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -684,7 +685,7 @@ public class WCT extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
-        jMenuItem2.setText("Detect mouse");
+        jMenuItem2.setText(bundle.getString("WCT.jMenuItem2.text")); // NOI18N
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -693,7 +694,7 @@ public class WCT extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
-        jMenuItem3.setText("Configuration");
+        jMenuItem3.setText(bundle.getString("WCT.jMenuItem3.text")); // NOI18N
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -703,10 +704,10 @@ public class WCT extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Help");
+        jMenu2.setText(bundle.getString("WCT.jMenu2.text")); // NOI18N
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jMenuItem5.setText("Help contents");
+        jMenuItem5.setText(bundle.getString("WCT.jMenuItem5.text")); // NOI18N
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -714,7 +715,7 @@ public class WCT extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
-        jMenuItem6.setText("About");
+        jMenuItem6.setText(bundle.getString("WCT.jMenuItem6.text")); // NOI18N
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
