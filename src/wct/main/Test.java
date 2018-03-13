@@ -67,5 +67,5 @@ public class Test {
         ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
         System.out.println(bundle.getString("menu"));
     }
-
+//-Duser.language=zh -Duser.country=CN
 }

@@ -282,7 +282,8 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel28, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "From beginning", "Continue" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(getComboboxModel()));
+        jComboBox1.setSelectedIndex(0);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -416,7 +417,8 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel5.add(jLabel23, gridBagConstraints);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "From beginning", "Continue" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(getComboboxModel()));
+        jComboBox2.setSelectedIndex(0);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -1312,5 +1314,9 @@ public class WCT extends javax.swing.JFrame {
                 break;
 
         }
+    }
+
+    private String[] getComboboxModel() {
+        return new String[]{bundle.getString("from_beginning"), bundle.getString("continue")};
     }
 }
