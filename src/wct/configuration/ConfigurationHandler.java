@@ -23,8 +23,10 @@ public class ConfigurationHandler {
 
     public static void loadConfig() throws IOException {
         File f = new File(CONFIGURATION_PATH);
-        Gson gson = new Gson();
-        config = gson.fromJson(FileUtils.readFileToString(f, "UTF-8"), Configuration.class);
+        if (f.exists()) {
+            Gson gson = new Gson();
+            config = gson.fromJson(FileUtils.readFileToString(f, "UTF-8"), Configuration.class);
+        }
     }
 
     public static Configuration getConfig() throws IOException {

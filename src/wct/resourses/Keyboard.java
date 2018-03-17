@@ -4,7 +4,6 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import wct.configuration.ConfigurationHandler;
 
 /**
  *
@@ -12,6 +11,8 @@ import wct.configuration.ConfigurationHandler;
  */
 public class Keyboard {
 
+    private static final long PR_WAITING_TIME = 50;
+    private static final long FINISH_WAITING_TIME = 50;
     private Robot r;
     private static Keyboard instance;
 
@@ -25,54 +26,48 @@ public class Keyboard {
         }
         return instance;
     }
-    
+
     public void pasteWithoutEnter() throws IOException, InterruptedException {
-        Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
         r.keyPress(KeyEvent.VK_CONTROL);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
         r.keyPress(KeyEvent.VK_V);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
         r.keyRelease(KeyEvent.VK_V);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
         r.keyRelease(KeyEvent.VK_CONTROL);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
     }
 
     public void pasteWithEnter() throws IOException, InterruptedException {
-        Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
         r.keyPress(KeyEvent.VK_CONTROL);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
         r.keyPress(KeyEvent.VK_V);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
         r.keyRelease(KeyEvent.VK_V);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
         r.keyRelease(KeyEvent.VK_CONTROL);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
         r.keyPress(KeyEvent.VK_ENTER);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
         r.keyRelease(KeyEvent.VK_ENTER);
-        Thread.sleep(prWatingTime);
+        Thread.sleep(PR_WAITING_TIME);
     }
 
     public void down(int no) throws IOException, InterruptedException {
-        Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
-        Long finishWatingTime = ConfigurationHandler.getConfig().getKbFinishWaiting();
         for (int i = 0; i < no; i++) {
             r.keyPress(KeyEvent.VK_DOWN);
-            Thread.sleep(prWatingTime);
+            Thread.sleep(PR_WAITING_TIME);
             r.keyRelease(KeyEvent.VK_DOWN);
-            Thread.sleep(finishWatingTime);
+            Thread.sleep(FINISH_WAITING_TIME);
         }
     }
 
     public void up(int no) throws IOException, InterruptedException {
-        Long prWatingTime = ConfigurationHandler.getConfig().getKbPRWaiting();
-        Long finishWatingTime = ConfigurationHandler.getConfig().getKbFinishWaiting();
         for (int i = 0; i < no; i++) {
             r.keyPress(KeyEvent.VK_UP);
-            Thread.sleep(prWatingTime);
+            Thread.sleep(PR_WAITING_TIME);
             r.keyRelease(KeyEvent.VK_UP);
-            Thread.sleep(finishWatingTime);
+            Thread.sleep(FINISH_WAITING_TIME);
         }
     }
 }

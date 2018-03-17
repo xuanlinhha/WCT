@@ -16,7 +16,7 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class Screen {
 
-    private List<Position> positions;
+    private List<Coordinate> positions;
     private Robot r;
     private static Screen instance;
 
@@ -33,8 +33,8 @@ public class Screen {
 
     public String getColorData() {
         try {
-            Position p1 = positions.get(0);
-            Position p2 = positions.get(1);
+            Coordinate p1 = positions.get(0);
+            Coordinate p2 = positions.get(1);
             BufferedImage image = r.createScreenCapture(new Rectangle(p1.getX(), p1.getY(), Math.abs(p2.getX() - p1.getX()), Math.abs(p2.getY() - p1.getY())));
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(image, "jpg", baos);
@@ -46,11 +46,11 @@ public class Screen {
         return "";
     }
 
-    public List<Position> getPositions() {
+    public List<Coordinate> getPositions() {
         return positions;
     }
 
-    public void setPositions(List<Position> positions) {
+    public void setPositions(List<Coordinate> positions) {
         this.positions = positions;
     }
 

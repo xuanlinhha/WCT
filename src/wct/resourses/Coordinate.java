@@ -4,7 +4,7 @@ package wct.resourses;
  *
  * @author xuanlinhha
  */
-public class Position {
+public class Coordinate {
 
     private int x;
     private int y;
@@ -25,12 +25,12 @@ public class Position {
         this.y = y;
     }
 
-    public Position(int x, int y) {
+    public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public Position() {
+    public Coordinate() {
         this.x = 0;
         this.y = 0;
     }

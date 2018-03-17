@@ -1,7 +1,6 @@
 package wct.background;
 
 import java.io.File;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -15,26 +14,21 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
 
     private static final int RAMDOM_LENGTH = 20;
 
-    // gui
-    private JButton generateButton;
-
-    // task
-    private int noOfCopies;
-    private String inputFolder;
-    private String outputFolder;
+    private CopiesGeneratorParams cgParams;
 
     @Override
     protected Void doInBackground() {
         long startTime = System.currentTimeMillis();
-        generateButton.setEnabled(false);
+        cgParams.getGenerateJButton().setEnabled(false);
+        cgParams.getStopJButton().setEnabled(true);
         try {
-            File folder = new File(inputFolder);
+            File folder = new File(cgParams.getInputFolder());
             File[] files = folder.listFiles();
 
-            for (int i = 1; i <= noOfCopies; i++) {
+            for (int i = 1; i <= cgParams.getNoOfCopies(); i++) {
                 String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
-                FileProcessor.changeHashcode(inputFolder, randString);
-                FileProcessor.copyToOutput(i, inputFolder, outputFolder);
+                FileProcessor.changeHashcode(cgParams.getInputFolder(), randString);
+                FileProcessor.copyToOutput(i, cgParams.getInputFolder(), cgParams.getOutputFolder());
                 if (isCancelled()) {
                     break;
                 }
@@ -46,41 +40,18 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        generateButton.setEnabled(true);
+        cgParams.getGenerateJButton().setEnabled(true);
+        cgParams.getStopJButton().setEnabled(false);
         return null;
 
     }
 
-    public JButton getGenerateButton() {
-        return generateButton;
+    public CopiesGeneratorParams getCgParams() {
+        return cgParams;
     }
 
-    public void setGenerateButton(JButton generateButton) {
-        this.generateButton = generateButton;
-    }
-
-    public int getNoOfCopies() {
-        return noOfCopies;
-    }
-
-    public void setNoOfCopies(int noOfCopies) {
-        this.noOfCopies = noOfCopies;
-    }
-
-    public String getInputFolder() {
-        return inputFolder;
-    }
-
-    public void setInputFolder(String inputFolder) {
-        this.inputFolder = inputFolder;
-    }
-
-    public String getOutputFolder() {
-        return outputFolder;
-    }
-
-    public void setOutputFolder(String outputFolder) {
-        this.outputFolder = outputFolder;
+    public void setCgParams(CopiesGeneratorParams cgParams) {
+        this.cgParams = cgParams;
     }
 
 }

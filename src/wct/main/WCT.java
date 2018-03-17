@@ -3,37 +3,29 @@ package wct.main;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
-import java.awt.event.ItemEvent;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
 import wct.background.CopiesGenerator;
+import wct.background.CopiesGeneratorParams;
 import wct.background.FileSender;
+import wct.background.FileSenderParams;
 import wct.background.MouseDetector;
 import wct.background.TextSender;
+import wct.background.TextSenderParams;
 import wct.configuration.Configuration;
 import wct.configuration.ConfigurationHandler;
 import wct.multilanguage.LanguageHandler;
-import wct.resourses.Position;
+import wct.resourses.Coordinate;
 
 /**
  *
  * @author xuanlinhha
  */
 public class WCT extends javax.swing.JFrame {
-
-    /**
-     * Creates new form WCT
-     */
-    public WCT() {
-        bundle = LanguageHandler.getInstance().getBundle();
-        initComponents();
-        initMyComponents();
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,8 +38,8 @@ public class WCT extends javax.swing.JFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel0 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -63,15 +55,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<String>();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jPanel3 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
@@ -79,9 +63,11 @@ public class WCT extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
         jButton11 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -91,28 +77,9 @@ public class WCT extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jTextField17 = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
-        jTextField19 = new javax.swing.JTextField();
-        jLabel25 = new javax.swing.JLabel();
-        jTextField20 = new javax.swing.JTextField();
-        jLabel20 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -129,11 +96,11 @@ public class WCT extends javax.swing.JFrame {
         setTitle(bundle.getString("WCT.title")); // NOI18N
         setPreferredSize(new java.awt.Dimension(700, 500));
 
-        jPanel1.setLayout(new java.awt.CardLayout());
+        jPanel0.setLayout(new java.awt.CardLayout());
 
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        jLabel3.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText(bundle.getString("WCT.jLabel3.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -142,7 +109,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        jPanel2.add(jLabel3, gridBagConstraints);
+        jPanel1.add(jLabel3, gridBagConstraints);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText(bundle.getString("WCT.jLabel4.text")); // NOI18N
@@ -150,13 +117,13 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel4, gridBagConstraints);
+        jPanel1.add(jLabel4, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jTextField2, gridBagConstraints);
+        jPanel1.add(jTextField2, gridBagConstraints);
 
         jButton2.setText(bundle.getString("WCT.jButton2.text")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -166,10 +133,10 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
-        jPanel2.add(jButton2, gridBagConstraints);
+        jPanel1.add(jButton2, gridBagConstraints);
 
         jButton3.setText(bundle.getString("WCT.jButton3.text")); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -179,10 +146,10 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
-        jPanel2.add(jButton3, gridBagConstraints);
+        jPanel1.add(jButton3, gridBagConstraints);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText(bundle.getString("WCT.jLabel11.text")); // NOI18N
@@ -190,38 +157,38 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel11, gridBagConstraints);
+        jPanel1.add(jLabel11, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jTextField9, gridBagConstraints);
+        jPanel1.add(jTextField9, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(bundle.getString("WCT.jLabel1.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
-        jPanel2.add(jLabel1, gridBagConstraints);
+        jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText(bundle.getString("WCT.jLabel2.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel2, gridBagConstraints);
+        jPanel1.add(jLabel2, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jTextField1, gridBagConstraints);
+        jPanel1.add(jTextField1, gridBagConstraints);
 
         jButton1.setText(bundle.getString("WCT.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -231,9 +198,9 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jButton1, gridBagConstraints);
+        jPanel1.add(jButton1, gridBagConstraints);
 
         jButton6.setText(bundle.getString("WCT.jButton6.text")); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -243,9 +210,9 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jButton6, gridBagConstraints);
+        jPanel1.add(jButton6, gridBagConstraints);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -254,7 +221,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
-        jPanel2.add(jLabel5, gridBagConstraints);
+        jPanel1.add(jLabel5, gridBagConstraints);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -263,7 +230,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
-        jPanel2.add(jLabel7, gridBagConstraints);
+        jPanel1.add(jLabel7, gridBagConstraints);
 
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -272,37 +239,74 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weighty = 0.1;
-        jPanel2.add(jLabel18, gridBagConstraints);
+        jPanel1.add(jLabel18, gridBagConstraints);
 
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel28.setText(bundle.getString("WCT.jLabel28.text")); // NOI18N
+        jPanel0.add(jPanel1, "card2");
+
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText(bundle.getString("WCT.jLabel6.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jLabel28, gridBagConstraints);
+        jPanel2.add(jLabel6, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(getComboboxModel()));
-        jComboBox1.setSelectedIndex(0);
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weighty = 0.8;
+        jPanel2.add(jScrollPane2, gridBagConstraints);
+
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel19.setText(bundle.getString("WCT.jLabel19.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jLabel19, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jTextField4, gridBagConstraints);
+
+        jButton10.setText(bundle.getString("WCT.jButton10.text")); // NOI18N
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel2.add(jComboBox1, gridBagConstraints);
+        gridBagConstraints.weightx = 0.4;
+        jPanel2.add(jButton10, gridBagConstraints);
 
-        jCheckBox1.setSelected(true);
-        jCheckBox1.setText(bundle.getString("WCT.jCheckBox1.text")); // NOI18N
-        jCheckBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCheckBox1ItemStateChanged(evt);
+        jButton11.setText(bundle.getString("WCT.jButton11.text")); // NOI18N
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
-        jPanel2.add(jCheckBox1, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.4;
+        jPanel2.add(jButton11, gridBagConstraints);
 
-        jPanel1.add(jPanel2, "card2");
+        jPanel0.add(jPanel2, "card5");
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
@@ -344,101 +348,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weighty = 0.8;
         jPanel3.add(jScrollPane1, gridBagConstraints);
 
-        jPanel1.add(jPanel3, "card3");
-
-        jPanel5.setLayout(new java.awt.GridBagLayout());
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText(bundle.getString("WCT.jLabel6.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jLabel6, gridBagConstraints);
-
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weighty = 0.8;
-        jPanel5.add(jScrollPane2, gridBagConstraints);
-
-        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel19.setText(bundle.getString("WCT.jLabel19.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jLabel19, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jTextField4, gridBagConstraints);
-
-        jButton10.setText(bundle.getString("WCT.jButton10.text")); // NOI18N
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.4;
-        jPanel5.add(jButton10, gridBagConstraints);
-
-        jButton11.setText(bundle.getString("WCT.jButton11.text")); // NOI18N
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.4;
-        jPanel5.add(jButton11, gridBagConstraints);
-
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel23.setText(bundle.getString("WCT.jLabel23.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jLabel23, gridBagConstraints);
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(getComboboxModel()));
-        jComboBox2.setSelectedIndex(0);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jComboBox2, gridBagConstraints);
-
-        jCheckBox2.setSelected(true);
-        jCheckBox2.setText(bundle.getString("WCT.jCheckBox2.text")); // NOI18N
-        jCheckBox2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jCheckBox2ItemStateChanged(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel5.add(jCheckBox2, gridBagConstraints);
-
-        jPanel1.add(jPanel5, "card5");
+        jPanel0.add(jPanel3, "card3");
 
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
@@ -452,7 +362,6 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.8;
         jPanel4.add(jTextField6, gridBagConstraints);
@@ -464,7 +373,7 @@ public class WCT extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton7, gridBagConstraints);
@@ -479,7 +388,6 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.8;
         jPanel4.add(jTextField7, gridBagConstraints);
@@ -491,12 +399,12 @@ public class WCT extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton8, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel10.setText(bundle.getString("WCT.jLabel10.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -513,77 +421,11 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton9, gridBagConstraints);
 
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText(bundle.getString("WCT.jLabel12.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel12, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
-        jPanel4.add(jTextField10, gridBagConstraints);
-
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText(bundle.getString("WCT.jLabel13.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel13, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 11;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
-        jPanel4.add(jTextField11, gridBagConstraints);
-
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel14.setText(bundle.getString("WCT.jLabel14.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel14, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
-        jPanel4.add(jTextField12, gridBagConstraints);
-
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel15.setText(bundle.getString("WCT.jLabel15.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel15, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
-        jPanel4.add(jTextField13, gridBagConstraints);
-
-        jLabel16.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
-        jLabel16.setText(bundle.getString("WCT.jLabel16.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel16, gridBagConstraints);
-
-        jLabel17.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel17.setText(bundle.getString("WCT.jLabel17.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -606,72 +448,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField17, gridBagConstraints);
 
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel24.setText(bundle.getString("WCT.jLabel24.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel24, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jTextField19, gridBagConstraints);
-
-        jLabel25.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel25.setText(bundle.getString("WCT.jLabel25.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel25, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jTextField20, gridBagConstraints);
-
-        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel20.setText(bundle.getString("WCT.jLabel20.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel20, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jTextField3, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jTextField5, gridBagConstraints);
-
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel26.setText(bundle.getString("WCT.jLabel26.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel26, gridBagConstraints);
-
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel27.setText(bundle.getString("WCT.jLabel27.text")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jLabel27, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel4.add(jTextField8, gridBagConstraints);
-
-        jPanel1.add(jPanel4, "card4");
+        jPanel0.add(jPanel4, "card4");
 
         jMenu1.setText(bundle.getString("WCT.jMenu1.text")); // NOI18N
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -738,11 +515,11 @@ public class WCT extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -750,112 +527,69 @@ public class WCT extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         fileSender = new FileSender();
-
-        // no. of groups
-        if (StringUtils.isBlank(jTextField2.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("input_group_no"), bundle.getString("missing_input"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        fileSender.setNoOfGroups(Integer.parseInt(jTextField2.getText()));
-
-        // sending time
-        if (StringUtils.isBlank(jTextField9.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("input_sending_time"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        fileSender.setSendingTime(Long.parseLong(jTextField9.getText()));
-
-        // input folder from config panel
-        fileSender.setInputFolder(jTextField6.getText());
-
-        // take WeChat's parameters from config panel
-        if (StringUtils.isBlank(jTextField17.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("wechat_pos_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String[] taskbarCoordinate = jTextField17.getText().split(" ");
-        Position taskbarPosition = new Position();
-        taskbarPosition.setX(Integer.parseInt(taskbarCoordinate[0]));
-        taskbarPosition.setY(Integer.parseInt(taskbarCoordinate[1]));
-        fileSender.setTaskbarPosition(taskbarPosition);
-
-        if (StringUtils.isBlank(jTextField19.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("scroll_pos_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String[] scrollCoordinate = jTextField19.getText().split(" ");
-        Position scrollPosition = new Position();
-        scrollPosition.setX(Integer.parseInt(scrollCoordinate[0]));
-        scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
-        fileSender.setScrollPosition(scrollPosition);
-
-        if (StringUtils.isBlank(jTextField8.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("second_last_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String[] secondLastCoordinate = jTextField8.getText().split(" ");
-        Position secondLastPosition = new Position();
-        secondLastPosition.setX(Integer.parseInt(secondLastCoordinate[0]));
-        secondLastPosition.setY(Integer.parseInt(secondLastCoordinate[1]));
-        fileSender.setSecondLastPosition(secondLastPosition);
-
-        if (StringUtils.isBlank(jTextField20.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("scrolling_time_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        Long scrollTime = Long.parseLong(jTextField20.getText());
-        fileSender.setScrollTime(scrollTime);
-
-        fileSender.setGroupRecognition(jCheckBox1.isSelected());
-
-        List<Position> imagePositions = new ArrayList<Position>();
-        if (StringUtils.isBlank(jTextField3.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("img1_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String[] imgPos1 = jTextField3.getText().split(" ");
-        imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
-
-        if (jCheckBox1.isSelected()) {
-            if (StringUtils.isBlank(jTextField5.getText())) {
-                JOptionPane.showMessageDialog(this, bundle.getString("img2_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-                return;
+        fileSender.setFsParams(fsParams);
+        if (checkFSParams(fsParams)) {
+            // run
+            int input = JOptionPane.showConfirmDialog(null, bundle.getString("start_question"), bundle.getString("confirm_title"),
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (input == 0) { // YES
+                fileSender.execute();
             }
-            String[] imgPos2 = jTextField5.getText().split(" ");
-            imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
         }
-        fileSender.setImagePositions(imagePositions);
-
-        if (jComboBox1.getSelectedItem().toString().equals(bundle.getString("continue"))) {
-            fileSender.setIsContinue(true);
-        } else {
-            fileSender.setIsContinue(false);
-        }
-
-        // gui
-        fileSender.setStartJButton(jButton2);
-        fileSender.setStopJButton(jButton3);
-        fileSender.setOption(jComboBox1);
-
-        // run
-        int input = JOptionPane.showConfirmDialog(null, bundle.getString("start_question"), bundle.getString("confirm_title"),
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (input == 0) { // YES
-            fileSender.execute();
-        }
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void initFSParam() {
+        fsParams = new FileSenderParams();
+        fsParams.setStartJButton(jButton2);
+        fsParams.setStopJButton(jButton3);
+    }
+
+    private boolean checkFSParams(FileSenderParams fsParams) {
+        // input folder
+        if (StringUtils.isBlank(jTextField6.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_input_folder"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            fsParams.setInputFolder(jTextField6.getText());
+        }
+        // on taskbar coordinate
+        if (StringUtils.isBlank(jTextField17.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_on_taskbar_coordinate"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            String[] onTaskbarCoordinateData = jTextField17.getText().split(" ");
+            Coordinate onTaskbarCoordinate = new Coordinate();
+            onTaskbarCoordinate.setX(Integer.parseInt(onTaskbarCoordinateData[0]));
+            onTaskbarCoordinate.setY(Integer.parseInt(onTaskbarCoordinateData[1]));
+            fsParams.setOnTaskbarCoordinate(onTaskbarCoordinate);
+        }
+        // no of groups
+        if (StringUtils.isBlank(jTextField2.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_no_of_groups"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            fsParams.setNoOfGroups(Integer.parseInt(jTextField2.getText()));
+        }
+        // sending time
+        if (StringUtils.isBlank(jTextField9.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_sending_time"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            fsParams.setSendingTime(Long.parseLong(jTextField9.getText()));
+        }
+        return true;
+    }
+
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        setPanel(0);
+        setPanel(1);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        setPanel(1);
+        setPanel(3);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        setPanel(2);
+        setPanel(4);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -882,23 +616,10 @@ public class WCT extends javax.swing.JFrame {
         Configuration config = new Configuration();
         config.setInputFolder(jTextField6.getText());
         config.setOutputFolder(jTextField7.getText());
-
-        config.setOnTaskbar(jTextField17.getText());
-        config.setScroll(jTextField19.getText());
-        config.setScrollTime(Long.parseLong(jTextField20.getText()));
-        config.setSecondLast(jTextField8.getText());
-        List<String> imagePositions = new ArrayList<String>();
-        imagePositions.add(jTextField3.getText());
-        imagePositions.add(jTextField5.getText());
-        config.setImagePositions(imagePositions);
-
-        config.setKbPRWaiting(Long.parseLong(jTextField10.getText()));
-        config.setKbFinishWaiting(Long.parseLong(jTextField11.getText()));
-        config.setMousePRWaiting((Long.parseLong(jTextField12.getText())));
-        config.setMouseMoveWaiting(Long.parseLong(jTextField13.getText()));
+        config.setOnTaskbarCoordinate(jTextField17.getText());
         try {
             ConfigurationHandler.save(config);
-            JOptionPane.showMessageDialog(this, bundle.getString("save_config_msg"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("save_config_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, bundle.getString("save_config_error"), bundle.getString("error"), JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
@@ -922,182 +643,128 @@ public class WCT extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (fileSender.cancel(true)) {
-            jButton2.setEnabled(true);
-            jButton3.setEnabled(false);
-            if (fileSender.isGroupRecognition()) {
-                JOptionPane.showMessageDialog(null, fileSender.getSentGroups().size() + bundle.getString("groups_sent_txt"), bundle.getString("sent_groups_title"), JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, fileSender.getCounter() + bundle.getString("groups_sent_txt"), bundle.getString("sent_groups_title"), JOptionPane.INFORMATION_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), fileSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
             fileSender = null;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        JOptionPane.showMessageDialog(this, bundle.getString("help_contents_msg"), bundle.getString("help_contents"), JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, bundle.getString("help_contents_message"), bundle.getString("help_contents"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        JOptionPane.showMessageDialog(this, bundle.getString("about_msg"), bundle.getString("about"), JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, bundle.getString("about_message"), bundle.getString("about"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        setPanel(3);
+        setPanel(2);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         textSender = new TextSender();
-
-        // text
-        textSender.setText(jTextArea2.getText().trim());
-
-        // no. of groups
-        if (StringUtils.isBlank(jTextField4.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("input_group_no"), bundle.getString("missing_input"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        textSender.setNoOfGroups(Integer.parseInt(jTextField4.getText()));
-
-        // take WeChat's parameters from config panel
-        if (StringUtils.isBlank(jTextField17.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("wechat_pos_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String[] taskbarCoordinate = jTextField17.getText().split(" ");
-        Position taskbarPosition = new Position();
-        taskbarPosition.setX(Integer.parseInt(taskbarCoordinate[0]));
-        taskbarPosition.setY(Integer.parseInt(taskbarCoordinate[1]));
-        textSender.setTaskbarPosition(taskbarPosition);
-
-        if (StringUtils.isBlank(jTextField19.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("scroll_pos_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String[] scrollCoordinate = jTextField19.getText().split(" ");
-        Position scrollPosition = new Position();
-        scrollPosition.setX(Integer.parseInt(scrollCoordinate[0]));
-        scrollPosition.setY(Integer.parseInt(scrollCoordinate[1]));
-        textSender.setScrollPosition(scrollPosition);
-
-        if (StringUtils.isBlank(jTextField8.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("second_last_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String[] secondLastCoordinate = jTextField8.getText().split(" ");
-        Position secondLastPosition = new Position();
-        secondLastPosition.setX(Integer.parseInt(secondLastCoordinate[0]));
-        secondLastPosition.setY(Integer.parseInt(secondLastCoordinate[1]));
-        textSender.setSecondLastPosition(secondLastPosition);
-
-        if (StringUtils.isBlank(jTextField20.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("scrolling_time_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        Long scrollTime = Long.parseLong(jTextField20.getText());
-        textSender.setScrollTime(scrollTime);
-
-        textSender.setGroupRecognition(jCheckBox2.isSelected());
-
-        List<Position> imagePositions = new ArrayList<Position>();
-        if (StringUtils.isBlank(jTextField3.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("img1_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String[] imgPos1 = jTextField3.getText().split(" ");
-        imagePositions.add(new Position(Integer.parseInt(imgPos1[0]), Integer.parseInt(imgPos1[1])));
-        if (jCheckBox2.isSelected()) {
-            if (StringUtils.isBlank(jTextField5.getText())) {
-                JOptionPane.showMessageDialog(this, bundle.getString("img2_missing"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-                return;
+        textSender.setTsParams(tsParams);
+        if (checkTSParams(tsParams)) {
+            // run
+            int input = JOptionPane.showConfirmDialog(null, bundle.getString("start_question"), bundle.getString("confirm_title"),
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (input == 0) { // YES
+                textSender.execute();
             }
-            String[] imgPos2 = jTextField5.getText().split(" ");
-            imagePositions.add(new Position(Integer.parseInt(imgPos2[0]), Integer.parseInt(imgPos2[1])));
-        }
-        textSender.setImagePositions(imagePositions);
-
-        if (jComboBox2.getSelectedItem().toString().equals(bundle.getString("continue"))) {
-            textSender.setIsContinue(true);
-        } else {
-            textSender.setIsContinue(false);
-        }
-
-        // gui
-        textSender.setStartJButton(jButton10);
-        textSender.setStopJButton(jButton11);
-        textSender.setOption(jComboBox2);
-
-        // run
-        int input = JOptionPane.showConfirmDialog(null, bundle.getString("start_question"), bundle.getString("confirm_title"),
-                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (input == 0) { // YES
-            textSender.execute();
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void initTSParams() {
+        tsParams = new TextSenderParams();
+        tsParams.setStartJButton(jButton2);
+        fsParams.setStopJButton(jButton3);
+    }
+
+    private boolean checkTSParams(TextSenderParams tsParams) {
+        // on taskbar coordinate
+        if (StringUtils.isBlank(jTextField17.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_on_taskbar_coordinate"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            String[] onTaskbarCoordinateData = jTextField17.getText().split(" ");
+            Coordinate onTaskbarCoordinate = new Coordinate();
+            onTaskbarCoordinate.setX(Integer.parseInt(onTaskbarCoordinateData[0]));
+            onTaskbarCoordinate.setY(Integer.parseInt(onTaskbarCoordinateData[1]));
+            tsParams.setOnTaskbarCoordinate(onTaskbarCoordinate);
+        }
+        // text
+        if (StringUtils.isBlank(jTextArea2.getText().trim())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_text"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            tsParams.setText(jTextArea2.getText().trim());
+        }
+        // no of groups
+        if (StringUtils.isBlank(jTextField4.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_no_of_groups"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            tsParams.setNoOfGroups(Integer.parseInt(jTextField4.getText()));
+        }
+        return true;
+    }
+
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if (textSender.cancel(true)) {
-            jButton10.setEnabled(true);
-            jButton11.setEnabled(false);
-            if (textSender.isGroupRecognition()) {
-                JOptionPane.showMessageDialog(null, textSender.getSentGroups().size() + bundle.getString("groups_sent_txt"), bundle.getString("sent_groups_title"), JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, textSender.getCounter() + bundle.getString("groups_sent_txt"), bundle.getString("sent_groups_title"), JOptionPane.INFORMATION_MESSAGE);
-            }
+            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), textSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
             textSender = null;
         }
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTextField1.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, bundle.getString("input_copies_no"), bundle.getString("missing_input"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        int noOfCopies = Integer.parseInt(jTextField1.getText());
-        if (noOfCopies < 1) {
-            JOptionPane.showMessageDialog(this, bundle.getString("incorrect_copies_no"), bundle.getString("incorrect_input"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        String inputFolder = jTextField6.getText();
-        String outputFolder = jTextField7.getText();
-        if (inputFolder.equals(outputFolder)) {
-            JOptionPane.showMessageDialog(this, bundle.getString("input_output_folder_error"), bundle.getString("incorrect_input"), JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         copiesGenerator = new CopiesGenerator();
-
-        // gui
-        copiesGenerator.setGenerateButton(jButton1);
-
-        // data
-        copiesGenerator.setInputFolder(inputFolder);
-        copiesGenerator.setOutputFolder(outputFolder);
-        copiesGenerator.setNoOfCopies(Integer.parseInt(jTextField1.getText()));
-        copiesGenerator.execute();
+        copiesGenerator.setCgParams(cgParams);
+        if (checkCGParams(cgParams)) {
+            copiesGenerator.execute();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void initCGParams() {
+        cgParams = new CopiesGeneratorParams();
+        cgParams.setGenerateJButton(jButton1);
+        cgParams.setStopJButton(jButton6);
+
+    }
+
+    private boolean checkCGParams(CopiesGeneratorParams cgParams) {
+        // input folder
+        if (StringUtils.isBlank(jTextField6.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_input_folder"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            cgParams.setInputFolder(jTextField6.getText());
+        }
+        // output folder
+        if (StringUtils.isBlank(jTextField7.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_output_folder"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            cgParams.setInputFolder(jTextField7.getText());
+        }
+        // input and output folder must be different
+        if (jTextField6.getText().equals(jTextField7.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("input_output_folder_error"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        // no of copies
+        if (StringUtils.isBlank(jTextField1.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_no_of_copies"), bundle.getString("missing_input"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            cgParams.setNoOfCopies(Integer.parseInt(jTextField1.getText()));
+        }
+        return true;
+    }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         if (copiesGenerator.cancel(true)) {
-            jButton1.setEnabled(true);
-            jButton6.setEnabled(false);
             copiesGenerator = null;
         }
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jCheckBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox1ItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            jComboBox1.setEnabled(true);
-        } else {
-            jComboBox1.setEnabled(false);
-        }
-    }//GEN-LAST:event_jCheckBox1ItemStateChanged
-
-    private void jCheckBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBox2ItemStateChanged
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            jComboBox2.setEnabled(true);
-        } else {
-            jComboBox2.setEnabled(false);
-        }
-    }//GEN-LAST:event_jCheckBox2ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -1147,30 +814,14 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1187,58 +838,46 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JPanel jPanel0;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+
     private CopiesGenerator copiesGenerator;
+    private CopiesGeneratorParams cgParams;
     private MouseDetector mouseDetector;
     private FileSender fileSender;
+    private FileSenderParams fsParams;
     private TextSender textSender;
+    private TextSenderParams tsParams;
     private ResourceBundle bundle;
+
+    /**
+     * Creates new form WCT
+     */
+    public WCT() {
+        bundle = LanguageHandler.getInstance().getBundle();
+        initComponents();
+        initMyComponents();
+    }
 
     private void initMyComponents() {
         centerWindow(this);
-        // send file
-        jButton2.setEnabled(true);
-        jButton3.setEnabled(false);
-//        jComboBox1.setEnabled(false);
-//        jComboBox2.setEnabled(false);
-        jTextField9.setText("5000");
-
-        // send text
-        jTextArea2.setText("");
-        jButton10.setEnabled(true);
-        jButton11.setEnabled(false);
-
-        // detect mouse
-        jButton4.setEnabled(true);
-        jButton5.setEnabled(false);
-
-        // configuration
+        // load configuration if possible
         Configuration config = null;
         try {
             config = ConfigurationHandler.getConfig();
@@ -1248,29 +887,12 @@ public class WCT extends javax.swing.JFrame {
         if (config != null) {
             jTextField6.setText(config.getInputFolder());
             jTextField7.setText(config.getOutputFolder());
+            jTextField17.setText(config.getOnTaskbarCoordinate());
 
-            jTextField17.setText(config.getOnTaskbar());
-            jTextField19.setText(config.getScroll());
-            jTextField8.setText(config.getSecondLast());
-            jTextField20.setText(config.getScrollTime() == null ? "3000" : config.getScrollTime().toString());
-            if (config.getImagePositions() != null) {
-                jTextField3.setText(config.getImagePositions().get(0));
-                if (config.getImagePositions().size() > 1) {
-                    jTextField5.setText(config.getImagePositions().get(1));
-                }
-            }
-
-            jTextField10.setText(config.getKbPRWaiting() == null ? "50" : config.getKbPRWaiting().toString());
-            jTextField11.setText(config.getKbFinishWaiting() == null ? "50" : config.getKbFinishWaiting().toString());
-            jTextField12.setText(config.getMousePRWaiting() == null ? "50" : config.getMousePRWaiting().toString());
-            jTextField13.setText(config.getMouseMoveWaiting() == null ? "50" : config.getMousePRWaiting().toString());
-        } else {
-            jTextField20.setText("3000");
-            jTextField10.setText("50");
-            jTextField11.setText("50");
-            jTextField12.setText("50");
-            jTextField13.setText("50");
         }
+        initFSParam();
+        initCGParams();
+        initTSParams();
     }
 
     private void centerWindow(Window frame) {
@@ -1281,42 +903,36 @@ public class WCT extends javax.swing.JFrame {
     }
 
     private void setPanel(int panelId) {
-        jPanel1.removeAll();
-        jPanel1.repaint();
-        jPanel1.revalidate();
-        ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
+        jPanel0.removeAll();
+        jPanel0.repaint();
+        jPanel0.revalidate();
         switch (panelId) {
-            case 0: {
-                jPanel1.add(jPanel2);
-                jPanel1.repaint();
-                jPanel1.revalidate();
-                break;
-            }
             case 1: {
-                jPanel1.add(jPanel3);
-                jPanel1.repaint();
-                jPanel1.revalidate();
+                jPanel0.add(jPanel1);
+                jPanel0.repaint();
+                jPanel0.revalidate();
                 break;
             }
             case 2: {
-                jPanel1.add(jPanel4);
-                jPanel1.repaint();
-                jPanel1.revalidate();
+                jPanel0.add(jPanel2);
+                jPanel0.repaint();
+                jPanel0.revalidate();
                 break;
             }
             case 3: {
-                jPanel1.add(jPanel5);
-                jPanel1.repaint();
-                jPanel1.revalidate();
+                jPanel0.add(jPanel3);
+                jPanel0.repaint();
+                jPanel0.revalidate();
+                break;
+            }
+            case 4: {
+                jPanel0.add(jPanel4);
+                jPanel0.repaint();
+                jPanel0.revalidate();
                 break;
             }
             default:
                 break;
-
         }
-    }
-
-    private String[] getComboboxModel() {
-        return new String[]{bundle.getString("from_beginning"), bundle.getString("continue")};
     }
 }

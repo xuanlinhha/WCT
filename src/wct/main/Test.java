@@ -19,7 +19,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import wct.multilanguage.LanguageHandler;
 import wct.resourses.Keyboard;
 import wct.resourses.Mouse;
-import wct.resourses.Position;
+import wct.resourses.Coordinate;
 import wct.resourses.SystemClipboard;
 
 /**
