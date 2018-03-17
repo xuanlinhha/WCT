@@ -139,6 +139,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel1.add(jButton2, gridBagConstraints);
 
         jButton3.setText(bundle.getString("WCT.jButton3.text")); // NOI18N
+        jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -158,6 +159,8 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jLabel11, gridBagConstraints);
+
+        jTextField9.setText(bundle.getString("WCT.jTextField9.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -203,6 +206,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel1.add(jButton1, gridBagConstraints);
 
         jButton6.setText(bundle.getString("WCT.jButton6.text")); // NOI18N
+        jButton6.setEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
@@ -294,6 +298,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jButton10, gridBagConstraints);
 
         jButton11.setText(bundle.getString("WCT.jButton11.text")); // NOI18N
+        jButton11.setEnabled(false);
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton11ActionPerformed(evt);
@@ -324,6 +329,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel3.add(jButton4, gridBagConstraints);
 
         jButton5.setText(bundle.getString("WCT.jButton5.text")); // NOI18N
+        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -675,8 +681,8 @@ public class WCT extends javax.swing.JFrame {
 
     private void initTSParams() {
         tsParams = new TextSenderParams();
-        tsParams.setStartJButton(jButton2);
-        fsParams.setStopJButton(jButton3);
+        tsParams.setStartJButton(jButton10);
+        tsParams.setStopJButton(jButton11);
     }
 
     private boolean checkTSParams(TextSenderParams tsParams) {
@@ -743,7 +749,7 @@ public class WCT extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, bundle.getString("no_output_folder"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            cgParams.setInputFolder(jTextField7.getText());
+            cgParams.setOutputFolder(jTextField7.getText());
         }
         // input and output folder must be different
         if (jTextField6.getText().equals(jTextField7.getText())) {

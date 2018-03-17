@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/main/WCT.java</file>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/background/FileSender.java</file>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/background/TextSender.java</file>
-            <file>file:/Users/xuanlinhha/NetBeansProjects/WCT/src/wct/configuration/Configuration.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Administrator/My%20Documents/NetBeansProjects/WCT/resources/wct/main/Bundle.properties</file>
+            <file>file:/C:/Documents%20and%20Settings/Administrator/My%20Documents/NetBeansProjects/WCT/src/wct/resourses/Screen.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Administrator/My%20Documents/NetBeansProjects/WCT/resources/wct/Message_zh_CN.properties</file>
+            <file>file:/C:/Documents%20and%20Settings/Administrator/My%20Documents/NetBeansProjects/WCT/src/wct/main/WCT.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Administrator/My%20Documents/NetBeansProjects/WCT/src/wct/multilanguage/LanguageHandler.java</file>
+            <file>file:/C:/Documents%20and%20Settings/Administrator/My%20Documents/NetBeansProjects/WCT/resources/wct/Message.properties</file>
         </group>
     </open-files>
 </project-private>
