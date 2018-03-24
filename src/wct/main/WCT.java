@@ -259,6 +259,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(50, 0, 0, 0);
         jPanel1.add(jButton12, gridBagConstraints);
 
         jButton13.setText(bundle.getString("WCT.jButton13.text")); // NOI18N
@@ -271,6 +272,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(50, 0, 0, 0);
         jPanel1.add(jButton13, gridBagConstraints);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
