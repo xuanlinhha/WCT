@@ -13,7 +13,7 @@ public class Configuration {
     private String imageCoordinate1;
     private String imageCoordinate2;
     private String secondLastCoordinate;
-    private Long scrollingTime;
+    private String scrollingTime;
 
     public String getInputFolder() {
         return inputFolder;
@@ -71,11 +71,11 @@ public class Configuration {
         this.secondLastCoordinate = secondLastCoordinate;
     }
 
-    public Long getScrollingTime() {
+    public String getScrollingTime() {
         return scrollingTime;
     }
 
-    public void setScrollingTime(Long scrollingTime) {
+    public void setScrollingTime(String scrollingTime) {
         this.scrollingTime = scrollingTime;
     }
 
