@@ -1,61 +1,29 @@
 package wct.fileprocessing;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import com.coremedia.iso.IsoFile;
+import com.coremedia.iso.boxes.*;
+import com.coremedia.iso.boxes.apple.AppleItemListBox;
+import com.googlecode.mp4parser.FileDataSourceImpl;
+import com.googlecode.mp4parser.boxes.apple.AppleNameBox;
+import com.googlecode.mp4parser.util.Path;
+
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.util.List;
-import java.util.Map;
-import org.jcodec.containers.mp4.boxes.MetaValue;
-import org.jcodec.movtool.MetadataEditor;
-
-import org.mp4parser.Box;
-import org.mp4parser.Container;
-import org.mp4parser.IsoFile;
-import org.mp4parser.boxes.apple.AppleItemListBox;
-import org.mp4parser.boxes.apple.AppleNameBox;
-import org.mp4parser.boxes.iso14496.part12.ChunkOffsetBox;
-import org.mp4parser.boxes.iso14496.part12.FreeBox;
-import org.mp4parser.boxes.iso14496.part12.HandlerBox;
-import org.mp4parser.boxes.iso14496.part12.MetaBox;
-import org.mp4parser.boxes.iso14496.part12.MovieBox;
-import org.mp4parser.boxes.iso14496.part12.UserDataBox;
-import org.mp4parser.tools.Path;
 
 public class Mp4Meta {
 
-    static void writeRandomMetadataWithJcodec(File f, String s) {
-        try {
-            MetadataEditor mediaMeta;
-            mediaMeta = MetadataEditor.createFrom(f);
-            Map<String, MetaValue> keyedMeta = mediaMeta.getKeyedMeta();
-            keyedMeta.put("k1", MetaValue.createString(s));
-            mediaMeta.save(true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void writeRandomMetadata(File videoFile, String title) throws IOException {
-
-        // File videoFile = new File(videoFilePath);
-        IsoFile isoFile = new IsoFile(videoFile);
+        IsoFile isoFile = new IsoFile(new FileDataSourceImpl(videoFile));
 
         MovieBox moov = isoFile.getBoxes(MovieBox.class).get(0);
         FreeBox freeBox = findFreeBox(moov);
 
         boolean correctOffset = needsOffsetCorrection(isoFile);
         long sizeBefore = moov.getSize();
-        long offset = 0;
-        for (Box box : isoFile.getBoxes()) {
-            if ("moov".equals(box.getType())) {
-                break;
-            }
-            offset += box.getSize();
-        }
+        long offset = moov.getOffset();
 
         // Create structure or just navigate to Apple List Box.
         UserDataBox userDataBox;
@@ -94,7 +62,7 @@ public class Mp4Meta {
 
         long sizeAfter = moov.getSize();
         long diff = sizeAfter - sizeBefore;
-		// This is the difference of before/after
+        // This is the difference of before/after
 
         // can we compensate by resizing a Free Box we have found?
         if (freeBox.getData().limit() > diff) {
@@ -121,9 +89,10 @@ public class Mp4Meta {
         fc.position(offset);
         fc.write(ByteBuffer.wrap(baos.getBuffer(), 0, baos.size()));
         fc.close();
+
     }
 
-    private static FileChannel splitFileAndInsert(File f, long pos, long length) throws IOException {
+    public static FileChannel splitFileAndInsert(File f, long pos, long length) throws IOException {
         FileChannel read = new RandomAccessFile(f, "r").getChannel();
         File tmp = File.createTempFile("ChangeMetaData", "splitFileAndInsert");
         FileChannel tmpWrite = new RandomAccessFile(tmp, "rw").getChannel();
@@ -133,33 +102,29 @@ public class Mp4Meta {
         FileChannel write = new RandomAccessFile(f, "rw").getChannel();
         write.position(pos + length);
         tmpWrite.position(0);
+        long transferred = 0;
+        while ((transferred += tmpWrite.transferTo(0, tmpWrite.size() - transferred, write)) != tmpWrite.size()) {
+            System.out.println(transferred);
+        }
+        System.out.println(transferred);
         tmpWrite.close();
         tmp.delete();
         return write;
     }
 
     private static boolean needsOffsetCorrection(IsoFile isoFile) {
-        if (Path.getPath(isoFile, "moov[0]/mvex[0]") != null) {
+        if (Path.getPath(isoFile, "/moov[0]/mvex[0]") != null) {
             // Fragmented files don't need a correction
             return false;
         } else {
-            // no correction needed if mdat is before moov as insert into moov want change
-            // the offsets of mdat
-            for (Box box : isoFile.getBoxes()) {
-                if ("moov".equals(box.getType())) {
-                    return true;
-                }
-                if ("mdat".equals(box.getType())) {
-                    return false;
-                }
-            }
-            throw new RuntimeException("I need moov or mdat. Otherwise all this doesn't make sense");
+            // no correction needed if mdat is before moov as insert into moov want change the offsets of mdat
+            return Path.getPath(isoFile, "/moov[0]").getOffset() < Path.getPath(isoFile, "/mdat[0]").getOffset();
         }
     }
 
     private static FreeBox findFreeBox(Container c) {
         for (Box box : c.getBoxes()) {
-            // System.err.println(box.getType());
+            System.err.println(box.getType());
             if (box instanceof FreeBox) {
                 return (FreeBox) box;
             }
@@ -175,7 +140,7 @@ public class Mp4Meta {
 
     private static void correctChunkOffsets(MovieBox movieBox, long correction) {
         List<ChunkOffsetBox> chunkOffsetBoxes = Path.getPaths((Box) movieBox, "trak/mdia[0]/minf[0]/stbl[0]/stco[0]");
-        if (chunkOffsetBoxes.isEmpty()) {
+        if (chunkOffsetBoxes.size() == 0) {
             chunkOffsetBoxes = Path.getPaths((Box) movieBox, "trak/mdia[0]/minf[0]/stbl[0]/st64[0]");
         }
         for (ChunkOffsetBox chunkOffsetBox : chunkOffsetBoxes) {
