@@ -793,7 +793,11 @@ public class WCT extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (fileSender.cancel(true)) {
-            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), fileSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+            if (fileSender.getFsParams().getImageRecognitionJCheckBox().isSelected()) {
+                JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), FileSender.getSentGroups().size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), fileSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+            }
             fileSender = null;
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -923,7 +927,11 @@ public class WCT extends javax.swing.JFrame {
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         if (textSender.cancel(true)) {
-            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), textSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+            if (textSender.getTsParams().getImageRecognitionJCheckBox().isSelected()) {
+                JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), TextSender.getSentGroups().size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), textSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+            }
             textSender = null;
         }
     }//GEN-LAST:event_jButton11ActionPerformed

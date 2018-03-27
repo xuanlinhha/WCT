@@ -195,4 +195,12 @@ public class FileSender extends SwingWorker<Void, Void> {
         this.counter = counter;
     }
 
+    public static Set<String> getSentGroups() {
+        return sentGroups;
+    }
+
+    public static void setSentGroups(Set<String> sentGroups) {
+        FileSender.sentGroups = sentGroups;
+    }
+
 }
