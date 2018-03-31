@@ -115,7 +115,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     }
                     color = sc.getColorData();
                     if (sentGroups.contains(color)) {
-                        SystemClipboard.getInstance().copyString("U");
+                        SystemClipboard.getInstance().copyString("-");
                         Keyboard.getInstance().pasteWithoutEnter();
                         Mouse.getInstance().click(fsParams.getSecondLastCoordinate());
                         Thread.sleep(GO_TOP_WAITING);
