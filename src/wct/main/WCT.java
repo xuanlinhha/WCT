@@ -62,6 +62,11 @@ public class WCT extends javax.swing.JFrame {
         jButton13 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField12 = new javax.swing.JTextField();
+        jButton14 = new javax.swing.JButton();
+        jLabel18 = new javax.swing.JLabel();
+        jButton15 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -100,6 +105,8 @@ public class WCT extends javax.swing.JFrame {
         jTextField10 = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         jTextField11 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jTextField13 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -114,12 +121,13 @@ public class WCT extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("wct/main/Bundle"); // NOI18N
         setTitle(bundle.getString("WCT.title")); // NOI18N
-        setPreferredSize(new java.awt.Dimension(700, 500));
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
         jPanel0.setLayout(new java.awt.CardLayout());
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText(bundle.getString("WCT.jLabel4.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -127,6 +135,8 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jLabel4, gridBagConstraints);
+
+        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -134,6 +144,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jTextField2, gridBagConstraints);
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText(bundle.getString("WCT.jButton2.text")); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +158,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.5;
         jPanel1.add(jButton2, gridBagConstraints);
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton3.setText(bundle.getString("WCT.jButton3.text")); // NOI18N
         jButton3.setEnabled(false);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +173,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.5;
         jPanel1.add(jButton3, gridBagConstraints);
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText(bundle.getString("WCT.jLabel11.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -169,6 +182,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jLabel11, gridBagConstraints);
 
+        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField9.setText(bundle.getString("WCT.jTextField9.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -177,7 +191,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jTextField9, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(bundle.getString("WCT.jLabel1.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -185,9 +199,10 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(50, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText(bundle.getString("WCT.jLabel2.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -195,6 +210,8 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jLabel2, gridBagConstraints);
+
+        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 10;
@@ -202,6 +219,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jTextField1, gridBagConstraints);
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText(bundle.getString("WCT.jButton1.text")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +232,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton1, gridBagConstraints);
 
+        jButton6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton6.setText(bundle.getString("WCT.jButton6.text")); // NOI18N
         jButton6.setEnabled(false);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -227,6 +246,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton6, gridBagConstraints);
 
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText(bundle.getString("WCT.jLabel12.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -235,6 +255,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jLabel12, gridBagConstraints);
 
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox1.setModel(loadComboboxModel());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -242,6 +263,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jComboBox1, gridBagConstraints);
 
+        jCheckBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jCheckBox1.setSelected(true);
         jCheckBox1.setText(bundle.getString("WCT.jCheckBox1.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -250,6 +272,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jCheckBox1, gridBagConstraints);
 
+        jButton12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton12.setText(bundle.getString("WCT.jButton12.text")); // NOI18N
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,6 +285,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton12, gridBagConstraints);
 
+        jButton13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton13.setText(bundle.getString("WCT.jButton13.text")); // NOI18N
         jButton13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,7 +298,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton13, gridBagConstraints);
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText(bundle.getString("WCT.jLabel5.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -284,7 +308,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jLabel5, gridBagConstraints);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText(bundle.getString("WCT.jLabel3.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -292,13 +316,68 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(50, 0, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
         jPanel1.add(jLabel3, gridBagConstraints);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText(bundle.getString("WCT.jLabel7.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jLabel7, gridBagConstraints);
+
+        jTextField12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 14;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jTextField12, gridBagConstraints);
+
+        jButton14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton14.setText(bundle.getString("WCT.jButton14.text")); // NOI18N
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jButton14, gridBagConstraints);
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText(bundle.getString("WCT.jLabel18.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
+        jPanel1.add(jLabel18, gridBagConstraints);
+
+        jButton15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton15.setText(bundle.getString("WCT.jButton15.text")); // NOI18N
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 15;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jButton15, gridBagConstraints);
 
         jPanel0.add(jPanel1, "card2");
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText(bundle.getString("WCT.jLabel6.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -308,6 +387,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jLabel6, gridBagConstraints);
 
         jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextArea2.setRows(5);
         jScrollPane2.setViewportView(jTextArea2);
 
@@ -320,6 +400,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weighty = 0.8;
         jPanel2.add(jScrollPane2, gridBagConstraints);
 
+        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel19.setText(bundle.getString("WCT.jLabel19.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -327,6 +408,8 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel19, gridBagConstraints);
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -334,6 +417,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jTextField4, gridBagConstraints);
 
+        jButton10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton10.setText(bundle.getString("WCT.jButton10.text")); // NOI18N
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,6 +431,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.4;
         jPanel2.add(jButton10, gridBagConstraints);
 
+        jButton11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton11.setText(bundle.getString("WCT.jButton11.text")); // NOI18N
         jButton11.setEnabled(false);
         jButton11.addActionListener(new java.awt.event.ActionListener() {
@@ -361,6 +446,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.4;
         jPanel2.add(jButton11, gridBagConstraints);
 
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText(bundle.getString("WCT.jLabel13.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -368,6 +454,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jLabel13, gridBagConstraints);
 
+        jCheckBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jCheckBox2.setSelected(true);
         jCheckBox2.setText(bundle.getString("WCT.jCheckBox2.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -376,6 +463,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jCheckBox2, gridBagConstraints);
 
+        jComboBox2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox2.setModel(loadComboboxModel());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -387,6 +475,7 @@ public class WCT extends javax.swing.JFrame {
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setText(bundle.getString("WCT.jButton4.text")); // NOI18N
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -400,6 +489,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.5;
         jPanel3.add(jButton4, gridBagConstraints);
 
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton5.setText(bundle.getString("WCT.jButton5.text")); // NOI18N
         jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -415,6 +505,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel3.add(jButton5, gridBagConstraints);
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
@@ -430,6 +521,7 @@ public class WCT extends javax.swing.JFrame {
 
         jPanel4.setLayout(new java.awt.GridBagLayout());
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText(bundle.getString("WCT.jLabel8.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -437,6 +529,8 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel8, gridBagConstraints);
+
+        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -445,6 +539,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.8;
         jPanel4.add(jTextField6, gridBagConstraints);
 
+        jButton7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton7.setText(bundle.getString("WCT.jButton7.text")); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -457,6 +552,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton7, gridBagConstraints);
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText(bundle.getString("WCT.jLabel9.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -464,6 +560,8 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel9, gridBagConstraints);
+
+        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -472,6 +570,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.8;
         jPanel4.add(jTextField7, gridBagConstraints);
 
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton8.setText(bundle.getString("WCT.jButton8.text")); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -484,7 +583,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton8, gridBagConstraints);
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel10.setText(bundle.getString("WCT.jLabel10.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -493,6 +592,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel10, gridBagConstraints);
 
+        jButton9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton9.setText(bundle.getString("WCT.jButton9.text")); // NOI18N
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -501,12 +601,12 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jButton9, gridBagConstraints);
 
-        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel17.setText(bundle.getString("WCT.jLabel17.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -516,6 +616,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         jPanel4.add(jLabel17, gridBagConstraints);
 
+        jLabel22.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel22.setText(bundle.getString("WCT.jLabel22.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -523,13 +624,16 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel22, gridBagConstraints);
+
+        jTextField17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weightx = 0.3;
         jPanel4.add(jTextField17, gridBagConstraints);
 
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText(bundle.getString("WCT.jLabel14.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -537,13 +641,16 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel14, gridBagConstraints);
+
+        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.5;
+        gridBagConstraints.weightx = 0.3;
         jPanel4.add(jTextField3, gridBagConstraints);
 
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText(bundle.getString("WCT.jLabel15.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -551,12 +658,15 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel15, gridBagConstraints);
+
+        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField5, gridBagConstraints);
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText(bundle.getString("WCT.jLabel16.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -564,12 +674,15 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel16, gridBagConstraints);
+
+        jTextField8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField8, gridBagConstraints);
 
+        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel20.setText(bundle.getString("WCT.jLabel20.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -577,12 +690,15 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel20, gridBagConstraints);
+
+        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField10, gridBagConstraints);
 
+        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel21.setText(bundle.getString("WCT.jLabel21.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -591,6 +707,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jLabel21, gridBagConstraints);
 
+        jTextField11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextField11.setText(bundle.getString("WCT.jTextField11.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -598,11 +715,29 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel4.add(jTextField11, gridBagConstraints);
 
+        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel23.setText(bundle.getString("WCT.jLabel23.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jLabel23, gridBagConstraints);
+
+        jTextField13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField13.setText("200"); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel4.add(jTextField13, gridBagConstraints);
+
         jPanel0.add(jPanel4, "card4");
 
         jMenu1.setText(bundle.getString("WCT.jMenu1.text")); // NOI18N
-        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
+        jMenuItem1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jMenuItem1.setText(bundle.getString("WCT.jMenuItem1.text")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -611,6 +746,7 @@ public class WCT extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jMenuItem4.setText(bundle.getString("WCT.jMenuItem4.text")); // NOI18N
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -619,6 +755,7 @@ public class WCT extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
+        jMenuItem2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jMenuItem2.setText(bundle.getString("WCT.jMenuItem2.text")); // NOI18N
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -628,6 +765,7 @@ public class WCT extends javax.swing.JFrame {
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
+        jMenuItem3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jMenuItem3.setText(bundle.getString("WCT.jMenuItem3.text")); // NOI18N
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -639,8 +777,9 @@ public class WCT extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText(bundle.getString("WCT.jMenu2.text")); // NOI18N
-        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
+        jMenuItem5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jMenuItem5.setText(bundle.getString("WCT.jMenuItem5.text")); // NOI18N
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -649,6 +788,7 @@ public class WCT extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItem6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jMenuItem6.setText(bundle.getString("WCT.jMenuItem6.text")); // NOI18N
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -665,7 +805,7 @@ public class WCT extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel0, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -767,6 +907,7 @@ public class WCT extends javax.swing.JFrame {
         config.setImageCoordinate2(jTextField8.getText());
         config.setSecondLastCoordinate(jTextField10.getText());
         config.setScrollingTime(jTextField11.getText());
+        config.setLimitToStop(jTextField13.getText());
         try {
             ConfigurationHandler.save(config);
             JOptionPane.showMessageDialog(this, bundle.getString("save_config_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
@@ -887,6 +1028,14 @@ public class WCT extends javax.swing.JFrame {
         } else {
             commonParams.setScrollingTime(Long.parseLong(jTextField11.getText()));
         }
+
+        // limit to stop
+        if (StringUtils.isBlank(jTextField13.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_limit_to_stop"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            commonParams.setLimitToStop(Integer.parseInt(jTextField13.getText()));
+        }
         // image corner 1
         if (StringUtils.isBlank(jTextField5.getText())) {
             JOptionPane.showMessageDialog(this, bundle.getString("no_image_corner_1"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
@@ -996,8 +1145,12 @@ public class WCT extends javax.swing.JFrame {
                 if (!input.exists()) {
                     JOptionPane.showMessageDialog(this, bundle.getString("no_input_folder"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
                 } else {
-                    FileUtils.cleanDirectory(input);
-                    JOptionPane.showMessageDialog(this, bundle.getString("clean_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                    int res = JOptionPane.showConfirmDialog(null, MessageFormat.format(bundle.getString("clean_question"), jTextField6.getText().trim()), bundle.getString("clean_title"),
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (res == 0) { // YES
+                        FileUtils.cleanDirectory(input);
+                        JOptionPane.showMessageDialog(this, bundle.getString("clean_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -1015,8 +1168,12 @@ public class WCT extends javax.swing.JFrame {
                 if (!output.exists()) {
                     JOptionPane.showMessageDialog(this, bundle.getString("no_output_folder"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
                 } else {
-                    FileUtils.cleanDirectory(output);
-                    JOptionPane.showMessageDialog(this, bundle.getString("clean_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                    int res = JOptionPane.showConfirmDialog(null, MessageFormat.format(bundle.getString("clean_question"), jTextField7.getText().trim()), bundle.getString("clean_title"),
+                            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    if (res == 0) { // YES
+                        FileUtils.cleanDirectory(output);
+                        JOptionPane.showMessageDialog(this, bundle.getString("clean_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -1024,6 +1181,33 @@ public class WCT extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        if (StringUtils.isBlank(jTextField12.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_shutdown_time"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+        } else {
+            Integer time = Integer.parseInt(jTextField12.getText()) * 60;
+            String shutdownCommand = "shutdown.exe -s -t " + time;
+            try {
+                Runtime.getRuntime().exec(shutdownCommand);
+                JOptionPane.showMessageDialog(this, bundle.getString("schedule_shutdown_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, bundle.getString("schedule_shutdown_fail"), bundle.getString("error"), JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        String cancelShutdownCommand = "shutdown.exe /a";
+        try {
+            Runtime.getRuntime().exec(cancelShutdownCommand);
+            JOptionPane.showMessageDialog(this, bundle.getString("cancel_shutdown_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, bundle.getString("cancel_shutdown_fail"), bundle.getString("error"), JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1067,6 +1251,8 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1088,15 +1274,18 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -1121,6 +1310,8 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -1168,6 +1359,7 @@ public class WCT extends javax.swing.JFrame {
             jTextField8.setText(config.getImageCoordinate2());
             jTextField10.setText(config.getSecondLastCoordinate());
             jTextField11.setText(config.getScrollingTime());
+            jTextField13.setText(config.getLimitToStop());
         }
         initFSParam();
         initCGParams();

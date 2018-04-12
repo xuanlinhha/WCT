@@ -26,6 +26,7 @@ public class TextSender extends SwingWorker<Void, Void> {
     private static final Long PAUSE_TIME = 500L;
     private static final Long CLICK_WAITING = 1000L;
     private static final Long GO_TOP_WAITING = 2000L;
+    private static final Integer SCROLL_TIMES = 10;
     private static final String SENT_TEXT_GROUPS = "sent_groups_TEXT.txt";
     private TextSenderParams tsParams;
     private int counter;
@@ -54,6 +55,7 @@ public class TextSender extends SwingWorker<Void, Void> {
             counter = 0;
             while (counter < tsParams.getNoOfGroups()) {
                 Mouse.getInstance().press(tsParams.getScrollingCoordinate(), tsParams.getScrollingTime());
+                Mouse.getInstance().scrollDown(SCROLL_TIMES);
                 Mouse.getInstance().click(tsParams.getImageCoordinate1());
                 Thread.sleep(CLICK_WAITING);
                 Keyboard.getInstance().pasteWithEnter();
@@ -89,10 +91,13 @@ public class TextSender extends SwingWorker<Void, Void> {
             counter = 0;
             while (counter < tsParams.getNoOfGroups()) {
                 Mouse.getInstance().press(tsParams.getScrollingCoordinate(), tsParams.getScrollingTime());
+                Mouse.getInstance().scrollDown(SCROLL_TIMES);
                 Mouse.getInstance().click(tsParams.getImageCoordinate1());
                 Thread.sleep(CLICK_WAITING);
                 // identify group is sent or not
                 boolean isAdded = false;
+                boolean exceedLimit = false;
+                int notSendingCounter = 0;
                 String color = "";
                 while (true) {
                     if (isCancelled()) {
@@ -100,7 +105,12 @@ public class TextSender extends SwingWorker<Void, Void> {
                     }
                     color = sc.getColorData();
                     if (sentGroups.contains(color)) {
-                        SystemClipboard.getInstance().copyString("U");
+                        notSendingCounter++;
+                        if (notSendingCounter == tsParams.getLimitToStop()) {
+                            exceedLimit = true;
+                            break;
+                        }
+                        SystemClipboard.getInstance().copyString("-");
                         Keyboard.getInstance().pasteWithoutEnter();
                         Mouse.getInstance().click(tsParams.getSecondLastCoordinate());
                         Thread.sleep(GO_TOP_WAITING);
@@ -114,6 +124,9 @@ public class TextSender extends SwingWorker<Void, Void> {
                     if (isAdded) {
                         sentGroups.remove(color);
                     }
+                    break;
+                }
+                if (exceedLimit) {
                     break;
                 }
                 // send text

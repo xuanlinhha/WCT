@@ -17,6 +17,7 @@ public class CommonParams {
     protected Coordinate imageCoordinate2;
     protected Coordinate secondLastCoordinate;
     private long scrollingTime;
+    private int limitToStop;
     private JComboBox optionJComboBox;
     private JCheckBox imageRecognitionJCheckBox;
     private JButton startJButton;
@@ -68,6 +69,14 @@ public class CommonParams {
 
     public void setScrollingTime(long scrollingTime) {
         this.scrollingTime = scrollingTime;
+    }
+
+    public int getLimitToStop() {
+        return limitToStop;
+    }
+
+    public void setLimitToStop(int limitToStop) {
+        this.limitToStop = limitToStop;
     }
 
     public JComboBox getOptionJComboBox() {

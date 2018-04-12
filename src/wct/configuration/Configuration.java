@@ -14,6 +14,7 @@ public class Configuration {
     private String imageCoordinate2;
     private String secondLastCoordinate;
     private String scrollingTime;
+    private String limitToStop;
 
     public String getInputFolder() {
         return inputFolder;
@@ -77,6 +78,14 @@ public class Configuration {
 
     public void setScrollingTime(String scrollingTime) {
         this.scrollingTime = scrollingTime;
+    }
+
+    public String getLimitToStop() {
+        return limitToStop;
+    }
+
+    public void setLimitToStop(String limitToStop) {
+        this.limitToStop = limitToStop;
     }
 
 }

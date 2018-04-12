@@ -28,6 +28,7 @@ public class FileSender extends SwingWorker<Void, Void> {
     private static final int RAMDOM_LENGTH = 20;
     private static final Long CLICK_WAITING = 1000L;
     private static final Long GO_TOP_WAITING = 2000L;
+    private static final Integer SCROLL_TIMES = 10;
     private static final String SENT_FILE_GROUPS = "sent_groups_FILE.txt";
 
     private FileSenderParams fsParams;
@@ -60,6 +61,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             counter = 0;
             while (counter < fsParams.getNoOfGroups()) {
                 Mouse.getInstance().press(fsParams.getScrollingCoordinate(), fsParams.getScrollingTime());
+                Mouse.getInstance().scrollDown(SCROLL_TIMES);
                 FileProcessor.changeHashcode(fsParams.getInputFolder(), randString + counter);
                 SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
                 Mouse.getInstance().click(fsParams.getImageCoordinate1());
@@ -103,11 +105,14 @@ public class FileSender extends SwingWorker<Void, Void> {
             counter = 0;
             while (counter < fsParams.getNoOfGroups()) {
                 Mouse.getInstance().press(fsParams.getScrollingCoordinate(), fsParams.getScrollingTime());
+                Mouse.getInstance().scrollDown(SCROLL_TIMES);
                 Mouse.getInstance().click(fsParams.getImageCoordinate1());
                 Thread.sleep(CLICK_WAITING);
 
                 // identify group is sent or not
                 boolean isAdded = false;
+                boolean exceedLimit = false;
+                int notSendingCounter = 0;
                 String color = "";
                 while (true) {
                     if (isCancelled()) {
@@ -115,6 +120,11 @@ public class FileSender extends SwingWorker<Void, Void> {
                     }
                     color = sc.getColorData();
                     if (sentGroups.contains(color)) {
+                        notSendingCounter++;
+                        if (notSendingCounter == fsParams.getLimitToStop()) {
+                            exceedLimit = true;
+                            break;
+                        }
                         SystemClipboard.getInstance().copyString("-");
                         Keyboard.getInstance().pasteWithoutEnter();
                         Mouse.getInstance().click(fsParams.getSecondLastCoordinate());
@@ -129,6 +139,9 @@ public class FileSender extends SwingWorker<Void, Void> {
                     if (isAdded) {
                         sentGroups.remove(color);
                     }
+                    break;
+                }
+                if (exceedLimit) {
                     break;
                 }
                 // send video
