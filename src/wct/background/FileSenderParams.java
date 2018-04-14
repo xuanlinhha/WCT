@@ -9,6 +9,7 @@ public class FileSenderParams extends CommonParams {
     private String inputFolder;
     private int noOfGroups;
     private long sendingTime;
+    private boolean shutdownAfterFinish;
 
     public String getInputFolder() {
         return inputFolder;
@@ -32,6 +33,14 @@ public class FileSenderParams extends CommonParams {
 
     public void setSendingTime(long sendingTime) {
         this.sendingTime = sendingTime;
+    }
+
+    public boolean isShutdownAfterFinish() {
+        return shutdownAfterFinish;
+    }
+
+    public void setShutdownAfterFinish(boolean shutdownAfterFinish) {
+        this.shutdownAfterFinish = shutdownAfterFinish;
     }
 
 }

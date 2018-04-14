@@ -154,6 +154,10 @@ public class FileSender extends SwingWorker<Void, Void> {
                 }
 
             }
+            if (fsParams.isShutdownAfterFinish() && !isCancelled()) {
+                String shutdownCommand = "shutdown.exe -s -t 60";
+                Runtime.getRuntime().exec(shutdownCommand);
+            }
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
