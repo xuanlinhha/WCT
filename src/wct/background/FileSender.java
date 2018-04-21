@@ -75,6 +75,12 @@ public class FileSender extends SwingWorker<Void, Void> {
                     break;
                 }
             }
+            // reset hook
+            fsParams.getKeyboardHook().shutdownHook();
+            if (fsParams.isShutdownAfterFinish() && !isCancelled()) {
+                String shutdownCommand = "shutdown.exe -s -t 60";
+                Runtime.getRuntime().exec(shutdownCommand);
+            }
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), fsParams.getNoOfGroups()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -154,6 +160,8 @@ public class FileSender extends SwingWorker<Void, Void> {
                 }
 
             }
+            // reset hook
+            fsParams.getKeyboardHook().shutdownHook();
             if (fsParams.isShutdownAfterFinish() && !isCancelled()) {
                 String shutdownCommand = "shutdown.exe -s -t 60";
                 Runtime.getRuntime().exec(shutdownCommand);

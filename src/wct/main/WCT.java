@@ -1,6 +1,9 @@
 package wct.main;
 
 import java.awt.Dimension;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.File;
@@ -10,6 +13,10 @@ import java.util.ResourceBundle;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import lc.kra.system.keyboard.GlobalKeyboardHook;
+import lc.kra.system.keyboard.event.GlobalKeyAdapter;
+import lc.kra.system.keyboard.event.GlobalKeyEvent;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import wct.background.CommonParams;
@@ -579,6 +586,11 @@ public class WCT extends javax.swing.JFrame {
         jPanel3.add(jLabel22, gridBagConstraints);
 
         jTextField17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField17.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField17FocusGained(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -596,6 +608,11 @@ public class WCT extends javax.swing.JFrame {
         jPanel3.add(jLabel14, gridBagConstraints);
 
         jTextField3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField3FocusGained(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
@@ -613,6 +630,11 @@ public class WCT extends javax.swing.JFrame {
         jPanel3.add(jLabel15, gridBagConstraints);
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField5FocusGained(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -629,6 +651,11 @@ public class WCT extends javax.swing.JFrame {
         jPanel3.add(jLabel16, gridBagConstraints);
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField8.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField8FocusGained(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
@@ -645,6 +672,11 @@ public class WCT extends javax.swing.JFrame {
         jPanel3.add(jLabel20, gridBagConstraints);
 
         jTextField10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextField10.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField10FocusGained(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
@@ -810,14 +842,19 @@ public class WCT extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        fileSender = new FileSender();
-        fileSender.setFsParams(fsParams);
         if (checkFSParams(fsParams)) {
             // run
             int input = JOptionPane.showConfirmDialog(null, bundle.getString("start_question"), bundle.getString("confirm_title"),
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (input == 0) { // YES
+                // create hook and set to fsParams
+                createGKBForStop();
+                fsParams.setKeyboardHook(keyboardHook);
+                // init file sender and start
+                fileSender = new FileSender();
+                fileSender.setFsParams(fsParams);
                 fileSender.execute();
+
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -911,16 +948,22 @@ public class WCT extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (fileSender.cancel(true)) {
-            if (fileSender.getFsParams().getImageRecognitionJCheckBox().isSelected()) {
-                JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), FileSender.getSentGroups().size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), fileSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
-            }
-            fileSender = null;
-        }
+        keyboardHook.shutdownHook();
+        stopFileSender();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void stopFileSender() {
+        if (fileSender != null) {
+            if (fileSender.cancel(true)) {
+                if (fileSender.getFsParams().getImageRecognitionJCheckBox().isSelected()) {
+                    JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), FileSender.getSentGroups().size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), fileSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+                }
+                fileSender = null;
+            }
+        }
+    }
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         JOptionPane.showMessageDialog(this, bundle.getString("help_contents_message"), bundle.getString("help_contents"), JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -935,13 +978,18 @@ public class WCT extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        textSender = new TextSender();
-        textSender.setTsParams(tsParams);
+
         if (checkTSParams(tsParams)) {
             // run
             int input = JOptionPane.showConfirmDialog(null, bundle.getString("start_question"), bundle.getString("confirm_title"),
                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (input == 0) { // YES
+                // create hook and set to tsParams
+                createGKBForStop();
+                tsParams.setKeyboardHook(keyboardHook);
+                // init text sender and start
+                textSender = new TextSender();
+                textSender.setTsParams(tsParams);
                 textSender.execute();
             }
         }
@@ -1054,15 +1102,22 @@ public class WCT extends javax.swing.JFrame {
     }
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        if (textSender.cancel(true)) {
-            if (textSender.getTsParams().getImageRecognitionJCheckBox().isSelected()) {
-                JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), TextSender.getSentGroups().size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), textSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
-            }
-            textSender = null;
-        }
+        keyboardHook.shutdownHook();
+        stopTextSender();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void stopTextSender() {
+        if (textSender != null) {
+            if (textSender.cancel(true)) {
+                if (textSender.getTsParams().getImageRecognitionJCheckBox().isSelected()) {
+                    JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), TextSender.getSentGroups().size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), textSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+                }
+                textSender = null;
+            }
+        }
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         copiesGenerator = new CopiesGenerator();
@@ -1189,14 +1244,47 @@ public class WCT extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        initGKBForCoorCapturing();
         mouseDetector = new MouseDetector();
         mouseDetector.setMdParams(mdParams);
         mouseDetector.execute();
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        keyboardHook.shutdownHook();
+        activeJTextField = null;
         mouseDetector.cancel(true);
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void setActiveJTextField(java.awt.event.FocusEvent evt) {
+        activeJTextField = (JTextField) evt.getSource();
+    }
+
+    private void resetActiveJTextField(java.awt.event.FocusEvent evt) {
+        if (activeJTextField == evt.getSource()) {
+            activeJTextField = null;
+        }
+    }
+
+    private void jTextField17FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField17FocusGained
+        setActiveJTextField(evt);
+    }//GEN-LAST:event_jTextField17FocusGained
+
+    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
+        setActiveJTextField(evt);
+    }//GEN-LAST:event_jTextField3FocusGained
+
+    private void jTextField5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusGained
+        setActiveJTextField(evt);
+    }//GEN-LAST:event_jTextField5FocusGained
+
+    private void jTextField8FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField8FocusGained
+        setActiveJTextField(evt);
+    }//GEN-LAST:event_jTextField8FocusGained
+
+    private void jTextField10FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField10FocusGained
+        setActiveJTextField(evt);
+    }//GEN-LAST:event_jTextField10FocusGained
 
     private void initMDParams() {
         mdParams = new MouseDetectorParams();
@@ -1328,6 +1416,10 @@ public class WCT extends javax.swing.JFrame {
     private TextSenderParams tsParams;
     private ResourceBundle bundle;
 
+    // used for configuration
+    private JTextField activeJTextField;
+    private GlobalKeyboardHook keyboardHook;
+
     /**
      * Creates new form WCT
      */
@@ -1361,6 +1453,38 @@ public class WCT extends javax.swing.JFrame {
         initCGParams();
         initTSParams();
         initMDParams();
+    }
+
+    private void initGKBForCoorCapturing() {
+        keyboardHook = new GlobalKeyboardHook(true);
+        keyboardHook.addKeyListener(new GlobalKeyAdapter() {
+            @Override
+            public void keyReleased(GlobalKeyEvent event) {
+                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_CONTROL) {
+                    // copy current coordinate to active JTextField
+                    if (activeJTextField != null) {
+                        PointerInfo pi = MouseInfo.getPointerInfo();
+                        Point p = pi.getLocation();
+                        String s = p.x + " " + p.y;
+                        activeJTextField.setText(s);
+                    }
+                }
+            }
+        });
+    }
+
+    private void createGKBForStop() {
+        keyboardHook = new GlobalKeyboardHook(true);
+        keyboardHook.addKeyListener(new GlobalKeyAdapter() {
+            @Override
+            public void keyReleased(GlobalKeyEvent event) {
+                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_SHIFT) {
+                    stopFileSender();
+                    stopTextSender();
+                    keyboardHook.shutdownHook();
+                }
+            }
+        });
     }
 
     private void centerWindow(Window frame) {

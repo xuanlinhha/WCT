@@ -134,6 +134,7 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Keyboard.getInstance().pasteWithEnter();
                 counter++;
             }
+            tsParams.getKeyboardHook().shutdownHook();
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -160,6 +161,7 @@ public class TextSender extends SwingWorker<Void, Void> {
                     break;
                 }
             }
+            tsParams.getKeyboardHook().shutdownHook();
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), tsParams.getNoOfGroups()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();

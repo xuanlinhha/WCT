@@ -1,5 +1,7 @@
 package wct.background;
 
+import lc.kra.system.keyboard.GlobalKeyboardHook;
+
 /**
  *
  * @author xuanlinhha
@@ -10,6 +12,7 @@ public class FileSenderParams extends CommonParams {
     private int noOfGroups;
     private long sendingTime;
     private boolean shutdownAfterFinish;
+    private GlobalKeyboardHook keyboardHook;
 
     public String getInputFolder() {
         return inputFolder;
@@ -41,6 +44,14 @@ public class FileSenderParams extends CommonParams {
 
     public void setShutdownAfterFinish(boolean shutdownAfterFinish) {
         this.shutdownAfterFinish = shutdownAfterFinish;
+    }
+
+    public GlobalKeyboardHook getKeyboardHook() {
+        return keyboardHook;
+    }
+
+    public void setKeyboardHook(GlobalKeyboardHook keyboardHook) {
+        this.keyboardHook = keyboardHook;
     }
 
 }
