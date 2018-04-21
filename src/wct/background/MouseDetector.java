@@ -4,7 +4,6 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
 import java.util.List;
-import javax.swing.JTextArea;
 import javax.swing.SwingWorker;
 
 /**
@@ -13,21 +12,14 @@ import javax.swing.SwingWorker;
  */
 public class MouseDetector extends SwingWorker<Void, String> {
 
-    private JTextArea positionJTextArea;
-
-    public JTextArea getPositionJTextArea() {
-        return positionJTextArea;
-    }
-
-    public void setPositionJTextArea(JTextArea positionJTextArea) {
-        this.positionJTextArea = positionJTextArea;
-    }
+    private MouseDetectorParams mdParams;
 
     @Override
     protected Void doInBackground() {
+        mdParams.getStartJButton().setEnabled(false);
+        mdParams.getStopJButton().setEnabled(true);
         try {
-
-            System.out.println("Background task is running ...");
+            mdParams.getjTextArea().setText("");
             while (!isCancelled()) {
                 PointerInfo pi = MouseInfo.getPointerInfo();
                 Point p = pi.getLocation();
@@ -37,6 +29,9 @@ public class MouseDetector extends SwingWorker<Void, String> {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            mdParams.getStartJButton().setEnabled(true);
+            mdParams.getStopJButton().setEnabled(false);
         }
         return null;
     }
@@ -44,7 +39,15 @@ public class MouseDetector extends SwingWorker<Void, String> {
     @Override
     protected void process(List<String> ss) {
         if (!ss.isEmpty()) {
-            this.positionJTextArea.append(ss.get(ss.size() - 1));
+            this.mdParams.getjTextArea().append(ss.get(ss.size() - 1));
         }
+    }
+
+    public MouseDetectorParams getMdParams() {
+        return mdParams;
+    }
+
+    public void setMdParams(MouseDetectorParams mdParams) {
+        this.mdParams = mdParams;
     }
 }
