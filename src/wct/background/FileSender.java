@@ -1,5 +1,6 @@
 package wct.background;
 
+import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -62,7 +63,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             while (counter < fsParams.getNoOfGroups()) {
                 Mouse.getInstance().press(fsParams.getScrollingCoordinate(), fsParams.getScrollingTime());
                 Mouse.getInstance().scrollDown(SCROLL_TIMES);
-                FileProcessor.changeHashcode(fsParams.getInputFolder(), randString + counter);
+                FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
                 SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
                 Mouse.getInstance().click(fsParams.getImageCoordinate1());
                 Thread.sleep(CLICK_WAITING);
@@ -151,9 +152,23 @@ public class FileSender extends SwingWorker<Void, Void> {
                     break;
                 }
                 // send video
-                FileProcessor.changeHashcode(fsParams.getInputFolder(), randString + counter);
-                SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
-                Keyboard.getInstance().pasteWithEnter();
+                if (fsParams.isOneByOne()) {
+                    List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
+                    for (int i = 0; i < files.size(); i++) {
+                        File f = files.get(i);
+                        FileProcessor.changeFileHashcode(f, randString + counter);
+                        SystemClipboard.getInstance().copyFile(f);
+                        Keyboard.getInstance().pasteWithEnter();
+                        if (i < files.size() - 1) {
+                            Thread.sleep(fsParams.getSendingTime());
+                        }
+                    }
+                } else {
+                    FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
+                    SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
+                    Keyboard.getInstance().pasteWithEnter();
+                }
+
                 counter++;
                 if (counter < fsParams.getNoOfGroups()) {
                     Thread.sleep(fsParams.getSendingTime());
@@ -186,7 +201,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             counter = 0;
             while (counter < fsParams.getNoOfGroups()) {
-                FileProcessor.changeHashcode(fsParams.getInputFolder(), randString + counter);
+                FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
                 SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
                 Keyboard.getInstance().pasteWithEnter();
                 Keyboard.getInstance().down(1);

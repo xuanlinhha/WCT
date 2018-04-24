@@ -75,6 +75,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jButton15 = new javax.swing.JButton();
         jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -194,7 +195,6 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jTextField9, gridBagConstraints);
 
@@ -378,6 +378,15 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jCheckBox3, gridBagConstraints);
+
+        jCheckBox4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jCheckBox4.setSelected(true);
+        jCheckBox4.setText(bundle.getString("WCT.jCheckBox4.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jCheckBox4, gridBagConstraints);
 
         jPanel0.add(jPanel1, "card2");
 
@@ -892,6 +901,7 @@ public class WCT extends javax.swing.JFrame {
         } else {
             fsParams.setSendingTime(Long.parseLong(jTextField9.getText()));
         }
+        fsParams.setOneByOne(jCheckBox4.isSelected());
         fsParams.setShutdownAfterFinish(jCheckBox3.isSelected());
 
         return true;
@@ -1348,6 +1358,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -1478,7 +1489,7 @@ public class WCT extends javax.swing.JFrame {
         keyboardHook.addKeyListener(new GlobalKeyAdapter() {
             @Override
             public void keyReleased(GlobalKeyEvent event) {
-                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_SHIFT) {
+                if (event.getVirtualKeyCode() == GlobalKeyEvent.VK_F10) {
                     stopFileSender();
                     stopTextSender();
                     keyboardHook.shutdownHook();

@@ -11,6 +11,7 @@ public class FileSenderParams extends CommonParams {
     private String inputFolder;
     private int noOfGroups;
     private long sendingTime;
+    private boolean oneByOne;
     private boolean shutdownAfterFinish;
     private GlobalKeyboardHook keyboardHook;
 
@@ -36,6 +37,14 @@ public class FileSenderParams extends CommonParams {
 
     public void setSendingTime(long sendingTime) {
         this.sendingTime = sendingTime;
+    }
+
+    public boolean isOneByOne() {
+        return oneByOne;
+    }
+
+    public void setOneByOne(boolean oneByOne) {
+        this.oneByOne = oneByOne;
     }
 
     public boolean isShutdownAfterFinish() {

@@ -27,7 +27,7 @@ public class CopiesGenerator extends SwingWorker<Void, Void> {
 
             for (int i = 1; i <= cgParams.getNoOfCopies(); i++) {
                 String randString = RandomStringUtils.random(RAMDOM_LENGTH) + i;
-                FileProcessor.changeHashcode(cgParams.getInputFolder(), randString);
+                FileProcessor.changeFilesHashcode(cgParams.getInputFolder(), randString);
                 FileProcessor.copyToOutput(i, cgParams.getInputFolder(), cgParams.getOutputFolder());
                 if (isCancelled()) {
                     break;

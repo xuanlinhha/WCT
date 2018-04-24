@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class FileProcessor {
 
-    public static void changeHashcode(String inputFolder, String randString) throws IOException {
+    public static void changeFilesHashcode(String inputFolder, String randString) throws IOException {
         File folder = new File(inputFolder);
         File[] files = folder.listFiles();
         for (File f : files) {
@@ -25,7 +25,14 @@ public class FileProcessor {
                 Mp4Meta.writeRandomMetadata(f, randString);
             }
         }
+    }
 
+    public static void changeFileHashcode(File f, String randString) throws IOException {
+        if (f.isFile() && (f.getName().endsWith(".mp3"))) {
+            Mp3Meta.changeComment(f, randString);
+        } else if (f.isFile() && f.getName().endsWith(".mp4")) {
+            Mp4Meta.writeRandomMetadata(f, randString);
+        }
     }
 
     public static List<File> getFiles(String inputFolder) {
