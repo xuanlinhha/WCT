@@ -61,7 +61,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             counter = 0;
             while (counter < fsParams.getNoOfGroups()) {
-                Mouse.getInstance().press(fsParams.getScrollingCoordinate(), fsParams.getScrollingTime());
+                Mouse.getInstance().press(fsParams.getScrollingCoordinate(), fsParams.getScrollingTime() * 1000);
                 Mouse.getInstance().scrollDown(SCROLL_TIMES);
                 FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
                 SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
@@ -70,7 +70,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 Keyboard.getInstance().pasteWithEnter();
                 counter++;
                 if (counter < fsParams.getNoOfGroups()) {
-                    Thread.sleep(fsParams.getSendingTime());
+                    Thread.sleep(fsParams.getSendingTime() * 1000);
                 }
                 if (isCancelled()) {
                     break;
@@ -111,7 +111,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             counter = 0;
             while (counter < fsParams.getNoOfGroups()) {
-                Mouse.getInstance().press(fsParams.getScrollingCoordinate(), fsParams.getScrollingTime());
+                Mouse.getInstance().press(fsParams.getScrollingCoordinate(), fsParams.getScrollingTime() * 1000);
                 Mouse.getInstance().scrollDown(SCROLL_TIMES);
                 Mouse.getInstance().click(fsParams.getImageCoordinate1());
                 Thread.sleep(CLICK_WAITING);
@@ -160,7 +160,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                         SystemClipboard.getInstance().copyFile(f);
                         Keyboard.getInstance().pasteWithEnter();
                         if (i < files.size() - 1) {
-                            Thread.sleep(fsParams.getSendingTime());
+                            Thread.sleep(fsParams.getSendingTime() * 1000);
                         }
                     }
                 } else {
@@ -171,7 +171,7 @@ public class FileSender extends SwingWorker<Void, Void> {
 
                 counter++;
                 if (counter < fsParams.getNoOfGroups()) {
-                    Thread.sleep(fsParams.getSendingTime());
+                    Thread.sleep(fsParams.getSendingTime() * 1000);
                 }
 
             }
@@ -207,7 +207,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 Keyboard.getInstance().down(1);
                 counter++;
                 if (counter < fsParams.getNoOfGroups()) {
-                    Thread.sleep(fsParams.getSendingTime());
+                    Thread.sleep(fsParams.getSendingTime() * 1000);
                 }
                 if (isCancelled()) {
                     break;

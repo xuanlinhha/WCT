@@ -54,7 +54,7 @@ public class TextSender extends SwingWorker<Void, Void> {
             Thread.sleep(SWITCH_TIME);
             counter = 0;
             while (counter < tsParams.getNoOfGroups()) {
-                Mouse.getInstance().press(tsParams.getScrollingCoordinate(), tsParams.getScrollingTime());
+                Mouse.getInstance().press(tsParams.getScrollingCoordinate(), tsParams.getScrollingTime() * 1000);
                 Mouse.getInstance().scrollDown(SCROLL_TIMES);
                 Mouse.getInstance().click(tsParams.getImageCoordinate1());
                 Thread.sleep(CLICK_WAITING);
@@ -90,7 +90,7 @@ public class TextSender extends SwingWorker<Void, Void> {
 
             counter = 0;
             while (counter < tsParams.getNoOfGroups()) {
-                Mouse.getInstance().press(tsParams.getScrollingCoordinate(), tsParams.getScrollingTime());
+                Mouse.getInstance().press(tsParams.getScrollingCoordinate(), tsParams.getScrollingTime() * 1000);
                 Mouse.getInstance().scrollDown(SCROLL_TIMES);
                 Mouse.getInstance().click(tsParams.getImageCoordinate1());
                 Thread.sleep(CLICK_WAITING);
