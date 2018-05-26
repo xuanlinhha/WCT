@@ -111,10 +111,14 @@ public class FileSender extends SwingWorker<Void, Void> {
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             counter = 0;
             while (counter < fsParams.getNoOfGroups()) {
-                Mouse.getInstance().press(fsParams.getScrollingCoordinate(), fsParams.getScrollingTime() * 1000);
-                Mouse.getInstance().scrollDown(SCROLL_TIMES);
-                Mouse.getInstance().click(fsParams.getImageCoordinate1());
-                Thread.sleep(CLICK_WAITING);
+                for (int i = 0; i < fsParams.getScrollingTime(); i++) {
+                    Mouse.getInstance().press(fsParams.getScrollingCoordinate(), 1000L);
+                    if (i == fsParams.getScrollingTime() - 1) {
+                        Mouse.getInstance().scrollDown(SCROLL_TIMES);
+                    }
+                    Mouse.getInstance().click(fsParams.getImageCoordinate1());
+                    Thread.sleep(CLICK_WAITING);
+                }
 
                 // identify group is sent or not
                 boolean isAdded = false;
