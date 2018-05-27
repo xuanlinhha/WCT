@@ -95,7 +95,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             List<Coordinate> coors = new ArrayList<Coordinate>();
             coors.add(fsParams.getImageCoordinate1());
             coors.add(fsParams.getImageCoordinate2());
-            sc.setPositions(coors);
+            sc.setStaticCorners(coors);
             // clear if start from beginning
             if (fsParams.getOptionJComboBox().getSelectedIndex() == 0) { // from beginning
                 sentGroups.clear();
@@ -129,7 +129,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     if (isCancelled()) {
                         break;
                     }
-                    color = sc.getColorData();
+                    color = sc.getStaticColorData();
                     if (sentGroups.contains(color)) {
                         notSendingCounter++;
                         if (notSendingCounter == fsParams.getLimitToStop()) {

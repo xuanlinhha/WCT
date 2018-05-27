@@ -1,4 +1,4 @@
-package wct.main;
+package wct.test;
 
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.*;
