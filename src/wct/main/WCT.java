@@ -1534,6 +1534,8 @@ public class WCT extends javax.swing.JFrame {
     }
 
     private DefaultComboBoxModel loadComboboxModel() {
-        return new DefaultComboBoxModel(new String[]{bundle.getString("from_beginning"), bundle.getString("continue")});
+        String[] model = new String[]{bundle.getString("from_beginning"), bundle.getString("continue")};
+//        System.out.println(model[0] + "; " + model[1]);
+        return new DefaultComboBoxModel(model);
     }
 }
