@@ -1,16 +1,14 @@
 package wct.resourses;
 
 import java.awt.AWTException;
-import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-import javax.imageio.ImageIO;
-import org.apache.commons.codec.digest.DigestUtils;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -18,9 +16,8 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class Screen {
 
-    private int counter = 0;
-    private List<Coordinate> staticCorners;
-    private List<Coordinate> dynPositions;
+    private static final int GRAY_THRESHOLD = 50;
+    private static final double DIFF_THRESHOLD = 0.8;
     private Robot r;
     private static Screen instance;
 
@@ -35,90 +32,71 @@ public class Screen {
         return instance;
     }
 
-    public String getDynColorData() {
-        int shift = dynPositions.get(3).getY() - dynPositions.get(2).getY();
-        int edge = dynPositions.get(4).getY() - dynPositions.get(3).getY();
-        int x0 = dynPositions.get(3).getX();
-        int x1 = x0 + edge;
-        try {
-            int grayY = findGrayY();
-//            System.out.println("grayY="+grayY);
-            int y0 = grayY + shift;
-            int y1 = y0 + edge;
-            Coordinate c1 = new Coordinate(x0, y0);
-            Coordinate c2 = new Coordinate(x1, y1);
-            return getColorData(c1, c2);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return "";
-    }
-
-    private int findGrayY() throws AWTException {
-        int x0 = dynPositions.get(0).getX();
-        int y0 = dynPositions.get(0).getY();
-        int y1 = dynPositions.get(1).getY();
-        Color c = r.getPixelColor(x0, y0);
-        int grayY = y0;
-        for (int i = dynPositions.get(0).getY() + 1; i <= y1; i++) {
-            Color tmp = r.getPixelColor(x0, i);
-//            System.out.println("[" + tmp.getRed() + "," + tmp.getGreen() + "," + tmp.getBlue() + "]");
-            if (!isSame(c, tmp)) {
-                grayY = i;
+    public BufferedImage captureAvatar(Color selectedColor, Coordinate c1, Coordinate c2) throws Exception {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Robot r = new Robot();
+        int len = c2.getX() - c1.getX();
+        int regionX = c2.getX() - len / 6;
+        int regionY = len;
+        int regionWidth = 7 * len / 6;
+        int regionHeigth = screenSize.height - len;
+        // capture region
+        BufferedImage regionImg = r.createScreenCapture(new Rectangle(regionX, regionY, regionWidth, regionHeigth));
+        // extract selected image
+        int tmpY = 0;
+        while (tmpY < regionImg.getHeight()) {
+            int clr = regionImg.getRGB(0, tmpY);
+            int tmpRed = (clr & 0x00ff0000) >> 16;
+            int tmpGreen = (clr & 0x0000ff00) >> 8;
+            int tmpBlue = clr & 0x000000ff;
+            int diff = Math.abs(tmpRed - selectedColor.getRed())
+                    + Math.abs(tmpGreen - selectedColor.getGreen())
+                    + Math.abs(tmpBlue - selectedColor.getBlue());
+            if (diff < GRAY_THRESHOLD) {
                 break;
+            } else {
+                tmpY++;
             }
         }
-        return grayY;
-    }
 
-    private boolean isSame(Color c1, Color c2) {
-        return (c1.getRed() == c2.getRed());
-//        return c1.getRGB() == c2.getRGB();
-    }
-
-    public String getStaticColorData() {
-        return getColorData(staticCorners.get(0), staticCorners.get(1));
-    }
-
-    private String getColorData(Coordinate p1, Coordinate p2) {
-        try {
-            BufferedImage image = r.createScreenCapture(new Rectangle(p1.getX(), p1.getY(), Math.abs(p2.getX() - p1.getX()), Math.abs(p2.getY() - p1.getY())));
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(image, "jpg", baos);
-            //
-            ImageIO.write(image, "jpg", new File("img" + counter + ".jpg"));
-            counter++;
-
-            byte[] bytes = baos.toByteArray();
-            return DigestUtils.sha256Hex(bytes);
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        int imgX = len / 6;
+        int imgY = tmpY + len / 3;
+        // if cannot find any selected 
+        if (imgY + len > regionImg.getHeight()) {
+            return null;
+        } else {
+            return regionImg.getSubimage(imgX, imgY, len, len);
         }
-        return "";
     }
 
-    public List<Coordinate> getStaticCorners() {
-        return staticCorners;
+    public Map<String, Integer> extractData(BufferedImage img) {
+        Map<String, Integer> data = new HashMap<String, Integer>();
+        for (int i = 0; i < img.getWidth(); i++) {
+            for (int j = 0; j < img.getHeight(); j++) {
+                int clr = img.getRGB(i, j);
+                int red = (clr & 0x00ff0000) >> 16;
+                int green = (clr & 0x0000ff00) >> 8;
+                int blue = clr & 0x000000ff;
+                String key = Integer.toString(red) + Integer.toString(green) + Integer.toString(blue);
+                data.put(key, data.containsKey(key) ? (data.get(key) + 1) : 1);
+            }
+        }
+        return data;
     }
 
-    public void setStaticCorners(List<Coordinate> staticCorners) {
-        this.staticCorners = staticCorners;
-    }
-
-    public List<Coordinate> getDynPositions() {
-        return dynPositions;
-    }
-
-    public void setDynPositions(List<Coordinate> dynPositions) {
-        this.dynPositions = dynPositions;
-    }
-
-    public Robot getR() {
-        return r;
-    }
-
-    public void setR(Robot r) {
-        this.r = r;
+    public boolean isSame(Map<String, Integer> data1, Map<String, Integer> data2) {
+        double count = 0;
+        for (String s : data2.keySet()) {
+            if (data1.containsKey(s)) {
+                count += (int) Math.min(data1.get(s), data2.get(s));
+            }
+        }
+        double total = 0;
+        for (int i : data1.values()) {
+            total += i;
+        }
+        DecimalFormat df = new DecimalFormat("#.##");
+        return (Double.valueOf(df.format(count / total)) >= DIFF_THRESHOLD);
     }
 
 }

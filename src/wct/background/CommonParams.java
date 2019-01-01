@@ -1,8 +1,8 @@
 package wct.background;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import wct.resourses.Color;
 import wct.resourses.Coordinate;
 
 /**
@@ -12,14 +12,10 @@ import wct.resourses.Coordinate;
 public class CommonParams {
 
     protected Coordinate onTaskbarCoordinate;
-    protected Coordinate scrollingCoordinate;
+    protected Color selectedColor;
     protected Coordinate imageCoordinate1;
     protected Coordinate imageCoordinate2;
-    protected Coordinate secondLastCoordinate;
-    private long scrollingTime;
-    private int limitToStop;
     private JComboBox optionJComboBox;
-    private JCheckBox imageRecognitionJCheckBox;
     private JButton startJButton;
     private JButton stopJButton;
 
@@ -31,12 +27,12 @@ public class CommonParams {
         this.onTaskbarCoordinate = onTaskbarCoordinate;
     }
 
-    public Coordinate getScrollingCoordinate() {
-        return scrollingCoordinate;
+    public Color getSelectedColor() {
+        return selectedColor;
     }
 
-    public void setScrollingCoordinate(Coordinate scrollingCoordinate) {
-        this.scrollingCoordinate = scrollingCoordinate;
+    public void setSelectedColor(Color selectedColor) {
+        this.selectedColor = selectedColor;
     }
 
     public Coordinate getImageCoordinate1() {
@@ -55,44 +51,12 @@ public class CommonParams {
         this.imageCoordinate2 = imageCoordinate2;
     }
 
-    public Coordinate getSecondLastCoordinate() {
-        return secondLastCoordinate;
-    }
-
-    public void setSecondLastCoordinate(Coordinate secondLastCoordinate) {
-        this.secondLastCoordinate = secondLastCoordinate;
-    }
-
-    public long getScrollingTime() {
-        return scrollingTime;
-    }
-
-    public void setScrollingTime(long scrollingTime) {
-        this.scrollingTime = scrollingTime;
-    }
-
-    public int getLimitToStop() {
-        return limitToStop;
-    }
-
-    public void setLimitToStop(int limitToStop) {
-        this.limitToStop = limitToStop;
-    }
-
     public JComboBox getOptionJComboBox() {
         return optionJComboBox;
     }
 
     public void setOptionJComboBox(JComboBox optionJComboBox) {
         this.optionJComboBox = optionJComboBox;
-    }
-
-    public JCheckBox getImageRecognitionJCheckBox() {
-        return imageRecognitionJCheckBox;
-    }
-
-    public void setImageRecognitionJCheckBox(JCheckBox imageRecognitionJCheckBox) {
-        this.imageRecognitionJCheckBox = imageRecognitionJCheckBox;
     }
 
     public JButton getStartJButton() {

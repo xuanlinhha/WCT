@@ -1,6 +1,7 @@
 package wct.background;
 
 import lc.kra.system.keyboard.GlobalKeyboardHook;
+import wct.resourses.Color;
 
 /**
  *
@@ -10,6 +11,7 @@ public class FileSenderParams extends CommonParams {
 
     private String inputFolder;
     private int noOfGroups;
+    private Color selectedColor;
     private long sendingTime;
     private boolean oneByOne;
     private boolean shutdownAfterFinish;
@@ -29,6 +31,14 @@ public class FileSenderParams extends CommonParams {
 
     public void setNoOfGroups(int noOfGroups) {
         this.noOfGroups = noOfGroups;
+    }
+
+    public Color getSelectedColor() {
+        return selectedColor;
+    }
+
+    public void setSelectedColor(Color selectedColor) {
+        this.selectedColor = selectedColor;
     }
 
     public long getSendingTime() {
