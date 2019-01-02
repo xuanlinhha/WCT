@@ -66,6 +66,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     break;
                 }
                 BufferedImage avatar = Screen.getInstance().captureAvatar(fsParams.getSelectedColor(), fsParams.getImageCoordinate1(), fsParams.getImageCoordinate2());
+
                 if (avatar != null) {
                     Map<String, Integer> current = Screen.getInstance().extractData(avatar);
                     if (prev != null && Screen.getInstance().isSame(current, prev)) {
@@ -98,10 +99,10 @@ public class FileSender extends SwingWorker<Void, Void> {
                                 Keyboard.getInstance().pasteWithEnter();
                             }
                             counter++;
+                            sentGroups.add(current);
                             if (counter < fsParams.getNoOfGroups()) {
                                 Thread.sleep(fsParams.getSendingTime() * 1000);
                             }
-                            sentGroups.add(current);
                         }
                     }
                 }
@@ -122,6 +123,7 @@ public class FileSender extends SwingWorker<Void, Void> {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
+            System.out.println(sentGroups.size() + " sent!");
             TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
             fsParams.getOptionJComboBox().setSelectedIndex(1);
         }

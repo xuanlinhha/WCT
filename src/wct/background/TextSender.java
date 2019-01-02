@@ -1,16 +1,15 @@
 package wct.background;
 
+import java.awt.image.BufferedImage;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import wct.fileprocessing.TextReaderWriter;
 import wct.multilanguage.LanguageHandler;
-import wct.resourses.Coordinate;
 import wct.resourses.Keyboard;
 import wct.resourses.Mouse;
 import wct.resourses.Screen;
@@ -30,141 +29,78 @@ public class TextSender extends SwingWorker<Void, Void> {
     private static final String SENT_TEXT_GROUPS = "sent_groups_TEXT.txt";
     private TextSenderParams tsParams;
     private int counter;
-    private static Set<String> sentGroups = new HashSet<String>();
+    private static List<Map<String, Integer>> sentGroups = new ArrayList<Map<String, Integer>>();
 
     @Override
     protected Void doInBackground() {
         tsParams.getStartJButton().setEnabled(false);
         tsParams.getStopJButton().setEnabled(true);
-//        if (tsParams.getImageRecognitionJCheckBox().isSelected()) {
-//            bottomUpSendWithImageRecognition();
-//        } else {
-//            bottomUpSend();
-//        }
+        send();
         tsParams.getStartJButton().setEnabled(true);
         tsParams.getStopJButton().setEnabled(false);
         return null;
     }
 
-//    private void bottomUpSend() {
-//        ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
-//        try {
-//            Mouse.getInstance().click(tsParams.getOnTaskbarCoordinate());
-//            SystemClipboard.getInstance().copyString(tsParams.getText());
-//            Thread.sleep(SWITCH_TIME);
-//            counter = 0;
-//            while (counter < tsParams.getNoOfGroups()) {
-//                Mouse.getInstance().press(tsParams.getScrollingCoordinate(), tsParams.getScrollingTime() * 1000);
-//                Mouse.getInstance().scrollDown(SCROLL_TIMES);
-//                Mouse.getInstance().click(tsParams.getImageCoordinate1());
-//                Thread.sleep(CLICK_WAITING);
-//                Keyboard.getInstance().pasteWithEnter();
-//                counter++;
-//                if (isCancelled()) {
-//                    break;
-//                }
-//            }
-//            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), tsParams.getNoOfGroups()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
-//    private void bottomUpSendWithImageRecognition() {
-//        ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
-//        try {
-//            Screen sc = Screen.getInstance();
-//            List<Coordinate> coors = new ArrayList<Coordinate>();
-//            coors.add(tsParams.getImageCoordinate1());
-//            coors.add(tsParams.getImageCoordinate2());
-//            sc.setStaticCorners(coors);
-//            // clear if start from beginning
-//            if (tsParams.getOptionJComboBox().getSelectedIndex() == 0) { // from beginning
-//                sentGroups.clear();
-//            } else {
-//                sentGroups = TextReaderWriter.loadSentFileGroups(SENT_TEXT_GROUPS);
-//            }
-//
-//            // click to WeChat app
-//            Mouse.getInstance().click(tsParams.getOnTaskbarCoordinate());
-//
-//            counter = 0;
-//            while (counter < tsParams.getNoOfGroups()) {
-//                Mouse.getInstance().press(tsParams.getScrollingCoordinate(), tsParams.getScrollingTime() * 1000);
-//                Mouse.getInstance().scrollDown(SCROLL_TIMES);
-//                Mouse.getInstance().click(tsParams.getImageCoordinate1());
-//                Thread.sleep(CLICK_WAITING);
-//                // identify group is sent or not
-//                boolean isAdded = false;
-//                boolean exceedLimit = false;
-//                int notSendingCounter = 0;
-//                String color = "";
-//                while (true) {
-//                    if (isCancelled()) {
-//                        break;
-//                    }
-//                    color = sc.getStaticColorData();
-//                    if (sentGroups.contains(color)) {
-//                        notSendingCounter++;
-//                        if (notSendingCounter == tsParams.getLimitToStop()) {
-//                            exceedLimit = true;
-//                            break;
-//                        }
-//                        SystemClipboard.getInstance().copyString("-");
-//                        Keyboard.getInstance().pasteWithoutEnter();
-//                        Mouse.getInstance().click(tsParams.getSecondLastCoordinate());
-//                        Thread.sleep(GO_TOP_WAITING);
-//                    } else {
-//                        sentGroups.add(color);
-//                        isAdded = true;
-//                        break;
-//                    }
-//                }
-//                if (isCancelled()) {
-//                    if (isAdded) {
-//                        sentGroups.remove(color);
-//                    }
-//                    break;
-//                }
-//                if (exceedLimit) {
-//                    break;
-//                }
-//                // send text
-//                SystemClipboard.getInstance().copyString(tsParams.getText());
-//                Keyboard.getInstance().pasteWithEnter();
-//                counter++;
-//            }
-//            tsParams.getKeyboardHook().shutdownHook();
-//            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        } finally {
-//            TextReaderWriter.saveSentFileGroups(SENT_TEXT_GROUPS, sentGroups);
-//            tsParams.getOptionJComboBox().setSelectedIndex(1);
-//        }
-//    }
-
-    private void topdownSend() {
+    private void send() {
         ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
         try {
+            // clear if start from beginning
+            if (tsParams.getOptionJComboBox().getSelectedIndex() == 0) { // from beginning
+                sentGroups.clear();
+            } else {
+                sentGroups = TextReaderWriter.loadSentFileGroups(SENT_TEXT_GROUPS);
+            }
+
+            // click to WeChat app
             Mouse.getInstance().click(tsParams.getOnTaskbarCoordinate());
-            SystemClipboard.getInstance().copyString(tsParams.getText());
             Thread.sleep(SWITCH_TIME);
+
+            // run
+            Map<String, Integer> prev = null;
+            boolean isDown = true;
             counter = 0;
             while (counter < tsParams.getNoOfGroups()) {
-                Keyboard.getInstance().pasteWithEnter();
-                Thread.sleep(PAUSE_TIME);
-                Keyboard.getInstance().down(1);
-                Thread.sleep(PAUSE_TIME);
-                counter++;
                 if (isCancelled()) {
                     break;
                 }
+                BufferedImage avatar = Screen.getInstance().captureAvatar(tsParams.getSelectedColor(), tsParams.getImageCoordinate1(), tsParams.getImageCoordinate2());
+
+                if (avatar != null) {
+                    Map<String, Integer> current = Screen.getInstance().extractData(avatar);
+                    if (prev != null && Screen.getInstance().isSame(current, prev)) {
+                        break;
+                    } else {
+                        // check if the new avatar has been processed or not
+                        boolean exist = false;
+                        for (Map<String, Integer> m : sentGroups) {
+                            if (Screen.getInstance().isSame(current, m)) {
+                                exist = true;
+                                break;
+                            }
+                        }
+                        if (!exist) {
+                            // send text
+                            SystemClipboard.getInstance().copyString(tsParams.getText());
+                            Keyboard.getInstance().pasteWithEnter();
+                            counter++;
+                            sentGroups.add(current);
+                        }
+                    }
+                }
+                if (isDown) {
+                    Keyboard.getInstance().down(1);
+                } else {
+                    Keyboard.getInstance().up(1);
+                }
+                Thread.sleep(1000);
             }
             tsParams.getKeyboardHook().shutdownHook();
-            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), tsParams.getNoOfGroups()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            TextReaderWriter.saveSentFileGroups(SENT_TEXT_GROUPS, sentGroups);
+            tsParams.getOptionJComboBox().setSelectedIndex(1);
         }
     }
 
@@ -184,11 +120,11 @@ public class TextSender extends SwingWorker<Void, Void> {
         this.counter = counter;
     }
 
-    public static Set<String> getSentGroups() {
+    public static List<Map<String, Integer>> getSentGroups() {
         return sentGroups;
     }
 
-    public static void setSentGroups(Set<String> sentGroups) {
+    public static void setSentGroups(List<Map<String, Integer>> sentGroups) {
         TextSender.sentGroups = sentGroups;
     }
 

@@ -971,8 +971,8 @@ public class WCT extends javax.swing.JFrame {
             String[] selectedColorComps = jTextField3.getText().split(" ");
             Color selectedColor = new Color();
             selectedColor.setRed(Integer.parseInt(selectedColorComps[0]));
-            selectedColor.setRed(Integer.parseInt(selectedColorComps[1]));
-            selectedColor.setRed(Integer.parseInt(selectedColorComps[2]));
+            selectedColor.setGreen(Integer.parseInt(selectedColorComps[1]));
+            selectedColor.setBlue(Integer.parseInt(selectedColorComps[2]));
             commonParams.setSelectedColor(selectedColor);
         }
         // image corner 1
@@ -1008,7 +1008,6 @@ public class WCT extends javax.swing.JFrame {
     private void stopTextSender() {
         if (textSender != null) {
             if (textSender.cancel(true)) {
-
                 JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), textSender.getCounter()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
                 textSender = null;
             }

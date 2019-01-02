@@ -6,9 +6,13 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -34,14 +38,14 @@ public class Screen {
 
     public BufferedImage captureAvatar(Color selectedColor, Coordinate c1, Coordinate c2) throws Exception {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Robot r = new Robot();
         int len = c2.getX() - c1.getX();
-        int regionX = c2.getX() - len / 6;
+        int regionX = c1.getX() - len / 6;
         int regionY = len;
         int regionWidth = 7 * len / 6;
         int regionHeigth = screenSize.height - len;
         // capture region
         BufferedImage regionImg = r.createScreenCapture(new Rectangle(regionX, regionY, regionWidth, regionHeigth));
+
         // extract selected image
         int tmpY = 0;
         while (tmpY < regionImg.getHeight()) {
@@ -49,9 +53,7 @@ public class Screen {
             int tmpRed = (clr & 0x00ff0000) >> 16;
             int tmpGreen = (clr & 0x0000ff00) >> 8;
             int tmpBlue = clr & 0x000000ff;
-            int diff = Math.abs(tmpRed - selectedColor.getRed())
-                    + Math.abs(tmpGreen - selectedColor.getGreen())
-                    + Math.abs(tmpBlue - selectedColor.getBlue());
+            int diff = Math.abs(tmpRed - selectedColor.getRed()) + Math.abs(tmpGreen - selectedColor.getGreen()) + Math.abs(tmpBlue - selectedColor.getBlue());
             if (diff < GRAY_THRESHOLD) {
                 break;
             } else {
@@ -97,6 +99,13 @@ public class Screen {
         }
         DecimalFormat df = new DecimalFormat("#.##");
         return (Double.valueOf(df.format(count / total)) >= DIFF_THRESHOLD);
+    }
+
+    public void saveImg(BufferedImage image, String name) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "jpg", baos);
+        ImageIO.write(image, "jpg", baos);
+        ImageIO.write(image, "jpg", new File(name + ".jpg"));
     }
 
 }
