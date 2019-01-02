@@ -58,33 +58,41 @@ public class TextSender extends SwingWorker<Void, Void> {
             // run
             Map<String, Integer> prev = null;
             boolean isDown = true;
+            int stop = 0;
             counter = 0;
             while (counter < tsParams.getNoOfGroups()) {
                 if (isCancelled()) {
                     break;
                 }
+                if (stop == 2) {
+                    break;
+                }
                 BufferedImage avatar = Screen.getInstance().captureAvatar(tsParams.getSelectedColor(), tsParams.getImageCoordinate1(), tsParams.getImageCoordinate2());
-
                 if (avatar != null) {
                     Map<String, Integer> current = Screen.getInstance().extractData(avatar);
-                    if (prev != null && Screen.getInstance().isSame(current, prev)) {
-                        break;
+                    boolean exist = false;
+                    for (Map<String, Integer> m : sentGroups) {
+                        if (Screen.getInstance().isSame(current, m)) {
+                            exist = true;
+                            break;
+                        }
+                    }
+                    if (exist) {
+                        if (prev != null && Screen.getInstance().isSame(current, prev)) {
+                            // toggle
+                            isDown = !isDown;
+                            stop++;
+                        } else {
+                            // save to check the next one
+                            prev = current;
+                        }
                     } else {
-                        // check if the new avatar has been processed or not
-                        boolean exist = false;
-                        for (Map<String, Integer> m : sentGroups) {
-                            if (Screen.getInstance().isSame(current, m)) {
-                                exist = true;
-                                break;
-                            }
-                        }
-                        if (!exist) {
-                            // send text
-                            SystemClipboard.getInstance().copyString(tsParams.getText());
-                            Keyboard.getInstance().pasteWithEnter();
-                            counter++;
-                            sentGroups.add(current);
-                        }
+                        // send text
+                        SystemClipboard.getInstance().copyString(tsParams.getText());
+                        System.out.println(tsParams.getText());
+                        Keyboard.getInstance().pasteWithEnter();
+                        counter++;
+                        sentGroups.add(current);
                     }
                 }
                 if (isDown) {

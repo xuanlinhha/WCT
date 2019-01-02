@@ -59,50 +59,61 @@ public class FileSender extends SwingWorker<Void, Void> {
             // run
             Map<String, Integer> prev = null;
             boolean isDown = true;
+            int stop = 0;
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             counter = 0;
             while (counter < fsParams.getNoOfGroups()) {
                 if (isCancelled()) {
                     break;
                 }
+                if (stop == 2) {
+                    break;
+                }
                 BufferedImage avatar = Screen.getInstance().captureAvatar(fsParams.getSelectedColor(), fsParams.getImageCoordinate1(), fsParams.getImageCoordinate2());
 
                 if (avatar != null) {
                     Map<String, Integer> current = Screen.getInstance().extractData(avatar);
-                    if (prev != null && Screen.getInstance().isSame(current, prev)) {
-                        break;
-                    } else {
-                        // check if the new avatar has been processed or not
-                        boolean exist = false;
-                        for (Map<String, Integer> m : sentGroups) {
-                            if (Screen.getInstance().isSame(current, m)) {
-                                exist = true;
-                                break;
-                            }
+                    // check if the new avatar has been processed or not
+                    boolean exist = false;
+                    for (Map<String, Integer> m : sentGroups) {
+                        if (Screen.getInstance().isSame(current, m)) {
+                            exist = true;
+                            break;
                         }
-                        if (!exist) {
-                            // send video
-                            if (fsParams.isOneByOne()) {
-                                List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
-                                for (int i = 0; i < files.size(); i++) {
-                                    File f = files.get(i);
-                                    FileProcessor.changeFileHashcode(f, randString + counter);
-                                    SystemClipboard.getInstance().copyFile(f);
-                                    Keyboard.getInstance().pasteWithEnter();
-                                    if (i < files.size() - 1) {
-                                        Thread.sleep(fsParams.getSendingTime() * 1000);
-                                    }
-                                }
-                            } else {
-                                FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
-                                SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
+                    }
+                    if (exist) {
+                        if (prev != null && Screen.getInstance().isSame(current, prev)) {
+                            // toggle
+                            isDown = !isDown;
+                            stop++;
+                        } else {
+                            // save to check the next one
+                            prev = current;
+                        }
+                    } else {
+
+                        // send video
+                        if (fsParams.isOneByOne()) {
+                            List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
+                            for (int i = 0; i < files.size(); i++) {
+                                File f = files.get(i);
+                                FileProcessor.changeFileHashcode(f, randString + counter);
+                                SystemClipboard.getInstance().copyFile(f);
                                 Keyboard.getInstance().pasteWithEnter();
+                                if (i < files.size() - 1) {
+                                    Thread.sleep(fsParams.getSendingTime() * 1000);
+                                }
                             }
-                            counter++;
-                            sentGroups.add(current);
-                            if (counter < fsParams.getNoOfGroups()) {
-                                Thread.sleep(fsParams.getSendingTime() * 1000);
-                            }
+                            System.out.println("Sent");
+                        } else {
+                            FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
+                            SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
+                            Keyboard.getInstance().pasteWithEnter();
+                        }
+                        counter++;
+                        sentGroups.add(current);
+                        if (counter < fsParams.getNoOfGroups()) {
+                            Thread.sleep(fsParams.getSendingTime() * 1000);
                         }
                     }
                 }
@@ -123,7 +134,6 @@ public class FileSender extends SwingWorker<Void, Void> {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            System.out.println(sentGroups.size() + " sent!");
             TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
             fsParams.getOptionJComboBox().setSelectedIndex(1);
         }
