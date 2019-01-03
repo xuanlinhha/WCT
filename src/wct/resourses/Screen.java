@@ -11,8 +11,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
+import wct.background.FileSenderParams;
 
 /**
  *
@@ -34,6 +36,24 @@ public class Screen {
             instance.r = new Robot();
         }
         return instance;
+    }
+
+    public Coordinate getFirstUnsentGroup(FileSenderParams fsParams, List<Map<String, Integer>> sentGroups) throws IOException {
+        Coordinate coor = new Coordinate();
+        BufferedImage region = captureRegion(fsParams.getImageCoordinate1(), fsParams.getImageCoordinate2());
+        saveImg(region, "tmp");
+        return null;
+    }
+
+    public BufferedImage captureRegion(Coordinate c1, Coordinate c2) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int len = c2.getX() - c1.getX();
+        int regionX = c1.getX() - len / 6;
+        int regionY = len;
+        int regionWidth = 7 * len / 6;
+        int regionHeigth = screenSize.height - len;
+        BufferedImage regionImg = r.createScreenCapture(new Rectangle(regionX, regionY, regionWidth, regionHeigth));
+        return regionImg;
     }
 
     public BufferedImage captureAvatar(Color selectedColor, Coordinate c1, Coordinate c2) throws Exception {

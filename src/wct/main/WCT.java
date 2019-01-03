@@ -1,11 +1,9 @@
 package wct.main;
 
-import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
-import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.io.File;
@@ -33,7 +31,6 @@ import wct.background.TextSenderParams;
 import wct.configuration.Configuration;
 import wct.configuration.ConfigurationHandler;
 import wct.multilanguage.LanguageHandler;
-import wct.resourses.Color;
 import wct.resourses.Coordinate;
 
 /**
@@ -866,7 +863,7 @@ public class WCT extends javax.swing.JFrame {
         config.setInputFolder(jTextField6.getText());
         config.setOutputFolder(jTextField7.getText());
         config.setOnTaskbarCoordinate(jTextField17.getText());
-        config.setSelectedColor(jTextField3.getText());
+        config.setScrollingCoordinate(jTextField3.getText());
         config.setImageCoordinate1(jTextField5.getText());
         config.setImageCoordinate2(jTextField8.getText());
         try {
@@ -965,15 +962,14 @@ public class WCT extends javax.swing.JFrame {
         }
         // scrolling coordinate
         if (StringUtils.isBlank(jTextField3.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("no_selected_color"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("no_scrolling_coordinate"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
             String[] selectedColorComps = jTextField3.getText().split(" ");
-            Color selectedColor = new Color();
-            selectedColor.setRed(Integer.parseInt(selectedColorComps[0]));
-            selectedColor.setGreen(Integer.parseInt(selectedColorComps[1]));
-            selectedColor.setBlue(Integer.parseInt(selectedColorComps[2]));
-            commonParams.setSelectedColor(selectedColor);
+            Coordinate scrollingCoordinate = new Coordinate();
+            scrollingCoordinate.setX(Integer.parseInt(selectedColorComps[0]));
+            scrollingCoordinate.setY(Integer.parseInt(selectedColorComps[1]));
+            commonParams.setScrollingCoordinate(scrollingCoordinate);
         }
         // image corner 1
         if (StringUtils.isBlank(jTextField5.getText())) {
@@ -1326,7 +1322,7 @@ public class WCT extends javax.swing.JFrame {
             jTextField6.setText(config.getInputFolder());
             jTextField7.setText(config.getOutputFolder());
             jTextField17.setText(config.getOnTaskbarCoordinate());
-            jTextField3.setText(config.getSelectedColor());
+            jTextField3.setText(config.getScrollingCoordinate());
             jTextField5.setText(config.getImageCoordinate1());
             jTextField8.setText(config.getImageCoordinate2());
         }
@@ -1346,21 +1342,8 @@ public class WCT extends javax.swing.JFrame {
                     if (activeJTextField != null) {
                         PointerInfo pi = MouseInfo.getPointerInfo();
                         Point p = pi.getLocation();
-                        if (activeJTextField == jTextField3) {
-                            try {
-                                int color = (new Robot()).getPixelColor(p.x, p.y).getRGB();
-                                int red = (color & 0x00ff0000) >> 16;
-                                int green = (color & 0x0000ff00) >> 8;
-                                int blue = color & 0x000000ff;
-                                String s = String.valueOf(red) + " " + String.valueOf(green) + " " + String.valueOf(blue);
-                                activeJTextField.setText(s);
-                            } catch (AWTException ex) {
-                                ex.printStackTrace();
-                            }
-                        } else {
-                            String s = p.x + " " + p.y;
-                            activeJTextField.setText(s);
-                        }
+                        String s = p.x + " " + p.y;
+                        activeJTextField.setText(s);
                     }
                 }
             }

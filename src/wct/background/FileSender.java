@@ -1,6 +1,5 @@
 package wct.background;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -13,6 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import wct.fileprocessing.FileProcessor;
 import wct.fileprocessing.TextReaderWriter;
 import wct.multilanguage.LanguageHandler;
+import wct.resourses.Coordinate;
 import wct.resourses.Keyboard;
 import wct.resourses.Mouse;
 import wct.resourses.Screen;
@@ -57,77 +57,49 @@ public class FileSender extends SwingWorker<Void, Void> {
             Thread.sleep(SWITCH_TIME);
 
             // run
-            Map<String, Integer> prev = null;
-            boolean isDown = true;
-            int stop = 0;
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             counter = 0;
+            int loop = 0;
             while (counter < fsParams.getNoOfGroups()) {
                 if (isCancelled()) {
                     break;
                 }
-                if (stop == 2) {
-                    break;
-                }
-                BufferedImage avatar = Screen.getInstance().captureAvatar(fsParams.getSelectedColor(), fsParams.getImageCoordinate1(), fsParams.getImageCoordinate2());
+                // find unsent group
+                Coordinate unsentGroup = Screen.getInstance().getFirstUnsentGroup(fsParams, sentGroups);
 
-                if (avatar != null) {
-                    Map<String, Integer> current = Screen.getInstance().extractData(avatar);
-                    // check if the new avatar has been processed or not
-                    boolean exist = false;
-                    for (Map<String, Integer> m : sentGroups) {
-                        if (Screen.getInstance().isSame(current, m)) {
-                            exist = true;
-                            break;
-                        }
+                if (unsentGroup == null) {
+                    Mouse.getInstance().click(fsParams.getScrollingCoordinate());
+                    loop++;
+                    if (loop == 50) {
+                        break;
                     }
-                    if (exist) {
-                        if (prev != null && Screen.getInstance().isSame(current, prev)) {
-                            // toggle
-                            isDown = !isDown;
-                            stop++;
-                        } else {
-                            // save to check the next one
-                            prev = current;
-                        }
-                    } else {
-
-                        // send video
-                        if (fsParams.isOneByOne()) {
-                            List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
-                            for (int i = 0; i < files.size(); i++) {
-                                File f = files.get(i);
-                                FileProcessor.changeFileHashcode(f, randString + counter);
-                                SystemClipboard.getInstance().copyFile(f);
-                                Keyboard.getInstance().pasteWithEnter();
-                                if (i < files.size() - 1) {
-                                    Thread.sleep(fsParams.getSendingTime() * 1000);
-                                }
-                            }
-                            System.out.println("Sent");
-                        } else {
-                            FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
-                            SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
-                            Keyboard.getInstance().pasteWithEnter();
-                        }
-                        counter++;
-                        sentGroups.add(current);
-                        if (counter < fsParams.getNoOfGroups()) {
-                            Thread.sleep(fsParams.getSendingTime() * 1000);
-                        }
-                    }
-                }
-                if (isDown) {
-                    Keyboard.getInstance().down(1);
+                    Thread.sleep(500);
                 } else {
-                    Keyboard.getInstance().up(1);
+                    Mouse.getInstance().click(unsentGroup);
+                    if (fsParams.isOneByOne()) {
+                        List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
+                        for (int i = 0; i < files.size(); i++) {
+                            File f = files.get(i);
+                            FileProcessor.changeFileHashcode(f, randString + counter);
+                            SystemClipboard.getInstance().copyFile(f);
+                            Keyboard.getInstance().pasteWithEnter();
+                            if (i < files.size() - 1) {
+                                Thread.sleep(fsParams.getSendingTime() * 1000);
+                            }
+                        }
+                        System.out.println("Sent");
+                    } else {
+                        FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
+                        SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
+                        Keyboard.getInstance().pasteWithEnter();
+                    }
+                    counter++;
                 }
-                Thread.sleep(1000);
             }
             // reset hook
             fsParams.getKeyboardHook().shutdownHook();
             if (fsParams.isShutdownAfterFinish() && !isCancelled()) {
-                String shutdownCommand = "shutdown.exe -s -t 60";
+                String shutdownCommand = "shutdown.exe -s -t 180";
                 Runtime.getRuntime().exec(shutdownCommand);
             }
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);

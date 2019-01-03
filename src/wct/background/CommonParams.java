@@ -2,7 +2,6 @@ package wct.background;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import wct.resourses.Color;
 import wct.resourses.Coordinate;
 
 /**
@@ -12,7 +11,7 @@ import wct.resourses.Coordinate;
 public class CommonParams {
 
     protected Coordinate onTaskbarCoordinate;
-    protected Color selectedColor;
+    protected Coordinate scrollingCoordinate;
     protected Coordinate imageCoordinate1;
     protected Coordinate imageCoordinate2;
     private JComboBox optionJComboBox;
@@ -27,12 +26,12 @@ public class CommonParams {
         this.onTaskbarCoordinate = onTaskbarCoordinate;
     }
 
-    public Color getSelectedColor() {
-        return selectedColor;
+    public Coordinate getScrollingCoordinate() {
+        return scrollingCoordinate;
     }
 
-    public void setSelectedColor(Color selectedColor) {
-        this.selectedColor = selectedColor;
+    public void setScrollingCoordinate(Coordinate scrollingCoordinate) {
+        this.scrollingCoordinate = scrollingCoordinate;
     }
 
     public Coordinate getImageCoordinate1() {

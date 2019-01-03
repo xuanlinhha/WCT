@@ -64,43 +64,7 @@ public class TextSender extends SwingWorker<Void, Void> {
                 if (isCancelled()) {
                     break;
                 }
-                if (stop == 2) {
-                    break;
-                }
-                BufferedImage avatar = Screen.getInstance().captureAvatar(tsParams.getSelectedColor(), tsParams.getImageCoordinate1(), tsParams.getImageCoordinate2());
-                if (avatar != null) {
-                    Map<String, Integer> current = Screen.getInstance().extractData(avatar);
-                    boolean exist = false;
-                    for (Map<String, Integer> m : sentGroups) {
-                        if (Screen.getInstance().isSame(current, m)) {
-                            exist = true;
-                            break;
-                        }
-                    }
-                    if (exist) {
-                        if (prev != null && Screen.getInstance().isSame(current, prev)) {
-                            // toggle
-                            isDown = !isDown;
-                            stop++;
-                        } else {
-                            // save to check the next one
-                            prev = current;
-                        }
-                    } else {
-                        // send text
-                        SystemClipboard.getInstance().copyString(tsParams.getText());
-                        System.out.println(tsParams.getText());
-                        Keyboard.getInstance().pasteWithEnter();
-                        counter++;
-                        sentGroups.add(current);
-                    }
-                }
-                if (isDown) {
-                    Keyboard.getInstance().down(1);
-                } else {
-                    Keyboard.getInstance().up(1);
-                }
-                Thread.sleep(1000);
+                
             }
             tsParams.getKeyboardHook().shutdownHook();
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);

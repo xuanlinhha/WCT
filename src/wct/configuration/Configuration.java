@@ -9,7 +9,7 @@ public class Configuration {
     private String inputFolder;
     private String outputFolder;
     private String onTaskbarCoordinate;
-    private String selectedColor;
+    private String scrollingCoordinate;
     private String imageCoordinate1;
     private String imageCoordinate2;
 
@@ -37,12 +37,12 @@ public class Configuration {
         this.onTaskbarCoordinate = onTaskbarCoordinate;
     }
 
-    public String getSelectedColor() {
-        return selectedColor;
+    public String getScrollingCoordinate() {
+        return scrollingCoordinate;
     }
 
-    public void setSelectedColor(String selectedColor) {
-        this.selectedColor = selectedColor;
+    public void setScrollingCoordinate(String scrollingCoordinate) {
+        this.scrollingCoordinate = scrollingCoordinate;
     }
 
     public String getImageCoordinate1() {
