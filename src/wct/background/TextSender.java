@@ -1,6 +1,5 @@
 package wct.background;
 
-import java.awt.image.BufferedImage;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import wct.fileprocessing.TextReaderWriter;
 import wct.multilanguage.LanguageHandler;
+import wct.resourses.Coordinate;
 import wct.resourses.Keyboard;
 import wct.resourses.Mouse;
 import wct.resourses.Screen;
@@ -22,10 +22,6 @@ import wct.resourses.SystemClipboard;
 public class TextSender extends SwingWorker<Void, Void> {
 
     private static final Long SWITCH_TIME = 1000L;
-    private static final Long PAUSE_TIME = 500L;
-    private static final Long CLICK_WAITING = 1000L;
-    private static final Long GO_TOP_WAITING = 2000L;
-    private static final Integer SCROLL_TIMES = 10;
     private static final String SENT_TEXT_GROUPS = "sent_groups_TEXT.txt";
     private TextSenderParams tsParams;
     private int counter;
@@ -56,15 +52,35 @@ public class TextSender extends SwingWorker<Void, Void> {
             Thread.sleep(SWITCH_TIME);
 
             // run
-            Map<String, Integer> prev = null;
-            boolean isDown = true;
-            int stop = 0;
             counter = 0;
+            int downNo = 0;
             while (counter < tsParams.getNoOfGroups()) {
                 if (isCancelled()) {
                     break;
                 }
-                
+                // find unsent group
+                Coordinate unsentGroup = Screen.getInstance().getFirstUnsentGroup(tsParams, sentGroups);
+
+                if (unsentGroup == null) {
+                    // next window
+                    Mouse.getInstance().click(tsParams.getScrollingCoordinate());
+                    Thread.sleep(1000);
+                    // click on top group
+                    Coordinate top = new Coordinate(tsParams.getImageCoordinate2().getX(), tsParams.getImageCoordinate1().getY());
+                    Mouse.getInstance().click(top);
+                    Thread.sleep(1000);
+                    downNo++;
+                    if (downNo == 300) {
+                        break;
+                    }
+                } else {
+                    Mouse.getInstance().click(unsentGroup);
+                    Thread.sleep(1000);
+                    // send text
+                    SystemClipboard.getInstance().copyString(tsParams.getText());
+                    Keyboard.getInstance().pasteWithEnter();
+                    counter++;
+                }
             }
             tsParams.getKeyboardHook().shutdownHook();
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);

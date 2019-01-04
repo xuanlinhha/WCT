@@ -24,7 +24,6 @@ import wct.resourses.SystemClipboard;
  */
 public class FileSender extends SwingWorker<Void, Void> {
 
-    private static final Long SWITCH_TIME = 1000L;
     private static final int RAMDOM_LENGTH = 20;
     private static final String SENT_FILE_GROUPS = "sent_groups_FILE.txt";
 
@@ -54,12 +53,12 @@ public class FileSender extends SwingWorker<Void, Void> {
 
             // click to WeChat app
             Mouse.getInstance().click(fsParams.getOnTaskbarCoordinate());
-            Thread.sleep(SWITCH_TIME);
+            Thread.sleep(1000);
 
             // run
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
             counter = 0;
-            int loop = 0;
+            int downNo = 0;
             while (counter < fsParams.getNoOfGroups()) {
                 if (isCancelled()) {
                     break;
@@ -68,14 +67,20 @@ public class FileSender extends SwingWorker<Void, Void> {
                 Coordinate unsentGroup = Screen.getInstance().getFirstUnsentGroup(fsParams, sentGroups);
 
                 if (unsentGroup == null) {
+                    // next window
                     Mouse.getInstance().click(fsParams.getScrollingCoordinate());
-                    loop++;
-                    if (loop == 50) {
+                    Thread.sleep(1000);
+                    // click on top group
+                    Coordinate top = new Coordinate(fsParams.getImageCoordinate2().getX(), fsParams.getImageCoordinate1().getY());
+                    Mouse.getInstance().click(top);
+                    Thread.sleep(1000);
+                    downNo++;
+                    if (downNo == 300) {
                         break;
                     }
-                    Thread.sleep(500);
                 } else {
                     Mouse.getInstance().click(unsentGroup);
+                    Thread.sleep(1000);
                     if (fsParams.isOneByOne()) {
                         List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
                         for (int i = 0; i < files.size(); i++) {
@@ -87,13 +92,15 @@ public class FileSender extends SwingWorker<Void, Void> {
                                 Thread.sleep(fsParams.getSendingTime() * 1000);
                             }
                         }
-                        System.out.println("Sent");
                     } else {
                         FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
                         SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
                         Keyboard.getInstance().pasteWithEnter();
                     }
                     counter++;
+                    if (counter < fsParams.getNoOfGroups()) {
+                        Thread.sleep(fsParams.getSendingTime() * 1000);
+                    }
                 }
             }
             // reset hook

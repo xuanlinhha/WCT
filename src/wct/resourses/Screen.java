@@ -1,10 +1,8 @@
 package wct.resourses;
 
 import java.awt.AWTException;
-import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
-import wct.background.FileSenderParams;
+import wct.background.CommonParams;
 
 /**
  *
@@ -38,60 +36,43 @@ public class Screen {
         return instance;
     }
 
-    public Coordinate getFirstUnsentGroup(FileSenderParams fsParams, List<Map<String, Integer>> sentGroups) throws IOException {
-        Coordinate coor = new Coordinate();
-        BufferedImage region = captureRegion(fsParams.getImageCoordinate1(), fsParams.getImageCoordinate2());
-        saveImg(region, "tmp");
+    public Coordinate getFirstUnsentGroup(CommonParams fsParams, List<Map<String, Integer>> sentGroups) throws IOException {
+        Coordinate c1 = fsParams.getImageCoordinate1(), c2 = fsParams.getImageCoordinate2();
+        int len = c2.getX() - c1.getX();
+        int regionHeigth = c2.getY() - c1.getY();
+        BufferedImage regionImg = r.createScreenCapture(new Rectangle(c1.getX(), c1.getY(), len, regionHeigth));
+        int space = (regionHeigth - 15 * len) / 14;
+        for (int i = 0; i < 15; i++) {
+            int tmpY = (len + space) * i;
+            BufferedImage avatar = regionImg.getSubimage(0, tmpY, len, len);
+            Map<String, Integer> data = extractData(avatar);
+            boolean isSent = false;
+            for (Map<String, Integer> m : sentGroups) {
+                if (isSame(data, m)) {
+                    isSent = true;
+                    break;
+                }
+            }
+            if (!isSent) {
+                sentGroups.add(data);
+                // return unsent coordinate
+                Coordinate coor = new Coordinate();
+                coor.setX(c1.getX());
+                coor.setY(c1.getX() + tmpY);
+                return coor;
+            }
+        }
         return null;
     }
 
     public BufferedImage captureRegion(Coordinate c1, Coordinate c2) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int len = c2.getX() - c1.getX();
-        int regionX = c1.getX() - len / 6;
-        int regionY = len;
-        int regionWidth = 7 * len / 6;
-        int regionHeigth = screenSize.height - len;
-        BufferedImage regionImg = r.createScreenCapture(new Rectangle(regionX, regionY, regionWidth, regionHeigth));
+        int regionHeigth = c2.getY() - c1.getY();
+        BufferedImage regionImg = r.createScreenCapture(new Rectangle(c1.getX(), c1.getY(), len, regionHeigth));
         return regionImg;
     }
 
-    public BufferedImage captureAvatar(Color selectedColor, Coordinate c1, Coordinate c2) throws Exception {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int len = c2.getX() - c1.getX();
-        int regionX = c1.getX() - len / 6;
-        int regionY = len;
-        int regionWidth = 7 * len / 6;
-        int regionHeigth = screenSize.height - len;
-        // capture region
-        BufferedImage regionImg = r.createScreenCapture(new Rectangle(regionX, regionY, regionWidth, regionHeigth));
-
-        // extract selected image
-        int tmpY = 0;
-        while (tmpY < regionImg.getHeight()) {
-            int clr = regionImg.getRGB(0, tmpY);
-            int tmpRed = (clr & 0x00ff0000) >> 16;
-            int tmpGreen = (clr & 0x0000ff00) >> 8;
-            int tmpBlue = clr & 0x000000ff;
-            int diff = Math.abs(tmpRed - selectedColor.getRed()) + Math.abs(tmpGreen - selectedColor.getGreen()) + Math.abs(tmpBlue - selectedColor.getBlue());
-            if (diff < GRAY_THRESHOLD) {
-                break;
-            } else {
-                tmpY++;
-            }
-        }
-
-        int imgX = len / 6;
-        int imgY = tmpY + len / 3;
-        // if cannot find any selected 
-        if (imgY + len > regionImg.getHeight()) {
-            return null;
-        } else {
-            return regionImg.getSubimage(imgX, imgY, len, len);
-        }
-    }
-
-    public Map<String, Integer> extractData(BufferedImage img) {
+    private Map<String, Integer> extractData(BufferedImage img) {
         Map<String, Integer> data = new HashMap<String, Integer>();
         for (int i = 0; i < img.getWidth(); i++) {
             for (int j = 0; j < img.getHeight(); j++) {
