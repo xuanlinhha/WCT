@@ -14,6 +14,7 @@ public class CommonParams {
     protected Coordinate scrollingCoordinate;
     protected Coordinate imageCoordinate1;
     protected Coordinate imageCoordinate2;
+    protected int groupsInRegion;
     private JComboBox optionJComboBox;
     private JButton startJButton;
     private JButton stopJButton;
@@ -48,6 +49,14 @@ public class CommonParams {
 
     public void setImageCoordinate2(Coordinate imageCoordinate2) {
         this.imageCoordinate2 = imageCoordinate2;
+    }
+
+    public int getGroupsInRegion() {
+        return groupsInRegion;
+    }
+
+    public void setGroupsInRegion(int groupsInRegion) {
+        this.groupsInRegion = groupsInRegion;
     }
 
     public JComboBox getOptionJComboBox() {

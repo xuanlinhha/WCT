@@ -12,6 +12,7 @@ public class Configuration {
     private String scrollingCoordinate;
     private String imageCoordinate1;
     private String imageCoordinate2;
+    private String groupsInRegion;
 
     public String getInputFolder() {
         return inputFolder;
@@ -59,6 +60,14 @@ public class Configuration {
 
     public void setImageCoordinate2(String imageCoordinate2) {
         this.imageCoordinate2 = imageCoordinate2;
+    }
+
+    public String getGroupsInRegion() {
+        return groupsInRegion;
+    }
+
+    public void setGroupsInRegion(String groupsInRegion) {
+        this.groupsInRegion = groupsInRegion;
     }
 
 }

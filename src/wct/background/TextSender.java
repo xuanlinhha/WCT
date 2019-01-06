@@ -21,7 +21,6 @@ import wct.resourses.SystemClipboard;
  */
 public class TextSender extends SwingWorker<Void, Void> {
 
-    private static final Long SWITCH_TIME = 1000L;
     private static final String SENT_TEXT_GROUPS = "sent_groups_TEXT.txt";
     private TextSenderParams tsParams;
     private int counter;
@@ -47,9 +46,12 @@ public class TextSender extends SwingWorker<Void, Void> {
                 sentGroups = TextReaderWriter.loadSentFileGroups(SENT_TEXT_GROUPS);
             }
 
-            // click to WeChat app
+            // select the top
+            Coordinate top = new Coordinate(tsParams.getImageCoordinate2().getX(), tsParams.getImageCoordinate1().getY());
             Mouse.getInstance().click(tsParams.getOnTaskbarCoordinate());
-            Thread.sleep(SWITCH_TIME);
+            Thread.sleep(1000);
+            Mouse.getInstance().click(top);
+            Thread.sleep(1000);
 
             // run
             counter = 0;
@@ -66,14 +68,15 @@ public class TextSender extends SwingWorker<Void, Void> {
                     Mouse.getInstance().click(tsParams.getScrollingCoordinate());
                     Thread.sleep(1000);
                     // click on top group
-                    Coordinate top = new Coordinate(tsParams.getImageCoordinate2().getX(), tsParams.getImageCoordinate1().getY());
                     Mouse.getInstance().click(top);
                     Thread.sleep(1000);
                     downNo++;
-                    if (downNo == 300) {
+                    if (downNo == 100) {
                         break;
                     }
                 } else {
+                    // reset down count
+                    downNo = 0;
                     Mouse.getInstance().click(unsentGroup);
                     Thread.sleep(1000);
                     // send text

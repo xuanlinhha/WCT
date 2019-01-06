@@ -20,7 +20,6 @@ import wct.background.CommonParams;
  */
 public class Screen {
 
-    private static final int GRAY_THRESHOLD = 50;
     private static final double DIFF_THRESHOLD = 0.8;
     private Robot r;
     private static Screen instance;
@@ -41,9 +40,10 @@ public class Screen {
         int len = c2.getX() - c1.getX();
         int regionHeigth = c2.getY() - c1.getY();
         BufferedImage regionImg = r.createScreenCapture(new Rectangle(c1.getX(), c1.getY(), len, regionHeigth));
-        int space = (regionHeigth - 15 * len) / 14;
-        for (int i = 0; i < 15; i++) {
-            int tmpY = (len + space) * i;
+        float space = (float) (regionHeigth - fsParams.getGroupsInRegion() * len) / (fsParams.getGroupsInRegion() - 1);
+
+        for (int i = 0; i < fsParams.getGroupsInRegion(); i++) {
+            int tmpY = Math.round((len + space) * i);
             BufferedImage avatar = regionImg.getSubimage(0, tmpY, len, len);
             Map<String, Integer> data = extractData(avatar);
             boolean isSent = false;

@@ -22,13 +22,17 @@ public class Test {
     private static long WAIT_FOR_PASTING = 1000L;
 
     public static void main(String[] args) {
-        Test cmd = new Test();
-        try {
-            cmd.writeRandomMetadata("C:\\Users\\admin\\Documents\\WCT\\input\\2.mp4",
-                    "abcd");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        int a = 9;
+        int b = 4;
+        float c = (float) a / b;
+        System.out.println("c=" + Math.round((2 + c) * 2));
+//        Test cmd = new Test();
+//        try {
+//            cmd.writeRandomMetadata("C:\\Users\\admin\\Documents\\WCT\\input\\2.mp4",
+//                    "abcd");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
 
     }
 

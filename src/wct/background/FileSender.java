@@ -51,8 +51,15 @@ public class FileSender extends SwingWorker<Void, Void> {
                 sentGroups = TextReaderWriter.loadSentFileGroups(SENT_FILE_GROUPS);
             }
 
-            // click to WeChat app
+            // select the top
+            int len = fsParams.getImageCoordinate2().getX() - fsParams.getImageCoordinate1().getX();
+            Coordinate top1 = new Coordinate(fsParams.getImageCoordinate2().getX(), fsParams.getImageCoordinate1().getY() + len);
+            Coordinate top2 = new Coordinate(fsParams.getImageCoordinate2().getX(), fsParams.getImageCoordinate1().getY());
             Mouse.getInstance().click(fsParams.getOnTaskbarCoordinate());
+            Thread.sleep(1000);
+            Mouse.getInstance().click(top1);
+            Thread.sleep(500);
+            Mouse.getInstance().click(top2);
             Thread.sleep(1000);
 
             // run
@@ -71,14 +78,17 @@ public class FileSender extends SwingWorker<Void, Void> {
                     Mouse.getInstance().click(fsParams.getScrollingCoordinate());
                     Thread.sleep(1000);
                     // click on top group
-                    Coordinate top = new Coordinate(fsParams.getImageCoordinate2().getX(), fsParams.getImageCoordinate1().getY());
-                    Mouse.getInstance().click(top);
+                    Mouse.getInstance().click(top1);
+                    Thread.sleep(500);
+                    Mouse.getInstance().click(top2);
                     Thread.sleep(1000);
                     downNo++;
-                    if (downNo == 300) {
+                    if (downNo == 100) {
                         break;
                     }
                 } else {
+                    // reset down count
+                    downNo = 0;
                     Mouse.getInstance().click(unsentGroup);
                     Thread.sleep(1000);
                     if (fsParams.isOneByOne()) {
