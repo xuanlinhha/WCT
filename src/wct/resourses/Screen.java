@@ -8,6 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,31 +22,34 @@ import wct.background.CommonParams;
 public class Screen {
 
     private static final double DIFF_THRESHOLD = 0.8;
+    private CommonParams cp;
     private Robot r;
-    private static Screen instance;
+    private List<Map<String, Integer>> prev;
+    private List<Map<String, Integer>> current;
 
-    private Screen() {
+    public Screen(CommonParams cp) throws AWTException {
+        this.cp = cp;
+        this.r = new Robot();
+        this.prev = new ArrayList<Map<String, Integer>>();
+        this.current = new ArrayList<Map<String, Integer>>();
     }
 
-    public static Screen getInstance() throws AWTException {
-        if (instance == null) {
-            instance = new Screen();
-            instance.r = new Robot();
-        }
-        return instance;
-    }
-
-    public Coordinate getFirstUnsentGroup(CommonParams fsParams, List<Map<String, Integer>> sentGroups) throws IOException {
-        Coordinate c1 = fsParams.getImageCoordinate1(), c2 = fsParams.getImageCoordinate2();
+    public Coordinate getFirstUnsentGroup(List<Map<String, Integer>> sentGroups) throws IOException {
+        Coordinate c1 = cp.getImageCoordinate1(), c2 = cp.getImageCoordinate2();
         int len = c2.getX() - c1.getX();
         int regionHeigth = c2.getY() - c1.getY();
         BufferedImage regionImg = r.createScreenCapture(new Rectangle(c1.getX(), c1.getY(), len, regionHeigth));
-        float space = (float) (regionHeigth - fsParams.getGroupsInRegion() * len) / (fsParams.getGroupsInRegion() - 1);
+        float space = (float) (regionHeigth - cp.getGroupsInRegion() * len) / (cp.getGroupsInRegion() - 1);
 
-        for (int i = 0; i < fsParams.getGroupsInRegion(); i++) {
+        // reset current
+        current.clear();
+        for (int i = 0; i < cp.getGroupsInRegion(); i++) {
             int tmpY = Math.round((len + space) * i);
             BufferedImage avatar = regionImg.getSubimage(0, tmpY, len, len);
             Map<String, Integer> data = extractData(avatar);
+            current.add(data);
+
+            // check sent or not
             boolean isSent = false;
             for (Map<String, Integer> m : sentGroups) {
                 if (isSame(data, m)) {
@@ -107,6 +111,21 @@ public class Screen {
         ImageIO.write(image, "jpg", baos);
         ImageIO.write(image, "jpg", baos);
         ImageIO.write(image, "jpg", new File(name + ".jpg"));
+    }
+
+    public boolean isBatchChanged() {
+        if (prev.size() == 0) {
+            return true;
+        }
+        if (current.size() != prev.size()) {
+            return true;
+        }
+        for (int i = 0; i < prev.size(); i++) {
+            if (!isSame(prev.get(i), current.get(i))) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }
