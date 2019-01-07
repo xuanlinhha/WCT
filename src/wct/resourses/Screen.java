@@ -30,8 +30,8 @@ public class Screen {
     public Screen(CommonParams cp) throws AWTException {
         this.cp = cp;
         this.r = new Robot();
-        this.prev = new ArrayList<Map<String, Integer>>();
-        this.current = new ArrayList<Map<String, Integer>>();
+        this.prev = null;
+        this.current = null;
     }
 
     public Coordinate getFirstUnsentGroup(List<Map<String, Integer>> sentGroups) throws IOException {
@@ -42,7 +42,8 @@ public class Screen {
         float space = (float) (regionHeigth - cp.getGroupsInRegion() * len) / (cp.getGroupsInRegion() - 1);
 
         // reset current
-        current.clear();
+        prev = current;
+        current = new ArrayList<Map<String, Integer>>();
         for (int i = 0; i < cp.getGroupsInRegion(); i++) {
             int tmpY = Math.round((len + space) * i);
             BufferedImage avatar = regionImg.getSubimage(0, tmpY, len, len);
