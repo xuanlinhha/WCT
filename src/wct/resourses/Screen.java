@@ -115,7 +115,7 @@ public class Screen {
     }
 
     public boolean isBatchChanged() {
-        if (prev.size() == 0) {
+        if (prev == null) {
             return true;
         }
         if (current.size() != prev.size()) {
