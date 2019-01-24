@@ -55,9 +55,9 @@ public class FileSender extends SwingWorker<Void, Void> {
             Screen screen = new Screen(fsParams);
             counter = 0;
             String randString = RandomStringUtils.random(RAMDOM_LENGTH);
-            int len = fsParams.getImageCoordinate2().getX() - fsParams.getImageCoordinate1().getX();
-            Coordinate top1 = new Coordinate(fsParams.getImageCoordinate2().getX(), fsParams.getImageCoordinate1().getY() + len);
-            Coordinate top2 = new Coordinate(fsParams.getImageCoordinate2().getX(), fsParams.getImageCoordinate1().getY());
+            int len = fsParams.getCorner2().getX() - fsParams.getCorner1().getX();
+            Coordinate top1 = new Coordinate(fsParams.getCorner2().getX(), fsParams.getCorner1().getY() + len);
+            Coordinate top2 = new Coordinate(fsParams.getCorner2().getX(), fsParams.getCorner1().getY());
 
             // click on wechat & select the top
             Mouse.getInstance().click(fsParams.getOnTaskbarCoordinate());
@@ -66,52 +66,53 @@ public class FileSender extends SwingWorker<Void, Void> {
             Thread.sleep(500);
             Mouse.getInstance().click(top2);
             Thread.sleep(1000);
-
-            // run
-            while (counter < fsParams.getNoOfGroups()) {
-                if (isCancelled()) {
-                    break;
-                }
-                // find unsent group
-                Coordinate unsentGroup = screen.getFirstUnsentGroup(sentGroups);
-                if (unsentGroup == null) {
-                    // check to stop
-                    if (!screen.isBatchChanged()) {
-                        break;
-                    } else {
-                        Mouse.getInstance().click(fsParams.getScrollingCoordinate());
-                        Thread.sleep(1000);
-                        Mouse.getInstance().click(top1);
-                        Thread.sleep(500);
-                        Mouse.getInstance().click(top2);
-                        Thread.sleep(1000);
-                    }
-                } else {
-                    // reset down count
-                    Mouse.getInstance().click(unsentGroup);
-                    Thread.sleep(1000);
-                    if (fsParams.isOneByOne()) {
-                        List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
-                        for (int i = 0; i < files.size(); i++) {
-                            File f = files.get(i);
-                            FileProcessor.changeFileHashcode(f, randString + counter);
-                            SystemClipboard.getInstance().copyFile(f);
-                            Keyboard.getInstance().pasteWithEnter();
-                            if (i < files.size() - 1) {
-                                Thread.sleep(fsParams.getSendingTime() * 1000);
-                            }
-                        }
-                    } else {
-                        FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
-                        SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
-                        Keyboard.getInstance().pasteWithEnter();
-                    }
-                    counter++;
-                    if (counter < fsParams.getNoOfGroups()) {
-                        Thread.sleep(fsParams.getSendingTime() * 1000);
-                    }
-                }
-            }
+//
+//            // run
+//            while (counter < fsParams.getNoOfGroups()) {
+//                if (isCancelled()) {
+//                    break;
+//                }
+//                // find unsent group
+//                Coordinate unsentGroup = screen.getFirstUnsentGroup(sentGroups);
+//                if (unsentGroup == null) {
+//                    // check to stop
+//                    if (!screen.isBatchChanged()) {
+//                        break;
+//                    } else {
+//                        Mouse.getInstance().click(fsParams.getScrollingCoordinate());
+//                        Thread.sleep(1000);
+//                        Mouse.getInstance().click(top1);
+//                        Thread.sleep(500);
+//                        Mouse.getInstance().click(top2);
+//                        Thread.sleep(1000);
+//                    }
+//                } else {
+//                    // reset down count
+//                    Mouse.getInstance().click(unsentGroup);
+//                    Thread.sleep(1000);
+//                    if (fsParams.isOneByOne()) {
+//                        List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
+//                        for (int i = 0; i < files.size(); i++) {
+//                            File f = files.get(i);
+//                            FileProcessor.changeFileHashcode(f, randString + counter);
+//                            SystemClipboard.getInstance().copyFile(f);
+//                            Keyboard.getInstance().pasteWithEnter();
+//                            if (i < files.size() - 1) {
+//                                Thread.sleep(fsParams.getSendingTime() * 1000);
+//                            }
+//                        }
+//                    } else {
+//                        FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
+//                        SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
+//                        Keyboard.getInstance().pasteWithEnter();
+//                    }
+//                    counter++;
+//                    if (counter < fsParams.getNoOfGroups()) {
+//                        Thread.sleep(fsParams.getSendingTime() * 1000);
+//                    }
+//                }
+//            }
+            
             // reset hook
             fsParams.getKeyboardHook().shutdownHook();
             if (fsParams.isShutdownAfterFinish() && !isCancelled()) {

@@ -11,10 +11,14 @@ import wct.resourses.Coordinate;
 public class CommonParams {
 
     protected Coordinate onTaskbarCoordinate;
-    protected Coordinate scrollingCoordinate;
-    protected Coordinate imageCoordinate1;
-    protected Coordinate imageCoordinate2;
     protected int groupsInRegion;
+    protected Coordinate scroll1;
+    protected Coordinate scroll2;
+    protected Coordinate corner1;
+    protected Coordinate corner2;
+    protected Coordinate corner3;
+    protected Coordinate corner4;
+    
     private JComboBox optionJComboBox;
     private JButton startJButton;
     private JButton stopJButton;
@@ -27,36 +31,60 @@ public class CommonParams {
         this.onTaskbarCoordinate = onTaskbarCoordinate;
     }
 
-    public Coordinate getScrollingCoordinate() {
-        return scrollingCoordinate;
-    }
-
-    public void setScrollingCoordinate(Coordinate scrollingCoordinate) {
-        this.scrollingCoordinate = scrollingCoordinate;
-    }
-
-    public Coordinate getImageCoordinate1() {
-        return imageCoordinate1;
-    }
-
-    public void setImageCoordinate1(Coordinate imageCoordinate1) {
-        this.imageCoordinate1 = imageCoordinate1;
-    }
-
-    public Coordinate getImageCoordinate2() {
-        return imageCoordinate2;
-    }
-
-    public void setImageCoordinate2(Coordinate imageCoordinate2) {
-        this.imageCoordinate2 = imageCoordinate2;
-    }
-
     public int getGroupsInRegion() {
         return groupsInRegion;
     }
 
     public void setGroupsInRegion(int groupsInRegion) {
         this.groupsInRegion = groupsInRegion;
+    }
+
+    public Coordinate getScroll1() {
+        return scroll1;
+    }
+
+    public void setScroll1(Coordinate scroll1) {
+        this.scroll1 = scroll1;
+    }
+
+    public Coordinate getScroll2() {
+        return scroll2;
+    }
+
+    public void setScroll2(Coordinate scroll2) {
+        this.scroll2 = scroll2;
+    }
+
+    public Coordinate getCorner1() {
+        return corner1;
+    }
+
+    public void setCorner1(Coordinate corner1) {
+        this.corner1 = corner1;
+    }
+
+    public Coordinate getCorner2() {
+        return corner2;
+    }
+
+    public void setCorner2(Coordinate corner2) {
+        this.corner2 = corner2;
+    }
+
+    public Coordinate getCorner3() {
+        return corner3;
+    }
+
+    public void setCorner3(Coordinate corner3) {
+        this.corner3 = corner3;
+    }
+
+    public Coordinate getCorner4() {
+        return corner4;
+    }
+
+    public void setCorner4(Coordinate corner4) {
+        this.corner4 = corner4;
     }
 
     public JComboBox getOptionJComboBox() {

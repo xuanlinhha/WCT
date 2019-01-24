@@ -35,7 +35,7 @@ public class Screen {
     }
 
     public Coordinate getFirstUnsentGroup(List<Map<String, Integer>> sentGroups) throws IOException {
-        Coordinate c1 = cp.getImageCoordinate1(), c2 = cp.getImageCoordinate2();
+        Coordinate c1 = cp.getCorner1(), c2 = cp.getCorner2();
         int len = c2.getX() - c1.getX();
         int regionHeigth = c2.getY() - c1.getY();
         BufferedImage regionImg = r.createScreenCapture(new Rectangle(c1.getX(), c1.getY(), len, regionHeigth));

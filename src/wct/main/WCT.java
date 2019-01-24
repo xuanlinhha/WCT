@@ -75,6 +75,7 @@ public class WCT extends javax.swing.JFrame {
         jButton15 = new javax.swing.JButton();
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox4 = new javax.swing.JCheckBox();
+        jTextField15 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -85,6 +86,7 @@ public class WCT extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
+        jTextField16 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -110,6 +112,12 @@ public class WCT extends javax.swing.JFrame {
         jTextArea3 = new javax.swing.JTextArea();
         jLabel20 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jTextField11 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jTextField13 = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jTextField14 = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -123,7 +131,6 @@ public class WCT extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("wct/main/Bundle"); // NOI18N
         setTitle(bundle.getString("WCT.title")); // NOI18N
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         jPanel0.setLayout(new java.awt.CardLayout());
 
@@ -142,7 +149,6 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.2;
         jPanel1.add(jTextField2, gridBagConstraints);
@@ -375,6 +381,13 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.weightx = 0.1;
         jPanel1.add(jCheckBox4, gridBagConstraints);
 
+        jTextField15.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jTextField15, gridBagConstraints);
+
         jPanel0.add(jPanel1, "card2");
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
@@ -415,7 +428,6 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jTextField4, gridBagConstraints);
 
@@ -465,6 +477,13 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel2.add(jComboBox2, gridBagConstraints);
 
+        jTextField16.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel2.add(jTextField16, gridBagConstraints);
+
         jPanel0.add(jPanel2, "card5");
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
@@ -482,7 +501,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.8;
         jPanel3.add(jTextField6, gridBagConstraints);
@@ -495,7 +514,7 @@ public class WCT extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel3.add(jButton7, gridBagConstraints);
@@ -513,7 +532,7 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.8;
         jPanel3.add(jTextField7, gridBagConstraints);
@@ -526,7 +545,7 @@ public class WCT extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel3.add(jButton8, gridBagConstraints);
@@ -549,7 +568,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel3.add(jButton9, gridBagConstraints);
@@ -583,15 +602,15 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 0.3;
+        gridBagConstraints.weightx = 0.2;
         jPanel3.add(jTextField17, gridBagConstraints);
 
         jLabel14.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText(bundle.getString("WCT.jLabel14.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel3.add(jLabel14, gridBagConstraints);
 
@@ -602,8 +621,8 @@ public class WCT extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.3;
         jPanel3.add(jTextField3, gridBagConstraints);
@@ -654,7 +673,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel3.setText(bundle.getString("WCT.jLabel3.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridy = 11;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel3.add(jLabel3, gridBagConstraints);
@@ -668,7 +687,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel3.add(jButton16, gridBagConstraints);
 
@@ -682,7 +701,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel3.add(jButton17, gridBagConstraints);
 
@@ -693,7 +712,7 @@ public class WCT extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -703,17 +722,66 @@ public class WCT extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
         jLabel20.setText(bundle.getString("WCT.jLabel20.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel3.add(jLabel20, gridBagConstraints);
 
         jTextField10.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.2;
+        jPanel3.add(jTextField10, gridBagConstraints);
+
+        jLabel21.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel21.setText(bundle.getString("WCT.jLabel21.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel3.add(jLabel21, gridBagConstraints);
+
+        jTextField11.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel3.add(jTextField11, gridBagConstraints);
+
+        jLabel23.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel23.setText(bundle.getString("WCT.jLabel23.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel3.add(jLabel23, gridBagConstraints);
+
+        jTextField13.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jTextField10, gridBagConstraints);
+        jPanel3.add(jTextField13, gridBagConstraints);
+
+        jLabel24.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel24.setText(bundle.getString("WCT.jLabel24.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel3.add(jLabel24, gridBagConstraints);
+
+        jTextField14.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel3.add(jTextField14, gridBagConstraints);
 
         jPanel0.add(jPanel3, "card4");
 
@@ -824,12 +892,19 @@ public class WCT extends javax.swing.JFrame {
         } else {
             fsParams.setInputFolder(jTextField6.getText());
         }
-        // no of groups
+        // no down times
         if (StringUtils.isBlank(jTextField2.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("missing_no_of_groups"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_down_times"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            fsParams.setNoOfGroups(Integer.parseInt(jTextField2.getText()));
+            fsParams.setDownTimes(Integer.parseInt(jTextField2.getText()));
+        }
+        // no up times
+        if (StringUtils.isBlank(jTextField15.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_up_times"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            fsParams.setUpTimes(Integer.parseInt(jTextField15.getText()));
         }
         // sending time
         if (StringUtils.isBlank(jTextField9.getText())) {
@@ -880,10 +955,14 @@ public class WCT extends javax.swing.JFrame {
         config.setInputFolder(jTextField6.getText());
         config.setOutputFolder(jTextField7.getText());
         config.setOnTaskbarCoordinate(jTextField17.getText());
-        config.setScrollingCoordinate(jTextField3.getText());
-        config.setImageCoordinate1(jTextField5.getText());
-        config.setImageCoordinate2(jTextField8.getText());
         config.setGroupsInRegion(jTextField10.getText());
+        config.setScroll1(jTextField3.getText());
+        config.setScroll2(jTextField11.getText());
+        config.setCorner1(jTextField5.getText());
+        config.setCorner2(jTextField8.getText());
+        config.setCorner3(jTextField13.getText());
+        config.setCorner4(jTextField14.getText());
+        
         try {
             ConfigurationHandler.save(config);
             JOptionPane.showMessageDialog(this, bundle.getString("save_config_success"), bundle.getString("success"), JOptionPane.INFORMATION_MESSAGE);
@@ -955,12 +1034,19 @@ public class WCT extends javax.swing.JFrame {
         } else {
             tsParams.setText(jTextArea2.getText().trim());
         }
-        // no of groups
+        // no down times
         if (StringUtils.isBlank(jTextField4.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("missing_no_of_groups"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_down_times"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            tsParams.setNoOfGroups(Integer.parseInt(jTextField4.getText()));
+            tsParams.setDownTimes(Integer.parseInt(jTextField4.getText()));
+        }
+        // no up times
+        if (StringUtils.isBlank(jTextField16.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("missing_up_times"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            tsParams.setUpTimes(Integer.parseInt(jTextField16.getText()));
         }
 
         return true;
@@ -972,44 +1058,11 @@ public class WCT extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, bundle.getString("no_on_taskbar_coordinate"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            String[] onTaskbarCoordinateData = jTextField17.getText().split(" ");
-            Coordinate onTaskbarCoordinate = new Coordinate();
-            onTaskbarCoordinate.setX(Integer.parseInt(onTaskbarCoordinateData[0]));
-            onTaskbarCoordinate.setY(Integer.parseInt(onTaskbarCoordinateData[1]));
-            commonParams.setOnTaskbarCoordinate(onTaskbarCoordinate);
-        }
-        // scrolling coordinate
-        if (StringUtils.isBlank(jTextField3.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("no_scrolling_coordinate"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return false;
-        } else {
-            String[] selectedColorComps = jTextField3.getText().split(" ");
-            Coordinate scrollingCoordinate = new Coordinate();
-            scrollingCoordinate.setX(Integer.parseInt(selectedColorComps[0]));
-            scrollingCoordinate.setY(Integer.parseInt(selectedColorComps[1]));
-            commonParams.setScrollingCoordinate(scrollingCoordinate);
-        }
-        // image corner 1
-        if (StringUtils.isBlank(jTextField5.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("no_image_corner_1"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return false;
-        } else {
-            String[] imageCorner1CoordinateData = jTextField5.getText().split(" ");
-            Coordinate imageCoordinate1 = new Coordinate();
-            imageCoordinate1.setX(Integer.parseInt(imageCorner1CoordinateData[0]));
-            imageCoordinate1.setY(Integer.parseInt(imageCorner1CoordinateData[1]));
-            commonParams.setImageCoordinate1(imageCoordinate1);
-        }
-        // image corner 2
-        if (StringUtils.isBlank(jTextField8.getText())) {
-            JOptionPane.showMessageDialog(this, bundle.getString("no_image_corner_2"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
-            return false;
-        } else {
-            String[] imageCorner2CoordinateData = jTextField8.getText().split(" ");
-            Coordinate imageCoordinate2 = new Coordinate();
-            imageCoordinate2.setX(Integer.parseInt(imageCorner2CoordinateData[0]));
-            imageCoordinate2.setY(Integer.parseInt(imageCorner2CoordinateData[1]));
-            commonParams.setImageCoordinate2(imageCoordinate2);
+            String[] sdata = jTextField17.getText().split(" ");
+            Coordinate tmp = new Coordinate();
+            tmp.setX(Integer.parseInt(sdata[0]));
+            tmp.setY(Integer.parseInt(sdata[1]));
+            commonParams.setOnTaskbarCoordinate(tmp);
         }
         // group in region
         if (StringUtils.isBlank(jTextField10.getText())) {
@@ -1018,6 +1071,73 @@ public class WCT extends javax.swing.JFrame {
         } else {
             commonParams.setGroupsInRegion(Integer.parseInt(jTextField10.getText()));
         }
+        // corner 1
+        if (StringUtils.isBlank(jTextField5.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_corner_1"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            String[] sdata = jTextField5.getText().split(" ");
+            Coordinate tmp = new Coordinate();
+            tmp.setX(Integer.parseInt(sdata[0]));
+            tmp.setY(Integer.parseInt(sdata[1]));
+            commonParams.setCorner1(tmp);
+        }
+        // corner 2
+        if (StringUtils.isBlank(jTextField8.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_corner_2"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            String[] sdata = jTextField8.getText().split(" ");
+            Coordinate tmp = new Coordinate();
+            tmp.setX(Integer.parseInt(sdata[0]));
+            tmp.setY(Integer.parseInt(sdata[1]));
+            commonParams.setCorner2(tmp);
+        }
+        // corner 3
+        if (StringUtils.isBlank(jTextField13.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_corner_3"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            String[] sdata = jTextField13.getText().split(" ");
+            Coordinate tmp = new Coordinate();
+            tmp.setX(Integer.parseInt(sdata[0]));
+            tmp.setY(Integer.parseInt(sdata[1]));
+            commonParams.setCorner3(tmp);
+        }
+        // corner 4
+        if (StringUtils.isBlank(jTextField14.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_corner_4"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            String[] sdata = jTextField8.getText().split(" ");
+            Coordinate tmp = new Coordinate();
+            tmp.setX(Integer.parseInt(sdata[0]));
+            tmp.setY(Integer.parseInt(sdata[1]));
+            commonParams.setCorner4(tmp);
+        }
+        // scroll 1
+        if (StringUtils.isBlank(jTextField3.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_scroll1"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            String[] sdata = jTextField3.getText().split(" ");
+            Coordinate tmp = new Coordinate();
+            tmp.setX(Integer.parseInt(sdata[0]));
+            tmp.setY(Integer.parseInt(sdata[1]));
+            commonParams.setScroll1(tmp);
+        }
+        // scroll 2
+        if (StringUtils.isBlank(jTextField11.getText())) {
+            JOptionPane.showMessageDialog(this, bundle.getString("no_scroll2"), bundle.getString("config_error"), JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            String[] sdata = jTextField11.getText().split(" ");
+            Coordinate tmp = new Coordinate();
+            tmp.setX(Integer.parseInt(sdata[0]));
+            tmp.setY(Integer.parseInt(sdata[1]));
+            commonParams.setScroll1(tmp);
+        }
+        
         return true;
     }
 
@@ -1274,7 +1394,10 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1301,7 +1424,12 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -1349,10 +1477,14 @@ public class WCT extends javax.swing.JFrame {
             jTextField6.setText(config.getInputFolder());
             jTextField7.setText(config.getOutputFolder());
             jTextField17.setText(config.getOnTaskbarCoordinate());
-            jTextField3.setText(config.getScrollingCoordinate());
-            jTextField5.setText(config.getImageCoordinate1());
-            jTextField8.setText(config.getImageCoordinate2());
             jTextField10.setText(config.getGroupsInRegion());
+            jTextField3.setText(config.getScroll1());
+            jTextField11.setText(config.getScroll2());
+            jTextField5.setText(config.getCorner1());
+            jTextField8.setText(config.getCorner2());
+            jTextField13.setText(config.getCorner3());
+            jTextField14.setText(config.getCorner4());
+            
         }
         initFSParam();
         initCGParams();

@@ -49,9 +49,9 @@ public class TextSender extends SwingWorker<Void, Void> {
             // initial data
             Screen screen = new Screen(tsParams);
             counter = 0;
-            int len = tsParams.getImageCoordinate2().getX() - tsParams.getImageCoordinate1().getX();
-            Coordinate top1 = new Coordinate(tsParams.getImageCoordinate2().getX(), tsParams.getImageCoordinate1().getY() + len);
-            Coordinate top2 = new Coordinate(tsParams.getImageCoordinate2().getX(), tsParams.getImageCoordinate1().getY());
+            int len = tsParams.getCorner2().getX() - tsParams.getCorner1().getX();
+            Coordinate top1 = new Coordinate(tsParams.getCorner2().getX(), tsParams.getCorner1().getY() + len);
+            Coordinate top2 = new Coordinate(tsParams.getCorner2().getX(), tsParams.getCorner1().getY());
 
             // click on wechat & select the top
             Mouse.getInstance().click(tsParams.getOnTaskbarCoordinate());
@@ -61,37 +61,37 @@ public class TextSender extends SwingWorker<Void, Void> {
             Mouse.getInstance().click(top2);
             Thread.sleep(1000);
 
-            // run
-            counter = 0;
-            while (counter < tsParams.getNoOfGroups()) {
-                if (isCancelled()) {
-                    break;
-                }
-                // find unsent group
-                Coordinate unsentGroup = screen.getFirstUnsentGroup(sentGroups);
-
-                if (unsentGroup == null) {
-                    // check to stop
-                    if (!screen.isBatchChanged()) {
-                        break;
-                    } else {
-                        Mouse.getInstance().click(tsParams.getScrollingCoordinate());
-                        Thread.sleep(1000);
-                        Mouse.getInstance().click(top1);
-                        Thread.sleep(500);
-                        Mouse.getInstance().click(top2);
-                        Thread.sleep(1000);
-                    }
-                } else {
-                    // reset down count
-                    Mouse.getInstance().click(unsentGroup);
-                    Thread.sleep(1000);
-                    // send text
-                    SystemClipboard.getInstance().copyString(tsParams.getText());
-                    Keyboard.getInstance().pasteWithEnter();
-                    counter++;
-                }
-            }
+//            // run
+//            counter = 0;
+//            while (counter < tsParams.getNoOfGroups()) {
+//                if (isCancelled()) {
+//                    break;
+//                }
+//                // find unsent group
+//                Coordinate unsentGroup = screen.getFirstUnsentGroup(sentGroups);
+//
+//                if (unsentGroup == null) {
+//                    // check to stop
+//                    if (!screen.isBatchChanged()) {
+//                        break;
+//                    } else {
+//                        Mouse.getInstance().click(tsParams.getScrollingCoordinate());
+//                        Thread.sleep(1000);
+//                        Mouse.getInstance().click(top1);
+//                        Thread.sleep(500);
+//                        Mouse.getInstance().click(top2);
+//                        Thread.sleep(1000);
+//                    }
+//                } else {
+//                    // reset down count
+//                    Mouse.getInstance().click(unsentGroup);
+//                    Thread.sleep(1000);
+//                    // send text
+//                    SystemClipboard.getInstance().copyString(tsParams.getText());
+//                    Keyboard.getInstance().pasteWithEnter();
+//                    counter++;
+//                }
+//            }
             tsParams.getKeyboardHook().shutdownHook();
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
