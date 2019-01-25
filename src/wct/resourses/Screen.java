@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,31 +23,23 @@ public class Screen {
     private static final double DIFF_THRESHOLD = 0.8;
     private CommonParams cp;
     private Robot r;
-    private List<Map<String, Integer>> prev;
-    private List<Map<String, Integer>> current;
 
     public Screen(CommonParams cp) throws AWTException {
         this.cp = cp;
         this.r = new Robot();
-        this.prev = null;
-        this.current = null;
     }
 
-    public Coordinate getFirstUnsentGroup(List<Map<String, Integer>> sentGroups) throws IOException {
+    public Coordinate getFirstUnsentGroupDown(List<Map<String, Integer>> sentGroups) throws IOException {
         Coordinate c1 = cp.getCorner1(), c2 = cp.getCorner2();
         int len = c2.getX() - c1.getX();
         int regionHeigth = c2.getY() - c1.getY();
         BufferedImage regionImg = r.createScreenCapture(new Rectangle(c1.getX(), c1.getY(), len, regionHeigth));
         float space = (float) (regionHeigth - cp.getGroupsInRegion() * len) / (cp.getGroupsInRegion() - 1);
 
-        // reset current
-        prev = current;
-        current = new ArrayList<Map<String, Integer>>();
         for (int i = 0; i < cp.getGroupsInRegion(); i++) {
             int tmpY = Math.round((len + space) * i);
             BufferedImage avatar = regionImg.getSubimage(0, tmpY, len, len);
             Map<String, Integer> data = extractData(avatar);
-            current.add(data);
 
             // check sent or not
             boolean isSent = false;
@@ -62,8 +53,40 @@ public class Screen {
                 sentGroups.add(data);
                 // return unsent coordinate
                 Coordinate coor = new Coordinate();
-                coor.setX(c1.getX());
-                coor.setY(c1.getX() + tmpY);
+                coor.setX(c2.getX());
+                coor.setY(c1.getY() + tmpY);
+                return coor;
+            }
+        }
+        return null;
+    }
+
+    public Coordinate getFirstUnsentGroupUp(List<Map<String, Integer>> sentGroups) throws IOException {
+        Coordinate c3 = cp.getCorner3(), c4 = cp.getCorner4();
+        int len = c3.getX() - c4.getX();
+        int regionHeigth = c3.getY() - c4.getY();
+        BufferedImage regionImg = r.createScreenCapture(new Rectangle(c4.getX(), c4.getY(), len, regionHeigth));
+        float space = (float) (regionHeigth - cp.getGroupsInRegion() * len) / (cp.getGroupsInRegion() - 1);
+
+        for (int i = 0; i < cp.getGroupsInRegion(); i++) {
+            int tmpY = Math.round((len + space) * i);
+            BufferedImage avatar = regionImg.getSubimage(0, regionHeigth - tmpY - len, len, len);
+            Map<String, Integer> data = extractData(avatar);
+
+            // check sent or not
+            boolean isSent = false;
+            for (Map<String, Integer> m : sentGroups) {
+                if (isSame(data, m)) {
+                    isSent = true;
+                    break;
+                }
+            }
+            if (!isSent) {
+                sentGroups.add(data);
+                // return unsent coordinate
+                Coordinate coor = new Coordinate();
+                coor.setX(c3.getX());
+                coor.setY(c3.getY() - tmpY);
                 return coor;
             }
         }
@@ -112,21 +135,6 @@ public class Screen {
         ImageIO.write(image, "jpg", baos);
         ImageIO.write(image, "jpg", baos);
         ImageIO.write(image, "jpg", new File(name + ".jpg"));
-    }
-
-    public boolean isBatchChanged() {
-        if (prev == null) {
-            return true;
-        }
-        if (current.size() != prev.size()) {
-            return true;
-        }
-        for (int i = 0; i < prev.size(); i++) {
-            if (!isSame(prev.get(i), current.get(i))) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

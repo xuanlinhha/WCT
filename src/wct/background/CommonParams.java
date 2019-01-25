@@ -18,7 +18,8 @@ public class CommonParams {
     protected Coordinate corner2;
     protected Coordinate corner3;
     protected Coordinate corner4;
-    
+    protected int timesToBottom;
+
     private JComboBox optionJComboBox;
     private JButton startJButton;
     private JButton stopJButton;
@@ -37,22 +38,6 @@ public class CommonParams {
 
     public void setGroupsInRegion(int groupsInRegion) {
         this.groupsInRegion = groupsInRegion;
-    }
-
-    public Coordinate getScroll1() {
-        return scroll1;
-    }
-
-    public void setScroll1(Coordinate scroll1) {
-        this.scroll1 = scroll1;
-    }
-
-    public Coordinate getScroll2() {
-        return scroll2;
-    }
-
-    public void setScroll2(Coordinate scroll2) {
-        this.scroll2 = scroll2;
     }
 
     public Coordinate getCorner1() {
@@ -85,6 +70,30 @@ public class CommonParams {
 
     public void setCorner4(Coordinate corner4) {
         this.corner4 = corner4;
+    }
+
+    public Coordinate getScroll1() {
+        return scroll1;
+    }
+
+    public void setScroll1(Coordinate scroll1) {
+        this.scroll1 = scroll1;
+    }
+
+    public Coordinate getScroll2() {
+        return scroll2;
+    }
+
+    public void setScroll2(Coordinate scroll2) {
+        this.scroll2 = scroll2;
+    }
+
+    public int getTimesToBottom() {
+        return timesToBottom;
+    }
+
+    public void setTimesToBottom(int timesToBottom) {
+        this.timesToBottom = timesToBottom;
     }
 
     public JComboBox getOptionJComboBox() {

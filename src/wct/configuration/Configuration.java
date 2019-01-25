@@ -16,6 +16,7 @@ public class Configuration {
     private String corner4;
     private String scroll1;
     private String scroll2;
+    private String timesToBottom;
 
     public String getInputFolder() {
         return inputFolder;
@@ -95,6 +96,14 @@ public class Configuration {
 
     public void setScroll2(String scroll2) {
         this.scroll2 = scroll2;
+    }
+
+    public String getTimesToBottom() {
+        return timesToBottom;
+    }
+
+    public void setTimesToBottom(String timesToBottom) {
+        this.timesToBottom = timesToBottom;
     }
 
 }
