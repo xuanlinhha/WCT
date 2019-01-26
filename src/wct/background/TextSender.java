@@ -48,18 +48,13 @@ public class TextSender extends SwingWorker<Void, Void> {
                 sentGroups = TextReaderWriter.loadSentFileGroups(SENT_TEXT_GROUPS);
             }
 
-            // initial data
-            Coordinate click1 = new Coordinate(tsParams.getCorner2().getX(), tsParams.getCorner1().getY());
-            Coordinate click2 = tsParams.getCorner3();
             counter = 0;
+            sendDown(false);
+            sendUp();
 
             // click on wechat & select the top
             Mouse.getInstance().click(tsParams.getOnTaskbarCoordinate());
             Thread.sleep(1000);
-
-            sendDown(tsParams.getDownTimes(), tsParams.getScroll1(), click1);
-            sendUp(tsParams.getUpTimes(), tsParams.getTimesToBottom(), tsParams.getScroll1(), tsParams.getScroll2(), click2);
-            sendDown(tsParams.getDownTimes(), tsParams.getScroll1(), click1);
 
             tsParams.getKeyboardHook().shutdownHook();
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
@@ -71,16 +66,21 @@ public class TextSender extends SwingWorker<Void, Void> {
         }
     }
 
-    private void sendDown(int maxTimes, Coordinate scroll1, Coordinate click) throws Exception {
+    private void sendDown(boolean isOnce) throws Exception {
+        int maxTimes = isOnce ? 1 : tsParams.getDownTimes();
+        Coordinate click = new Coordinate(tsParams.getCorner2().getX(), tsParams.getCorner1().getY());
         Screen screen = new Screen(tsParams);
         int times = 0;
         while (times < maxTimes) {
+            if (isCancelled()) {
+                break;
+            }
             Mouse.getInstance().click(click);
             Thread.sleep(SLEEP_TIME);
             Coordinate unsentGroup = screen.getFirstUnsentGroupDown(sentGroups);
             if (unsentGroup == null) {
                 times++;
-                Mouse.getInstance().click(scroll1);
+                Mouse.getInstance().click(tsParams.getScroll1());
                 Thread.sleep(SLEEP_TIME);
             } else {
                 Mouse.getInstance().click(unsentGroup);
@@ -94,17 +94,20 @@ public class TextSender extends SwingWorker<Void, Void> {
         }
     }
 
-    private void sendUp(int maxTimes, int timesToBottom, Coordinate scroll1, Coordinate scroll2, Coordinate click) throws Exception {
+    private void sendUp() throws Exception {
         Screen screen = new Screen(tsParams);
         int times = 0;
-        scrollToBottom(timesToBottom, scroll1, click);
-        while (times < maxTimes) {
-            Mouse.getInstance().click(click);
+        scrollToBottom(tsParams.getTimesToBottom(), tsParams.getScroll1(), tsParams.getCorner3());
+        while (times < tsParams.getUpTimes()) {
+            if (isCancelled()) {
+                break;
+            }
+            Mouse.getInstance().click(tsParams.getCorner3());
             Thread.sleep(1000);
             Coordinate unsentGroup = screen.getFirstUnsentGroupUp(sentGroups);
             if (unsentGroup == null) {
                 times++;
-                Mouse.getInstance().click(scroll1);
+                Mouse.getInstance().click(tsParams.getScroll2());
                 Thread.sleep(1000);
             } else {
                 Mouse.getInstance().click(unsentGroup);
@@ -114,7 +117,11 @@ public class TextSender extends SwingWorker<Void, Void> {
                 Keyboard.getInstance().pasteWithEnter();
                 counter++;
                 times = 0;
-                scrollToBottom(timesToBottom, scroll1, click);
+
+                // send down
+                sendDown(true);
+
+                scrollToBottom(tsParams.getTimesToBottom(), tsParams.getScroll1(), tsParams.getCorner3());
             }
         }
     }

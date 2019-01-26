@@ -44,7 +44,8 @@ public class Screen {
             // check sent or not
             boolean isSent = false;
             for (Map<String, Integer> m : sentGroups) {
-                if (isSame(data, m)) {
+                
+                if (likelihood(data, m) >= DIFF_THRESHOLD) {
                     isSent = true;
                     break;
                 }
@@ -76,7 +77,7 @@ public class Screen {
             // check sent or not
             boolean isSent = false;
             for (Map<String, Integer> m : sentGroups) {
-                if (isSame(data, m)) {
+                if (likelihood(data, m) >= DIFF_THRESHOLD) {
                     isSent = true;
                     break;
                 }
@@ -115,7 +116,7 @@ public class Screen {
         return data;
     }
 
-    public boolean isSame(Map<String, Integer> data1, Map<String, Integer> data2) {
+    public double likelihood(Map<String, Integer> data1, Map<String, Integer> data2) {
         double count = 0;
         for (String s : data2.keySet()) {
             if (data1.containsKey(s)) {
@@ -127,7 +128,7 @@ public class Screen {
             total += i;
         }
         DecimalFormat df = new DecimalFormat("#.##");
-        return (Double.valueOf(df.format(count / total)) >= DIFF_THRESHOLD);
+        return Double.valueOf(df.format(count / total));
     }
 
     public void saveImg(BufferedImage image, String name) throws IOException {

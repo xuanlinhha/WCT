@@ -149,6 +149,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel1.add(jLabel4, gridBagConstraints);
 
         jTextField2.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jTextField2.setText("1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -385,6 +386,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel1.add(jCheckBox4, gridBagConstraints);
 
         jTextField15.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jTextField15.setText("1"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -428,6 +430,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jLabel19, gridBagConstraints);
 
         jTextField4.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jTextField4.setText("1"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -481,6 +484,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jComboBox2, gridBagConstraints);
 
         jTextField16.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jTextField16.setText("1"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
