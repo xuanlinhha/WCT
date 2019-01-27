@@ -31,9 +31,9 @@ public class Screen {
 
     public Coordinate getFirstUnsentGroupDown(List<Map<String, Integer>> sentGroups) throws IOException {
         Coordinate c1 = cp.getCorner1(), c2 = cp.getCorner2();
-        int len = c2.getX() - c1.getX();
+        int len = c1.getX() - c2.getX();
         int regionHeigth = c2.getY() - c1.getY();
-        BufferedImage regionImg = r.createScreenCapture(new Rectangle(c1.getX(), c1.getY(), len, regionHeigth));
+        BufferedImage regionImg = r.createScreenCapture(new Rectangle(c2.getX(), c1.getY(), len, regionHeigth));
         float space = (float) (regionHeigth - cp.getGroupsInRegion() * len) / (cp.getGroupsInRegion() - 1);
 
         for (int i = 0; i < cp.getGroupsInRegion(); i++) {
@@ -44,7 +44,6 @@ public class Screen {
             // check sent or not
             boolean isSent = false;
             for (Map<String, Integer> m : sentGroups) {
-                
                 if (likelihood(data, m) >= DIFF_THRESHOLD) {
                     isSent = true;
                     break;
@@ -54,7 +53,7 @@ public class Screen {
                 sentGroups.add(data);
                 // return unsent coordinate
                 Coordinate coor = new Coordinate();
-                coor.setX(c2.getX());
+                coor.setX(c1.getX());
                 coor.setY(c1.getY() + tmpY);
                 return coor;
             }

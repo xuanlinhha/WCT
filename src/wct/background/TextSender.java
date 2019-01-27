@@ -68,14 +68,13 @@ public class TextSender extends SwingWorker<Void, Void> {
 
     private void sendDown(boolean isOnce) throws Exception {
         int maxTimes = isOnce ? 1 : tsParams.getDownTimes();
-        Coordinate click = new Coordinate(tsParams.getCorner2().getX(), tsParams.getCorner1().getY());
         Screen screen = new Screen(tsParams);
         int times = 0;
         while (times < maxTimes) {
             if (isCancelled()) {
                 break;
             }
-            Mouse.getInstance().click(click);
+            Mouse.getInstance().click(tsParams.getCorner1());
             Thread.sleep(SLEEP_TIME);
             Coordinate unsentGroup = screen.getFirstUnsentGroupDown(sentGroups);
             if (unsentGroup == null) {

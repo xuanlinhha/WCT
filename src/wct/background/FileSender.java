@@ -79,7 +79,6 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     private void sendDown(boolean isOnce) throws Exception {
         int maxTimes = isOnce ? 1 : fsParams.getDownTimes();
-        Coordinate click = new Coordinate(fsParams.getCorner2().getX(), fsParams.getCorner1().getY());
         Screen screen = new Screen(fsParams);
         String randString = RandomStringUtils.random(RAMDOM_LENGTH);
         int times = 0;
@@ -87,7 +86,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             if (isCancelled()) {
                 break;
             }
-            Mouse.getInstance().click(click);
+            Mouse.getInstance().click(fsParams.getCorner1());
             Thread.sleep(SLEEP_TIME);
             Coordinate unsentGroup = screen.getFirstUnsentGroupDown(sentGroups);
             if (unsentGroup == null) {
