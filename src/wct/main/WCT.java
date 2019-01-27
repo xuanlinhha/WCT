@@ -133,7 +133,7 @@ public class WCT extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("wct/main/Bundle"); // NOI18N
         setTitle(bundle.getString("WCT.title")); // NOI18N
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
         jPanel0.setLayout(new java.awt.CardLayout());
 
