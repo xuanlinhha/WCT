@@ -180,7 +180,7 @@ public class FileSender extends SwingWorker<Void, Void> {
             // reset hook
             fsParams.getKeyboardHook().shutdownHook();
             if (fsParams.isShutdownAfterFinish() && !isCancelled()) {
-                String shutdownCommand = "shutdown.exe -s -t 60";
+                String shutdownCommand = "shutdown.exe -s -t 180";
                 Runtime.getRuntime().exec(shutdownCommand);
             }
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
