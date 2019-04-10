@@ -174,9 +174,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 }
 
                 counter++;
-                if (counter < fsParams.getNoOfGroups()) {
-                    Thread.sleep(fsParams.getSendingTime() * 1000);
-                }
+                Thread.sleep(fsParams.getSendingTime() * 1000);
 
             }
             // reset hook
