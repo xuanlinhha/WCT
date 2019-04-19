@@ -170,13 +170,13 @@ public class FileSender extends SwingWorker<Void, Void> {
                 counter++;
                 Thread.sleep(fsParams.getSendingTime() * 1000);
 
-                // increase counter by 1 and stop if enough groups are sent
+                // stop if enough groups are sent
                 if (counter >= fsParams.getTotalGroups()) {
                     break;
                 }
 
                 // send down
-                sendDown(true);
+                sendDown1(true);
             }
         }
     }

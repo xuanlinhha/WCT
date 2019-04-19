@@ -427,7 +427,6 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jLabel19, gridBagConstraints);
 
         jTextField4.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
-        jTextField4.setText("1"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -481,7 +480,6 @@ public class WCT extends javax.swing.JFrame {
         jPanel2.add(jComboBox2, gridBagConstraints);
 
         jTextField16.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
-        jTextField16.setText("1"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -1075,14 +1073,14 @@ public class WCT extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, bundle.getString("missing_down_times"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            tsParams.setDownTimes(Integer.parseInt(jTextField4.getText()));
+            tsParams.setTotalGroups(Integer.parseInt(jTextField4.getText()));
         }
         // no up times
         if (StringUtils.isBlank(jTextField16.getText())) {
             JOptionPane.showMessageDialog(this, bundle.getString("missing_up_times"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            tsParams.setUpTimes(Integer.parseInt(jTextField16.getText()));
+            tsParams.setTopGroups(Integer.parseInt(jTextField16.getText()));
         }
 
         return true;
@@ -1545,6 +1543,7 @@ public class WCT extends javax.swing.JFrame {
             jTextField3.setText(config.getScroll1());
             jTextField11.setText(config.getScroll2());
             jTextField18.setText(config.getTimesToBottom());
+            initDefaultUIValues(config);
         }
         initFSParam();
         initCGParams();
@@ -1623,5 +1622,12 @@ public class WCT extends javax.swing.JFrame {
         String[] model = new String[]{bundle.getString("from_beginning"), bundle.getString("continue")};
 //        System.out.println(model[0] + "; " + model[1]);
         return new DefaultComboBoxModel(model);
+    }
+
+    private void initDefaultUIValues(Configuration config) {
+        jTextField2.setText(config.getGroupsInRegion());
+        jTextField15.setText(config.getGroupsInRegion());
+        jTextField4.setText(config.getGroupsInRegion());
+        jTextField16.setText(config.getGroupsInRegion());
     }
 }

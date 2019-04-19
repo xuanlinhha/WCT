@@ -9,8 +9,8 @@ import lc.kra.system.keyboard.GlobalKeyboardHook;
 public class TextSenderParams extends CommonParams {
 
     private String text;
-    private int downTimes;
-    private int upTimes;
+    private int totalGroups;
+    private int topGroups;
     private GlobalKeyboardHook keyboardHook;
 
     public String getText() {
@@ -21,22 +21,22 @@ public class TextSenderParams extends CommonParams {
         this.text = text;
     }
 
-    public int getDownTimes() {
-        return downTimes;
+    public int getTotalGroups() {
+        return totalGroups;
     }
 
-    public void setDownTimes(int downTimes) {
-        this.downTimes = downTimes;
+    public void setTotalGroups(int totalGroups) {
+        this.totalGroups = totalGroups;
     }
 
-    public int getUpTimes() {
-        return upTimes;
+    public int getTopGroups() {
+        return topGroups;
     }
 
-    public void setUpTimes(int upTimes) {
-        this.upTimes = upTimes;
+    public void setTopGroups(int topGroups) {
+        this.topGroups = topGroups;
     }
-    
+
     public GlobalKeyboardHook getKeyboardHook() {
         return keyboardHook;
     }

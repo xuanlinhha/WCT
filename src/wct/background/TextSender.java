@@ -48,13 +48,13 @@ public class TextSender extends SwingWorker<Void, Void> {
                 sentGroups = TextReaderWriter.loadSentFileGroups(SENT_TEXT_GROUPS);
             }
 
-            counter = 0;
-            sendDown(false);
-            sendUp();
-
             // click on wechat & select the top
             Mouse.getInstance().click(tsParams.getOnTaskbarCoordinate());
             Thread.sleep(1000);
+
+            counter = 0;
+            sendDown1(false);
+            sendUp1();
 
             tsParams.getKeyboardHook().shutdownHook();
             JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
@@ -66,8 +66,85 @@ public class TextSender extends SwingWorker<Void, Void> {
         }
     }
 
+    private void sendDown1(boolean isOnce) throws Exception {
+        Screen screen = new Screen(tsParams);
+        int regionCount = 0;
+        int limit = isOnce ? tsParams.getGroupsInRegion() : tsParams.getTopGroups();
+        while (limit > regionCount * tsParams.getGroupsInRegion()) {
+            // if user cancel then stop
+            if (isCancelled()) {
+                break;
+            }
+            // frame the region
+            Mouse.getInstance().click(tsParams.getCorner1());
+            Thread.sleep(SLEEP_TIME);
+
+            // get first unsent group in region within the limit from top
+            Coordinate unsentGroup = screen.getFirstUnsentGroupDownWithLimit(sentGroups, tsParams.getTopGroups() - regionCount * tsParams.getGroupsInRegion());
+            if (unsentGroup == null) {
+                // move to next region
+                regionCount++;
+                Mouse.getInstance().click(tsParams.getScroll1());
+                Thread.sleep(SLEEP_TIME);
+            } else {
+                // send video to the unsent group
+                Mouse.getInstance().click(unsentGroup);
+                Thread.sleep(SLEEP_TIME);
+                // send text
+                SystemClipboard.getInstance().copyString(tsParams.getText());
+                Keyboard.getInstance().pasteWithEnter();
+                counter++;
+                regionCount = 0;
+
+                System.out.println("counter=" + counter);
+                System.out.println("total=" + tsParams.getTotalGroups());
+
+                // if sent to enough groups then stop
+                if (counter >= tsParams.getTotalGroups()) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private void sendUp1() throws Exception {
+        Screen screen = new Screen(tsParams);
+
+        while (counter < tsParams.getTotalGroups()) {
+            if (isCancelled()) {
+                break;
+            }
+            // scroll to bottom & frame the region
+            scrollToBottom(tsParams.getTimesToBottom(), tsParams.getScroll1(), tsParams.getCorner3());
+            Mouse.getInstance().click(tsParams.getCorner3());
+            Thread.sleep(1000);
+
+            // get first unsent group in region from bottom
+            Coordinate unsentGroup = screen.getFirstUnsentGroupUp(sentGroups);
+            if (unsentGroup == null) {
+                break;
+            } else {
+                // send videos to the unsent group
+                Mouse.getInstance().click(unsentGroup);
+                Thread.sleep(1000);
+                // send text
+                SystemClipboard.getInstance().copyString(tsParams.getText());
+                Keyboard.getInstance().pasteWithEnter();
+                counter++;
+                //stop if enough groups are sent
+                System.out.println("counter1=" + counter);
+                System.out.println("total1=" + tsParams.getTotalGroups());
+                if (counter >= tsParams.getTotalGroups()) {
+                    break;
+                }
+                // send down
+                sendDown1(true);
+            }
+        }
+    }
+
     private void sendDown(boolean isOnce) throws Exception {
-        int maxTimes = isOnce ? 1 : tsParams.getDownTimes();
+        int maxTimes = isOnce ? 1 : tsParams.getTotalGroups();
         Screen screen = new Screen(tsParams);
         int times = 0;
         while (times < maxTimes) {
@@ -97,7 +174,7 @@ public class TextSender extends SwingWorker<Void, Void> {
         Screen screen = new Screen(tsParams);
         int times = 0;
         scrollToBottom(tsParams.getTimesToBottom(), tsParams.getScroll1(), tsParams.getCorner3());
-        while (times < tsParams.getUpTimes()) {
+        while (times < tsParams.getTopGroups()) {
             if (isCancelled()) {
                 break;
             }
