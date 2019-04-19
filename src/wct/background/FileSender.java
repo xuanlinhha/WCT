@@ -59,8 +59,8 @@ public class FileSender extends SwingWorker<Void, Void> {
 
             // initial data
             counter = 0;
-            sendDown(false);
-            sendUp();
+            sendDown1(false);
+            sendUp1();
 
             // reset hook
             fsParams.getKeyboardHook().shutdownHook();
@@ -68,7 +68,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                 String shutdownCommand = "shutdown.exe -s -t 180";
                 Runtime.getRuntime().exec(shutdownCommand);
             }
-            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), sentGroups.size()), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, MessageFormat.format(bundle.getString("result_message"), counter), bundle.getString("result_title"), JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
@@ -77,8 +77,112 @@ public class FileSender extends SwingWorker<Void, Void> {
         }
     }
 
+    private void sendDown1(boolean isOnce) throws Exception {
+        Screen screen = new Screen(fsParams);
+        String randString = RandomStringUtils.random(RAMDOM_LENGTH);
+        int regionCount = 0;
+        int limit = isOnce ? fsParams.getGroupsInRegion() : fsParams.getTopGroups();
+        while (limit > regionCount * fsParams.getGroupsInRegion()) {
+            // if user cancel then stop
+            if (isCancelled()) {
+                break;
+            }
+            // frame the region
+            Mouse.getInstance().click(fsParams.getCorner1());
+            Thread.sleep(SLEEP_TIME);
+
+            // get first unsent group in region within the limit from top
+            Coordinate unsentGroup = screen.getFirstUnsentGroupDownWithLimit(sentGroups, fsParams.getTopGroups() - regionCount * fsParams.getGroupsInRegion());
+            if (unsentGroup == null) {
+                // move to next region
+                regionCount++;
+                Mouse.getInstance().click(fsParams.getScroll1());
+                Thread.sleep(SLEEP_TIME);
+            } else {
+                // send video to the unsent group
+                Mouse.getInstance().click(unsentGroup);
+                Thread.sleep(SLEEP_TIME);
+                if (fsParams.isOneByOne()) {
+                    List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
+                    for (int i = 0; i < files.size(); i++) {
+                        File f = files.get(i);
+                        FileProcessor.changeFileHashcode(f, randString + counter);
+                        SystemClipboard.getInstance().copyFile(f);
+                        Keyboard.getInstance().pasteWithEnter();
+                        if (i < files.size() - 1) {
+                            Thread.sleep(fsParams.getSendingTime() * 1000);
+                        }
+                    }
+                } else {
+                    FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
+                    SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
+                    Keyboard.getInstance().pasteWithEnter();
+                }
+                counter++;
+                regionCount = 0;
+                Thread.sleep(fsParams.getSendingTime() * 1000);
+
+                // if sent to enough groups then stop
+                if (counter >= fsParams.getTotalGroups()) {
+                    break;
+                }
+            }
+        }
+    }
+
+    private void sendUp1() throws Exception {
+        Screen screen = new Screen(fsParams);
+        String randString = RandomStringUtils.random(RAMDOM_LENGTH);
+
+        while (counter < fsParams.getTotalGroups()) {
+            if (isCancelled()) {
+                break;
+            }
+            // scroll to bottom & frame the region
+            scrollToBottom(fsParams.getTimesToBottom(), fsParams.getScroll1(), fsParams.getCorner3());
+            Mouse.getInstance().click(fsParams.getCorner3());
+            Thread.sleep(1000);
+
+            // get first unsent group in region from bottom
+            Coordinate unsentGroup = screen.getFirstUnsentGroupUp(sentGroups);
+            if (unsentGroup == null) {
+                break;
+            } else {
+                // send videos to the unsent group
+                Mouse.getInstance().click(unsentGroup);
+                Thread.sleep(1000);
+                if (fsParams.isOneByOne()) {
+                    List<File> files = FileProcessor.getFiles(fsParams.getInputFolder());
+                    for (int i = 0; i < files.size(); i++) {
+                        File f = files.get(i);
+                        FileProcessor.changeFileHashcode(f, randString + counter);
+                        SystemClipboard.getInstance().copyFile(f);
+                        Keyboard.getInstance().pasteWithEnter();
+                        if (i < files.size() - 1) {
+                            Thread.sleep(fsParams.getSendingTime() * 1000);
+                        }
+                    }
+                } else {
+                    FileProcessor.changeFilesHashcode(fsParams.getInputFolder(), randString + counter);
+                    SystemClipboard.getInstance().copyFiles(FileProcessor.getFiles(fsParams.getInputFolder()));
+                    Keyboard.getInstance().pasteWithEnter();
+                }
+                counter++;
+                Thread.sleep(fsParams.getSendingTime() * 1000);
+
+                // increase counter by 1 and stop if enough groups are sent
+                if (counter >= fsParams.getTotalGroups()) {
+                    break;
+                }
+
+                // send down
+                sendDown(true);
+            }
+        }
+    }
+
     private void sendDown(boolean isOnce) throws Exception {
-        int maxTimes = isOnce ? 1 : fsParams.getDownTimes();
+        int maxTimes = isOnce ? 1 : fsParams.getTotalGroups();
         Screen screen = new Screen(fsParams);
         String randString = RandomStringUtils.random(RAMDOM_LENGTH);
         int times = 0;
@@ -124,7 +228,7 @@ public class FileSender extends SwingWorker<Void, Void> {
         String randString = RandomStringUtils.random(RAMDOM_LENGTH);
         int times = 0;
         scrollToBottom(fsParams.getTimesToBottom(), fsParams.getScroll1(), fsParams.getCorner3());
-        while (times < fsParams.getUpTimes()) {
+        while (times < fsParams.getTopGroups()) {
             if (isCancelled()) {
                 break;
             }

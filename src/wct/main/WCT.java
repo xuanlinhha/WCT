@@ -932,14 +932,14 @@ public class WCT extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, bundle.getString("missing_down_times"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            fsParams.setDownTimes(Integer.parseInt(jTextField2.getText()));
+            fsParams.setTotalGroups(Integer.parseInt(jTextField2.getText()));
         }
         // no up times
         if (StringUtils.isBlank(jTextField15.getText())) {
             JOptionPane.showMessageDialog(this, bundle.getString("missing_up_times"), bundle.getString("input_missing"), JOptionPane.ERROR_MESSAGE);
             return false;
         } else {
-            fsParams.setUpTimes(Integer.parseInt(jTextField15.getText()));
+            fsParams.setTopGroups(Integer.parseInt(jTextField15.getText()));
         }
         // sending time
         if (StringUtils.isBlank(jTextField9.getText())) {

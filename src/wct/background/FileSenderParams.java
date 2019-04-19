@@ -9,8 +9,8 @@ import lc.kra.system.keyboard.GlobalKeyboardHook;
 public class FileSenderParams extends CommonParams {
 
     private String inputFolder;
-    private int downTimes;
-    private int upTimes;
+    private int totalGroups;
+    private int topGroups;
     private long sendingTime;
     private boolean oneByOne;
     private boolean shutdownAfterFinish;
@@ -24,20 +24,20 @@ public class FileSenderParams extends CommonParams {
         this.inputFolder = inputFolder;
     }
 
-    public int getDownTimes() {
-        return downTimes;
+    public int getTotalGroups() {
+        return totalGroups;
     }
 
-    public void setDownTimes(int downTimes) {
-        this.downTimes = downTimes;
+    public void setTotalGroups(int totalGroups) {
+        this.totalGroups = totalGroups;
     }
 
-    public int getUpTimes() {
-        return upTimes;
+    public int getTopGroups() {
+        return topGroups;
     }
 
-    public void setUpTimes(int upTimes) {
-        this.upTimes = upTimes;
+    public void setTopGroups(int topGroups) {
+        this.topGroups = topGroups;
     }
 
     public long getSendingTime() {

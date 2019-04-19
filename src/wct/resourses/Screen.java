@@ -61,6 +61,40 @@ public class Screen {
         return null;
     }
 
+    public Coordinate getFirstUnsentGroupDownWithLimit(List<Map<String, Integer>> sentGroups, int limit) throws IOException {
+        Coordinate c1 = cp.getCorner1(), c2 = cp.getCorner2();
+        int len = c1.getX() - c2.getX();
+        int regionHeigth = c2.getY() - c1.getY();
+        BufferedImage regionImg = r.createScreenCapture(new Rectangle(c2.getX(), c1.getY(), len, regionHeigth));
+        float space = (float) (regionHeigth - cp.getGroupsInRegion() * len) / (cp.getGroupsInRegion() - 1);
+
+        int max = (limit < cp.getGroupsInRegion()) ? limit : cp.getGroupsInRegion();
+
+        for (int i = 0; i < max; i++) {
+            int tmpY = Math.round((len + space) * i);
+            BufferedImage avatar = regionImg.getSubimage(0, tmpY, len, len);
+            Map<String, Integer> data = extractData(avatar);
+
+            // check sent or not
+            boolean isSent = false;
+            for (Map<String, Integer> m : sentGroups) {
+                if (likelihood(data, m) >= DIFF_THRESHOLD) {
+                    isSent = true;
+                    break;
+                }
+            }
+            if (!isSent) {
+                sentGroups.add(data);
+                // return unsent coordinate
+                Coordinate coor = new Coordinate();
+                coor.setX(c1.getX());
+                coor.setY(c1.getY() + tmpY);
+                return coor;
+            }
+        }
+        return null;
+    }
+
     public Coordinate getFirstUnsentGroupUp(List<Map<String, Integer>> sentGroups) throws IOException {
         Coordinate c3 = cp.getCorner3(), c4 = cp.getCorner4();
         int len = c3.getX() - c4.getX();
