@@ -810,6 +810,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel3.add(jLabel25, gridBagConstraints);
 
         jTextField18.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jTextField18.setText("3"); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 9;
