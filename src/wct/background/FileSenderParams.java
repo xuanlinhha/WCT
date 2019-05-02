@@ -9,6 +9,9 @@ import lc.kra.system.keyboard.GlobalKeyboardHook;
 public class FileSenderParams extends CommonParams {
 
     private String inputFolder;
+    private String cleanFolder;
+    private int cleanAfterSending;
+    private boolean isClean;
     private int totalGroups;
     private int topGroups;
     private long sendingTime;
@@ -22,6 +25,30 @@ public class FileSenderParams extends CommonParams {
 
     public void setInputFolder(String inputFolder) {
         this.inputFolder = inputFolder;
+    }
+
+    public String getCleanFolder() {
+        return cleanFolder;
+    }
+
+    public void setCleanFolder(String cleanFolder) {
+        this.cleanFolder = cleanFolder;
+    }
+
+    public int getCleanAfterSending() {
+        return cleanAfterSending;
+    }
+
+    public void setCleanAfterSending(int cleanAfterSending) {
+        this.cleanAfterSending = cleanAfterSending;
+    }
+
+    public boolean isIsClean() {
+        return isClean;
+    }
+
+    public void setIsClean(boolean isClean) {
+        this.isClean = isClean;
     }
 
     public int getTotalGroups() {

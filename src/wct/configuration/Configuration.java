@@ -8,6 +8,9 @@ public class Configuration {
 
     private String inputFolder;
     private String outputFolder;
+    private String cleanFolder;
+    private String cleanAfterSending;
+    private boolean isClean;
     private String onTaskbarCoordinate;
     private String groupsInRegion;
     private String corner1;
@@ -32,6 +35,30 @@ public class Configuration {
 
     public void setOutputFolder(String outputFolder) {
         this.outputFolder = outputFolder;
+    }
+
+    public String getCleanFolder() {
+        return cleanFolder;
+    }
+
+    public void setCleanFolder(String cleanFolder) {
+        this.cleanFolder = cleanFolder;
+    }
+
+    public String getCleanAfterSending() {
+        return cleanAfterSending;
+    }
+
+    public void setCleanAfterSending(String cleanAfterSending) {
+        this.cleanAfterSending = cleanAfterSending;
+    }
+
+    public boolean isIsClean() {
+        return isClean;
+    }
+
+    public void setIsClean(boolean isClean) {
+        this.isClean = isClean;
     }
 
     public String getOnTaskbarCoordinate() {

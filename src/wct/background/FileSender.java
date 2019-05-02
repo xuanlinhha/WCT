@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import wct.fileprocessing.FileProcessor;
 import wct.fileprocessing.TextReaderWriter;
@@ -121,6 +122,11 @@ public class FileSender extends SwingWorker<Void, Void> {
                 counter++;
                 regionCount = 0;
                 Thread.sleep(fsParams.getSendingTime() * 1000);
+
+                // clean files after sending
+                if (fsParams.isIsClean() && (sentGroups.size() % fsParams.getCleanAfterSending()) == 0) {
+                    FileUtils.cleanDirectory(new File(fsParams.getCleanFolder()));
+                }
 
                 // if sent to enough groups then stop
                 if (counter >= fsParams.getTotalGroups()) {
