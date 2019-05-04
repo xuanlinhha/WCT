@@ -11,7 +11,10 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -21,19 +24,19 @@ public class Test {
 
     private static long WAIT_FOR_PASTING = 1000L;
 
-    public static void main(String[] args) {
-        int a = 9;
-        int b = 4;
-        float c = (float) a / b;
-        System.out.println("c=" + Math.round((2 + c) * 2));
-//        Test cmd = new Test();
-//        try {
-//            cmd.writeRandomMetadata("C:\\Users\\admin\\Documents\\WCT\\input\\2.mp4",
-//                    "abcd");
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-
+    public static void main(String[] args) throws IOException {
+        File[] files = new File("C:/Users/xuanlinhha/Documents/WeChat Files").listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isDirectory() && !pathname.getName().equals("All Users");
+            }
+        });
+        for (File f : files) {
+            java.nio.file.Path p = Paths.get(f.getAbsolutePath() + File.separator + "Video");
+            if (Files.exists(p) && Files.isDirectory(p)) {
+                FileUtils.cleanDirectory(p.toFile());
+            }
+        }
     }
 
     public FileChannel splitFileAndInsert(File f, long pos, long length) throws IOException {

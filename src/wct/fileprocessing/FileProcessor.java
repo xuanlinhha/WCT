@@ -1,13 +1,16 @@
 package wct.fileprocessing;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -56,6 +59,25 @@ public class FileProcessor {
             if (f.isFile() && (f.getName().endsWith(".mp3") || f.getName().endsWith(".mp4")
                     || f.getName().endsWith(".MP3") || f.getName().endsWith(".MP4"))) {
                 Files.copy(Paths.get(f.toURI()), Paths.get(outputFolder + File.separator + iterator + "_" + f.getName()), REPLACE_EXISTING);
+            }
+        }
+    }
+
+    public static void cleanVideoFolder(String root) {
+        File[] files = new File(root).listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isDirectory() && !pathname.getName().equals("All Users");
+            }
+        });
+        for (File f : files) {
+            Path p = Paths.get(f.getAbsolutePath() + File.separator + "Video");
+            if (Files.exists(p) && Files.isDirectory(p)) {
+                try {
+                    FileUtils.cleanDirectory(p.toFile());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }
