@@ -71,13 +71,19 @@ public class FileProcessor {
             }
         });
         for (File f : files) {
-            Path p = Paths.get(f.getAbsolutePath() + File.separator + "Video");
-            if (Files.exists(p) && Files.isDirectory(p)) {
-                try {
-                    FileUtils.cleanDirectory(p.toFile());
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+            List<Path> paths = new ArrayList<>();
+            Path p1 = Paths.get(f.getAbsolutePath() + File.separator + "Video");
+            paths.add(p1);
+            Path p2 = Paths.get(f.getAbsolutePath() + File.separator + "FileStorage" + File.separator + "Video");
+            paths.add(p2);
+            try {
+                for (Path p : paths) {
+                    if (Files.exists(p) && Files.isDirectory(p)) {
+                        FileUtils.cleanDirectory(p.toFile());
+                    }
                 }
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
     }
