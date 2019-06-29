@@ -373,6 +373,7 @@ public class WCT extends javax.swing.JFrame {
         jPanel1.add(jButton15, gridBagConstraints);
 
         jCheckBox3.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jCheckBox3.setSelected(true);
         jCheckBox3.setText(bundle.getString("WCT.jCheckBox3.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -1738,9 +1739,10 @@ public class WCT extends javax.swing.JFrame {
     }
 
     private void initDefaultUIValues(Configuration config) {
-        jTextField2.setText(config.getGroupsInRegion());
-        jTextField15.setText(config.getGroupsInRegion());
-        jTextField4.setText(config.getGroupsInRegion());
-        jTextField16.setText(config.getGroupsInRegion());
+        Integer default1 = Integer.parseInt(config.getGroupsInRegion()) * 5;
+        jTextField2.setText("1000");
+        jTextField15.setText(default1.toString());
+        jTextField4.setText("1000");
+        jTextField16.setText(default1.toString());
     }
 }
