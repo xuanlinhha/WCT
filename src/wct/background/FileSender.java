@@ -119,6 +119,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     Keyboard.getInstance().pasteWithEnter();
                 }
                 counter++;
+                TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
                 regionCount = 0;
                 Thread.sleep(fsParams.getSendingTime() * 1000);
 
@@ -173,6 +174,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     Keyboard.getInstance().pasteWithEnter();
                 }
                 counter++;
+                TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
                 Thread.sleep(fsParams.getSendingTime() * 1000);
 
                 // stop if enough groups are sent
