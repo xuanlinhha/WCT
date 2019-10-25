@@ -14,24 +14,25 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
 public class Mp3Meta {
-	public static void changeComment(File mp3, String comment) {
-		try {
-			AudioFile f = AudioFileIO.read(mp3);
-			Tag tag = f.getTag();
-			tag.setField(FieldKey.COMMENT, comment);
-			AudioFileIO.write(f);
-		} catch (CannotReadException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (TagException e) {
-			e.printStackTrace();
-		} catch (ReadOnlyFileException e) {
-			e.printStackTrace();
-		} catch (InvalidAudioFrameException e) {
-			e.printStackTrace();
-		} catch (CannotWriteException e) {
-			e.printStackTrace();
-		}
-	}
+
+    public static void changeComment(File mp3, String comment) {
+        try {
+            AudioFile f = AudioFileIO.read(mp3);
+            Tag tag = f.getTag();
+            tag.setField(FieldKey.COMMENT, comment);
+            AudioFileIO.write(f);
+        } catch (CannotReadException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TagException e) {
+            e.printStackTrace();
+        } catch (ReadOnlyFileException e) {
+            e.printStackTrace();
+        } catch (InvalidAudioFrameException e) {
+            e.printStackTrace();
+        } catch (CannotWriteException e) {
+            e.printStackTrace();
+        }
+    }
 }

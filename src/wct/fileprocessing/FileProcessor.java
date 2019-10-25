@@ -26,6 +26,8 @@ public class FileProcessor {
                 Mp3Meta.changeComment(f, randString);
             } else if (f.isFile() && (f.getName().endsWith(".mp4") || f.getName().endsWith(".MP4"))) {
                 Mp4Meta.writeRandomMetadata(f, randString);
+            } else if (f.isFile() && (f.getName().endsWith(".pdf") || f.getName().endsWith(".PDF"))) {
+                PDFEditor.changeInfo(f, randString);
             }
         }
     }
@@ -35,6 +37,8 @@ public class FileProcessor {
             Mp3Meta.changeComment(f, randString);
         } else if (f.isFile() && (f.getName().endsWith(".mp4") || f.getName().endsWith(".MP4"))) {
             Mp4Meta.writeRandomMetadata(f, randString);
+        } else if (f.isFile() && (f.getName().endsWith(".pdf") || f.getName().endsWith(".PDF"))) {
+            PDFEditor.changeInfo(f, randString);
         }
     }
 
@@ -45,7 +49,8 @@ public class FileProcessor {
         Arrays.sort(files, new WEFileComparator());
         for (File f : files) {
             if (f.isFile() && (f.getName().endsWith(".mp3") || f.getName().endsWith(".mp4")
-                    || f.getName().endsWith(".MP3") || f.getName().endsWith(".MP4"))) {
+                    || f.getName().endsWith(".MP3") || f.getName().endsWith(".MP4")
+                    || f.getName().endsWith(".pdf") || f.getName().endsWith(".PDF"))) {
                 selectedFiles.add(f);
             }
         }
@@ -57,7 +62,8 @@ public class FileProcessor {
         File[] files = folder.listFiles();
         for (File f : files) {
             if (f.isFile() && (f.getName().endsWith(".mp3") || f.getName().endsWith(".mp4")
-                    || f.getName().endsWith(".MP3") || f.getName().endsWith(".MP4"))) {
+                    || f.getName().endsWith(".MP3") || f.getName().endsWith(".MP4")
+                    || f.getName().endsWith(".pdf") || f.getName().endsWith(".PDF"))) {
                 Files.copy(Paths.get(f.toURI()), Paths.get(outputFolder + File.separator + iterator + "_" + f.getName()), REPLACE_EXISTING);
             }
         }
@@ -87,5 +93,4 @@ public class FileProcessor {
             }
         }
     }
-
 }
