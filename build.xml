@@ -70,12 +70,15 @@
     nbproject/build-impl.xml file. 
 
     -->
+    <tstamp>
+        <format property="TODAY_MY" pattern="yyyy-MM-dd_HH-mm"  locale="en,UK" />
+    </tstamp>
     <target name="package-for-store" depends="jar">
         <!-- Change the value of this property to be the name of your JAR,
              minus the .jar extension. It should not have spaces.
              <property name="store.jar.name" value="MyJarName"/>
         -->
-        <property name="store.jar.name" value="WCT"/>
+        <property name="store.jar.name" value="WCT_${TODAY_MY}"/>
         <!-- don't edit below this line -->
         <property name="store.dir" value="store"/>
         <property name="store.jar" value="${store.dir}/${store.jar.name}.jar"/>
