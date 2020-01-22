@@ -27,7 +27,6 @@ public class FileSender extends SwingWorker<Void, Void> {
     private static final int SLEEP_TIME = 900;
     private static final int SCROLL_TIMES = 10;
     private static final int RAMDOM_LENGTH = 20;
-    private static final String SENT_FILE_GROUPS = "sent_groups_FILE.txt";
 
     private FileSenderParams fsParams;
     private int counter;
@@ -45,12 +44,14 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     private void send() {
         ResourceBundle bundle = LanguageHandler.getInstance().getBundle();
+        String savedGroups = fsParams.getSavedGroupsFileJComboBox().getSelectedItem().toString();
+//        System.out.println("savegroups = " + savedGroups);
         try {
             // clear if start from beginning
             if (fsParams.getOptionJComboBox().getSelectedIndex() == 0) { // from beginning
                 sentGroups.clear();
             } else {
-                sentGroups = TextReaderWriter.loadSentFileGroups(SENT_FILE_GROUPS);
+                sentGroups = TextReaderWriter.loadSentFileGroups(savedGroups);
             }
 
             // click on wechat & select the top
@@ -72,13 +73,14 @@ public class FileSender extends SwingWorker<Void, Void> {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
+            TextReaderWriter.saveSentFileGroups(savedGroups, sentGroups);
             fsParams.getOptionJComboBox().setSelectedIndex(1);
         }
     }
 
     private void sendDown1(boolean isOnce) throws Exception {
         Screen screen = new Screen(fsParams);
+        String savedGroups = fsParams.getSavedGroupsFileJComboBox().getSelectedItem().toString();
         String randString = RandomStringUtils.random(RAMDOM_LENGTH);
         int regionCount = 0;
         int limit = isOnce ? fsParams.getGroupsInRegion() : fsParams.getTopGroups();
@@ -119,7 +121,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     Keyboard.getInstance().pasteWithEnter();
                 }
                 counter++;
-                TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
+                TextReaderWriter.saveSentFileGroups(savedGroups, sentGroups);
                 regionCount = 0;
                 Thread.sleep(fsParams.getSendingTime() * 1000);
 
@@ -138,8 +140,8 @@ public class FileSender extends SwingWorker<Void, Void> {
 
     private void sendUp1() throws Exception {
         Screen screen = new Screen(fsParams);
+        String savedGroups = fsParams.getSavedGroupsFileJComboBox().getSelectedItem().toString();
         String randString = RandomStringUtils.random(RAMDOM_LENGTH);
-
         while (counter < fsParams.getTotalGroups()) {
             if (isCancelled()) {
                 break;
@@ -174,7 +176,7 @@ public class FileSender extends SwingWorker<Void, Void> {
                     Keyboard.getInstance().pasteWithEnter();
                 }
                 counter++;
-                TextReaderWriter.saveSentFileGroups(SENT_FILE_GROUPS, sentGroups);
+                TextReaderWriter.saveSentFileGroups(savedGroups, sentGroups);
                 Thread.sleep(fsParams.getSendingTime() * 1000);
 
                 // stop if enough groups are sent

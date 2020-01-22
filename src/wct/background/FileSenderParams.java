@@ -1,5 +1,6 @@
 package wct.background;
 
+import javax.swing.JComboBox;
 import lc.kra.system.keyboard.GlobalKeyboardHook;
 
 /**
@@ -18,6 +19,8 @@ public class FileSenderParams extends CommonParams {
     private boolean oneByOne;
     private boolean shutdownAfterFinish;
     private GlobalKeyboardHook keyboardHook;
+
+    private JComboBox savedGroupsFileJComboBox;
 
     public String getInputFolder() {
         return inputFolder;
@@ -97,6 +100,14 @@ public class FileSenderParams extends CommonParams {
 
     public void setKeyboardHook(GlobalKeyboardHook keyboardHook) {
         this.keyboardHook = keyboardHook;
+    }
+
+    public JComboBox getSavedGroupsFileJComboBox() {
+        return savedGroupsFileJComboBox;
+    }
+
+    public void setSavedGroupsFileJComboBox(JComboBox savedGroupsFileJComboBox) {
+        this.savedGroupsFileJComboBox = savedGroupsFileJComboBox;
     }
 
 }

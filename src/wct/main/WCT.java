@@ -9,6 +9,8 @@ import java.awt.Window;
 import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
@@ -76,6 +78,8 @@ public class WCT extends javax.swing.JFrame {
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox4 = new javax.swing.JCheckBox();
         jTextField15 = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -172,7 +176,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
         jPanel1.add(jButton2, gridBagConstraints);
@@ -187,7 +191,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 0.5;
         jPanel1.add(jButton3, gridBagConstraints);
@@ -215,7 +219,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel1.setText(bundle.getString("WCT.jLabel1.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
@@ -226,14 +230,14 @@ public class WCT extends javax.swing.JFrame {
         jLabel2.setText(bundle.getString("WCT.jLabel2.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jLabel2, gridBagConstraints);
 
         jTextField1.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jTextField1, gridBagConstraints);
@@ -247,7 +251,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton1, gridBagConstraints);
 
@@ -261,7 +265,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton6, gridBagConstraints);
 
@@ -291,7 +295,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton12, gridBagConstraints);
 
@@ -304,7 +308,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 9;
+        gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton13, gridBagConstraints);
 
@@ -323,14 +327,14 @@ public class WCT extends javax.swing.JFrame {
         jLabel7.setText(bundle.getString("WCT.jLabel7.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jLabel7, gridBagConstraints);
 
         jTextField12.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 12;
+        gridBagConstraints.gridy = 13;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jTextField12, gridBagConstraints);
@@ -344,7 +348,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton14, gridBagConstraints);
 
@@ -353,7 +357,7 @@ public class WCT extends javax.swing.JFrame {
         jLabel18.setText(bundle.getString("WCT.jLabel18.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridy = 12;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(20, 0, 0, 0);
@@ -368,7 +372,7 @@ public class WCT extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 13;
+        gridBagConstraints.gridy = 14;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jButton15, gridBagConstraints);
 
@@ -396,6 +400,24 @@ public class WCT extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanel1.add(jTextField15, gridBagConstraints);
+
+        jLabel29.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel29.setText(bundle.getString("WCT.jLabel29.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jLabel29, gridBagConstraints);
+
+        jComboBox3.setFont(new java.awt.Font("MingLiU", 0, 18)); // NOI18N
+        jComboBox3.setModel(loadSavedGroupFile());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jComboBox3, gridBagConstraints);
 
         jPanel0.add(jPanel1, "card2");
 
@@ -981,6 +1003,7 @@ public class WCT extends javax.swing.JFrame {
 
     private void initFSParam() {
         fsParams = new FileSenderParams();
+        fsParams.setSavedGroupsFileJComboBox(jComboBox3);
         fsParams.setOptionJComboBox(jComboBox1);
         fsParams.setStartJButton(jButton2);
         fsParams.setStopJButton(jButton3);
@@ -1543,6 +1566,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1564,6 +1588,7 @@ public class WCT extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1736,6 +1761,15 @@ public class WCT extends javax.swing.JFrame {
         String[] model = new String[]{bundle.getString("from_beginning"), bundle.getString("continue")};
 //        System.out.println(model[0] + "; " + model[1]);
         return new DefaultComboBoxModel(model);
+    }
+
+    private DefaultComboBoxModel loadSavedGroupFile() {
+        List<String> model = new ArrayList<>();
+        for (File f : FileUtils.listFiles(new File("."), new String[]{"groups"}, false)) {
+            System.out.println(f.getName());
+            model.add(f.getName());
+        }
+        return new DefaultComboBoxModel(model.toArray());
     }
 
     private void initDefaultUIValues(Configuration config) {
